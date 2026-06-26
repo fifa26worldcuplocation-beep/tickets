@@ -1,0 +1,3234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FIFA World Cup 26™ – Official Hospitality</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+<link rel="stylesheet" href="style.css">
+
+<style>
+
+/* ============================================================
+   RESET & BASE
+============================================================ */
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+  font-family: 'Arial', sans-serif;
+  background: #fff;
+  color: #111;
+  overflow-x: hidden;
+}
+
+
+
+/* ============================================================
+   SECTION — HERO
+============================================================ */
+.hero {
+  position: relative;
+  background: #130b44;
+  border-bottom-left-radius: 300px;
+  overflow: hidden;
+}
+
+.hero-bg-img {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  height: 600px;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.hero-bg-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+.hero-images {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.hero-img {
+  position: absolute;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.hero-img.player {
+  left: 52px;
+  top: -22px;
+  width: 178px;
+  height: 248px;
+}
+
+.hero-img.stadium-top {
+  right: 36px;
+  top: -15px;
+  width: 250px;
+  height: 185px;
+}
+
+.hero-img.crowd {
+  left: 188px;
+  top: 290px;
+  width: 200px;
+  height: 148px;
+  opacity: .32;
+}
+
+.hero-img.stadium-bottom {
+  right: 162px;
+  top: 212px;
+  width: 158px;
+  height: 188px;
+  opacity: .3;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  color: #fff;
+  padding: 150px 20px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.hero-eyebrow {
+  font-size: 24px;
+  letter-spacing: 1px;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+
+.hero-h1 {
+  font-size: clamp(48px, 7vw, 78px);
+  font-weight: normal;
+  line-height: 1;
+  letter-spacing: -3px;
+}
+
+.hero-desc {
+  max-width: 680px;
+  margin: 20px auto 0;
+  font-size: 16px;
+  line-height: 1.65;
+  color: rgba(255,255,255,.85);
+}
+
+/* filter box */
+.filter-frost {
+  position: relative;
+  z-index: 5;
+  margin: 32px auto 0;
+  width: min(72%, 860px);
+  background: #100c3a49;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,.2);
+  border-radius: 26px;
+  padding: 14px;
+}
+
+.filter-inner {
+  display: flex;
+  background: #0e0734;
+  border-radius: 18px;
+  padding: 22px;
+}
+
+.filter-col {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 0 24px;
+}
+.filter-col:not(:last-child) {
+  border-right: 1px solid rgba(255,255,255,.1);
+}
+.filter-col > .fc-icon {
+  width: 20px;
+  height: 20px;
+  color: #8ed8ff;
+  flex-shrink: 0;
+}
+.fc-label {
+  font-size: 13px;
+  font-weight: 700;
+  color: #8ed8ff;
+  margin-bottom: 6px;
+  letter-spacing: .5px;
+}
+.fc-value {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #fff;
+  font-size: 14px;
+}
+.fc-value i { font-size: 11px; color: rgba(255,255,255,.5); transition: transform .2s; }
+
+/* ---- Functional dropdown panels (Location / Team / Stage) ---- */
+.filter-col { position: relative; cursor: pointer; }
+
+.fc-value.open i { transform: rotate(180deg); }
+
+.fc-dropdown {
+  display: none;
+  position: absolute;
+  top: calc(100% + 14px);
+  left: 0;
+  right: 0;
+  max-height: 320px;
+  overflow-y: auto;
+  background: #fff;
+  border: 1px solid #e6e6e6;
+  border-radius: 12px;
+  box-shadow: 0 18px 40px rgba(0,0,0,.35);
+  z-index: 2000;
+  padding: 6px;
+}
+.fc-dropdown.open { display: block; }
+
+.fc-dropdown-item {
+  padding: 10px 12px;
+  font-size: 13px;
+  color: #222;
+  border-radius: 8px;
+  cursor: pointer;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.fc-dropdown-item:hover { background: #f5f5f7; color: #111; }
+.fc-dropdown-item.selected { background: #eef3ff; color: #1a46c8; font-weight: 600; }
+
+.fc-dropdown-group {
+  padding: 10px 12px 6px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: #999;
+  margin-top: 4px;
+}
+.fc-dropdown-group:first-child { margin-top: 0; }
+
+.fc-dropdown-item-flag {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.fc-dropdown-item-flag img {
+  width: 22px;
+  height: 16px;
+  object-fit: cover;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+.fc-dropdown::-webkit-scrollbar { width: 6px; }
+.fc-dropdown::-webkit-scrollbar-thumb { background: #ddd; border-radius: 4px; }
+
+/* ---- Header country dropdown ---- */
+.hd-country { position: relative; }
+.hd-country-dropdown {
+  display: none;
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  min-width: 200px;
+  max-height: 260px;
+  overflow-y: auto;
+  background: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  box-shadow: 0 12px 32px rgba(0,0,0,.15);
+  z-index: 50;
+  padding: 6px;
+}
+.hd-country-dropdown.open { display: block; }
+.hd-country-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px;
+  font-size: 14px;
+  color: #222;
+  border-radius: 7px;
+  cursor: pointer;
+}
+.hd-country-item img { width: 20px; height: 14px; border-radius: 2px; object-fit: cover; }
+.hd-country-item:hover { background: #f5f5f5; }
+.hd-country-item.selected { background: #eef3ff; font-weight: 600; }
+
+/* ---- Header language dropdown ---- */
+.hd-lang { position: relative; }
+.hd-lang-dropdown {
+  display: none;
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  min-width: 160px;
+  background: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  box-shadow: 0 12px 32px rgba(0,0,0,.15);
+  z-index: 50;
+  padding: 6px;
+}
+.hd-lang-dropdown.open { display: block; }
+.hd-lang-item {
+  padding: 8px 10px;
+  font-size: 14px;
+  color: #222;
+  border-radius: 7px;
+  cursor: pointer;
+}
+.hd-lang-item:hover { background: #f5f5f5; }
+.hd-lang-item.selected { background: #eef3ff; font-weight: 600; }
+
+/* ---- Know Before You Go location dropdown ---- */
+.location-select { position: relative; cursor: pointer; }
+.kbyg-dropdown {
+  display: none;
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  right: 0;
+  max-height: 240px;
+  overflow-y: auto;
+  background: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  box-shadow: 0 12px 32px rgba(0,0,0,.18);
+  z-index: 100;
+  padding: 6px;
+}
+.kbyg-dropdown.open { display: block; }
+.kbyg-dropdown-item {
+  padding: 9px 12px;
+  font-size: 14px;
+  color: #222;
+  border-radius: 7px;
+  cursor: pointer;
+}
+.kbyg-dropdown-item:hover { background: #f5f5f5; }
+.kbyg-dropdown-item.selected { background: #eef3ff; font-weight: 600; }
+
+/* ============================================================
+   CHOOSE COUNTRY MODAL
+============================================================ */
+.country-modal-backdrop {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 5000;
+  background: rgba(8, 6, 30, .55);
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+.country-modal-backdrop.open {
+  display: flex;
+}
+
+.country-modal {
+  position: relative;
+  width: 100%;
+  max-width: 800px;
+  background: #fff;
+  border-radius: 18px;
+  padding: 48px;
+  box-shadow: 0 30px 70px rgba(0,0,0,.35);
+}
+
+.country-modal-close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 34px;
+  height: 34px;
+  border: none;
+  background: transparent;
+  color: #555;
+  font-size: 18px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+.country-modal-close:hover { background: #f2f2f2; color: #111; }
+
+.country-modal-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: start;
+}
+
+.country-modal-title {
+  font-size: 28px;
+  font-weight: normal;
+  letter-spacing: -0.5px;
+  text-transform: uppercase;
+  color: #0a0a0a;
+  margin-bottom: 18px;
+}
+
+.country-modal-desc {
+  font-size: 14px;
+  line-height: 1.6;
+  color: #555;
+  margin-bottom: 18px;
+}
+
+.country-modal-note {
+  font-size: 13px;
+  line-height: 1.6;
+  color: #888;
+}
+
+.country-modal-options {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  justify-content: center;
+  height: 100%;
+}
+
+.country-modal-option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid #e2e2e2;
+  border-radius: 10px;
+  padding: 16px 20px;
+  cursor: pointer;
+  transition: border-color .15s, box-shadow .15s;
+}
+.country-modal-option:hover {
+  border-color: #b8c4f0;
+}
+.country-modal-option.selected {
+  border-color: #5b8def;
+  box-shadow: 0 0 0 1px #5b8def;
+}
+
+.country-modal-option-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.country-modal-option-left img {
+  width: 28px;
+  height: 20px;
+  object-fit: cover;
+  border-radius: 3px;
+}
+.country-modal-option-left span {
+  font-size: 17px;
+  font-weight: 600;
+  color: #111;
+}
+.country-modal-option i {
+  font-size: 13px;
+  color: #999;
+}
+
+/* ---- MODAL: RESPONSIVE ≤768px ---- */
+@media (max-width: 768px) {
+
+  .country-modal {
+    padding: 28px 22px;
+    border-radius: 16px;
+  }
+
+  .country-modal-grid {
+    gap: 24px;
+  }
+
+  .country-modal-title {
+    font-size: 22px;
+    margin-bottom: 12px;
+  }
+
+  .country-modal-option {
+    padding: 14px 16px;
+  }
+
+  .country-modal-option-left span {
+    font-size: 15px;
+  }
+}
+
+.mob-filter-tabs,
+.mob-filter-input { display: none; }
+
+.mob-country-pill,
+.mob-header-right { display: none !important; }
+
+/* CTA */
+.hero-cta-wrap {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.hero-cta {
+  background: transparent;
+  border: 1.5px solid rgba(255,255,255,.8);
+  color: #fff;
+  border-radius: 20px 100px 100px 100px;
+  padding: 20px 25px;
+  font-size: 17px;
+  font-weight: 500;
+  letter-spacing: .3px;
+  transition: background .2s, color .2s;
+}
+.hero-cta:hover { background: #fff; color: #100c3a; }
+
+/* hero footer note */
+.hero-note {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  color: #ffffff67;
+  padding: 28px 24px 36px;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.6;
+}
+.hero-note p {
+  font-size: 15px;
+  font-weight: 400;
+  color: #f5f5f59a;
+  margin-top: 6px;
+  line-height: 40px;
+  max-width: 75%;
+  margin-left: auto;
+  margin-right: auto;
+}
+.hero-note strong{
+  color: white;
+  font-size: 16px;
+}
+
+/* mobile peek images, hidden by default (shown on mobile below) */
+.hero-img-mob-left,
+.hero-img-mob-right {
+  display: none;
+}
+
+/* ---- HERO: RESPONSIVE ≤768px ---- */
+@media (max-width: 768px) {
+
+  .hero {
+    border-bottom-left-radius: 150px;
+  }
+
+  .hero-bg-img {
+    height: 500px;
+
+  }
+
+  .hero-bg-img img{
+      object-position: right;
+  }
+
+  .hero-images { display: none; }
+
+  .hero-img-mob-left,
+  .hero-img-mob-right {
+    display: block;
+    position: absolute;
+    z-index: 0;
+    border-radius: 14px;
+    overflow: hidden;
+  }
+  .hero-img-mob-left {
+    top: 10px;
+    left: 50px;
+    width: 140px;
+    height: 160px;
+    border-top-left-radius: 0;
+    opacity: .5;
+  }
+  .hero-img-mob-right {
+    top: 0;
+    right: -10px;
+    width: 145px;
+    height: 120px;
+    border-top-right-radius: 0;
+  }
+  .hero-img-mob-left img,
+  .hero-img-mob-right img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .hero-content {
+    padding: 170px 20px 0;
+  }
+
+  .hero-eyebrow {
+    font-size: 13px;
+    letter-spacing: 2px;
+    font-weight: 800;
+  }
+
+  .hero-h1 {
+    font-size: clamp(34px, 9vw, 52px);
+    letter-spacing: -1.5px;
+    line-height: 1;
+    display: flex;
+  }
+
+  .hero-desc {
+    font-size: 15px;
+    margin-top: 14px;
+  }
+
+  .filter-frost {
+    width: calc(100% - 24px);
+    margin: 20px auto 0;
+    border-radius: 30px;
+    background: #9b9b9b10;
+    padding: 18px;
+  }
+
+  .filter-inner {
+    flex-direction: column;
+    border-radius: 16px;
+    background: #100c3a;
+    padding: 12px;
+    display: block;
+  }
+
+  .mob-filter-tabs {
+    display: flex;
+    background: #6e6e6e28;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    padding: 8px;
+    border-radius: 500px;
+    border: 2px solid #ffffff2a;
+  }
+
+  .mob-filter-tab {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    padding: 5px 8px;
+    cursor: pointer;
+    border-radius: 500px;
+    color: rgba(255,255,255,.7);
+    font-weight: 600;
+    transition: background .15s;
+    font-size: 18px;
+  }
+
+  .mob-filter-tab .fc-icon{
+    width: 20px;
+    height: 20px;
+    color: #ffffff7a;
+  }
+
+  .mob-filter-tab p{
+    font-size: 12px;
+  }
+
+  .mob-filter-tab.active {
+    background: white;
+    color: #100c3a;
+  }
+
+  .mob-filter-tab.active .fc-icon{
+    color: #100c3a;
+  }
+
+  .mob-filter-input {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px solid #ffffff1e;
+    border-radius: 10px;
+    margin: 10px 4px 4px;
+    padding: 16px 16px;
+    color: rgba(255,255,255,.6);
+    font-size: 18px;
+  }
+  .mob-filter-input i { color: rgba(255,255,255,.4); font-size: 12px; transition: transform .2s; }
+  .mob-filter-input.open i { transform: rotate(180deg); }
+
+  .mob-filter-input { position: relative; cursor: pointer; }
+
+  .fc-dropdown {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0;
+    right: 0;
+    background: #fff;
+  }
+
+  .hd-country-dropdown,
+  .kbyg-dropdown { left: 0; right: 0; }
+
+  .filter-col { display: none; }
+  .mob-filter-tabs { display: flex; }
+  .mob-filter-input { display: flex; }
+  .mob-header-right { display: flex !important; }
+
+  .hero-cta-wrap { margin-top: 20px; margin-bottom: 0px; padding: 0; }
+  .hero-cta { margin: 0 12px; font-size: 16px; padding: 16px; }
+
+  .hero-note { font-size: 12px; }
+  .hero-note p { line-height: normal; max-width: none; width: 96%; font-size: 13px; }
+}
+
+
+/* ============================================================
+   SECTION 2 — APP / KNOW BEFORE YOU GO PROMO
+============================================================ */
+.section-2{
+    padding:40px 28px;
+    background:#fff;
+}
+
+.promo-grid{
+    max-width:1220px;
+    margin:auto;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:28px;
+}
+
+.promo-card{
+    position:relative;
+    border-radius:18px;
+    height:152px;
+}
+
+.promo-card-bg-clip{
+    position:absolute;
+    inset:0;
+    overflow:hidden;
+    border-radius:18px;
+    z-index:0;
+}
+
+.card-bg{
+    position:absolute;
+    pointer-events:none;
+    background-repeat:no-repeat;
+    background-size:contain;
+}
+
+/* app card */
+.app-card{
+    background:#24146e;
+    overflow:hidden;
+}
+
+.app-bg-center{
+    right:120px; top:-30px;
+    width:320px; height:180px;
+    background-image:url('demo/purple-circle-shape.webp');
+    background-position:center;
+}
+/* decorative background image on the right half, behind the phone */
+.app-bg-right{
+    position:absolute;
+    inset:0;
+    background-image:url('images/download-our-app-card-background-material.png');
+    background-position:right center;
+    background-size:auto 100%;
+    background-repeat:no-repeat;
+    pointer-events:none;
+    z-index:1;
+}
+.phone-image{
+    position:absolute;
+    right:22px; bottom:-15px;
+    height:165px; width:auto;
+    z-index:3;
+}
+.app-content{
+    position:relative;
+    z-index:4;
+    padding:28px 32px;
+}
+.app-content h2{
+    color:#fff;
+    font-size:24px;
+    font-weight:normal;
+    line-height:1;
+    margin-bottom:16px;
+}
+.store-buttons{
+    display:flex;
+    gap:10px;
+}
+.store-btn{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    text-decoration:none;
+    color:#fff;
+    border:1px solid rgba(255,255,255,.8);
+    border-radius:8px;
+    padding:10px 14px;
+    background:transparent;
+}
+.store-btn i{ font-size:24px; }
+.store-btn small{ display:block; font-size:10px; opacity:.8; }
+.store-btn span{ display:block; font-size:15px; font-weight:600; }
+
+/* know before you go card */
+.know-card{
+    background:#751412;
+    overflow:visible;
+    border-radius:18px;
+}
+/* clips decorative backgrounds inside the card without clipping the dropdown */
+.know-deco-clip{
+    position:absolute;
+    inset:0;
+    border-radius:18px;
+    overflow:hidden;
+    pointer-events:none;
+    z-index:0;
+}
+.know-bg-left{
+    left:0; top:0;
+    width:100%; height:100%;
+    background-image:url('demo/red-left-shape.webp');
+    background-position:left center;
+    background-size:cover;
+}
+.know-bg-circle{
+    left:-40px; top:-50px;
+    width:250px; height:250px;
+    background-image:url('demo/red-circle.webp');
+    background-position:center;
+}
+/* decorative background image on the left side */
+.know-bg-img{
+    position:absolute;
+    inset:0;
+    background-image:url('images/know-before-you-go-card-background-material.png');
+    background-position:left center;
+    background-size:auto 100%;
+    background-repeat:no-repeat;
+    pointer-events:none;
+    z-index:1;
+}
+.know-content{
+    position:relative;
+    z-index:5;
+    height:100%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:0 32px;
+}
+.know-content h2{
+    color:#fff;
+    font-size:24px;
+    font-weight:normal;
+    line-height:1.1;
+}
+.location-select{
+    width:260px; height:60px;
+    background:#fff;
+    border-radius:10px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 18px;
+    color:#333;
+    font-size:16px;
+}
+.location-select i{ color:#777; }
+
+/* ---- SECTION 2: RESPONSIVE ≤768px ---- */
+@media(max-width:768px){
+
+.app-bg-right{
+    position:absolute;
+    inset:0;
+    right: -40%;
+    background-image:url('images/download-our-app-card-background-material.png');
+    background-position:right center;
+    background-size:auto 100%;
+
+}
+
+    .promo-grid{
+        grid-template-columns:1fr;
+    }
+
+    .promo-card{
+        height:auto;
+        min-height:170px;
+    }
+
+    .know-content{
+        padding:24px;
+        flex-direction:column;
+        align-items:flex-start;
+        gap:18px;
+    }
+
+    .location-select{
+        width:100%;
+    }
+
+    .phone-image{
+        height:180px;
+        right:10px;
+        bottom:-12px;
+    }
+
+    .store-buttons{
+        flex-direction: column;
+        width: fit-content;
+    }
+}
+
+
+/* ============================================================
+   SECTION 3 — SINGLE MATCHES + CAROUSEL
+============================================================ */
+.section-3{
+  width: 100%;
+  background:#fff;
+  padding: 0px;
+}
+
+.single-matches-card{
+    position:relative;
+    width: 100%;
+    height:350px;
+    margin:auto;
+    overflow:hidden;
+    border-radius:42px 42px 0 0;
+    background:#020813;
+}
+
+.single-bg{
+    position:absolute;
+    inset:0;
+    background-image:url('demo/single-matches-bg.webp');
+    background-size:cover;
+    background-position:center;
+    opacity:.35;
+}
+
+.single-bg::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:
+        linear-gradient(
+            90deg,
+            rgba(0,0,0,.55) 0%,
+            rgba(0,0,0,.25) 100%
+        );
+}
+
+.single-content{
+    position:relative;
+    z-index:2;
+    height:100%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:0 70px;
+}
+
+.single-left h2{
+    color:#fff;
+    font-size:72px;
+    line-height:.92;
+    font-weight:normal;
+    letter-spacing:-2px;
+    text-transform:uppercase;
+}
+
+.single-right{
+    width:460px;
+}
+
+.single-right p{
+    color:rgba(255,255,255,.8);
+    font-size:18px;
+    line-height:1.5;
+    margin-bottom:24px;
+}
+
+.single-actions{
+    display:flex;
+    align-items:center;
+    gap:18px;
+}
+
+.explore-btn{
+    height:60px;
+    padding:0 28px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:22px 999px 999px 999px;
+    background:#55d6ea;
+    color:#05141d;
+    font-weight:600;
+    text-decoration:none;
+}
+
+.schedule-link{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    color:#fff;
+    text-decoration:none;
+    font-size:16px;
+    font-weight:600;
+}
+.schedule-link i{ color:#d70f3f; }
+
+/* matches carousel */
+.matches-carousel-section{
+    background:#030813;
+    padding-bottom:50px;
+}
+
+.match-tabs{
+    display:flex;
+    justify-content:flex-end;
+    gap:24px;
+    padding: 0 50px;
+    margin-bottom:20px;
+}
+
+.match-tabs button{
+    background:none;
+    border:none;
+    color:#c6c6c6;
+    font-size:16px;
+    cursor:pointer;
+    position:relative;
+}
+.match-tabs button.active{ color:#fff; }
+.match-tabs button.active::after{
+    content:"";
+    position:absolute;
+    left:0; bottom:-8px;
+    width:100%; height:4px;
+    background:#ff1148;
+    border-radius:10px;
+}
+
+.matches-row-wrap{
+    padding: 0;
+}
+
+.matches-row{
+    display:flex;
+    gap:20px;
+    overflow-x:auto;
+    scroll-behavior:smooth;
+    padding: 0px 70px;
+    padding-bottom:10px;
+}
+.matches-row::-webkit-scrollbar{ display:none; }
+
+/* carousel nav buttons */
+.carousel-nav{
+    display:flex;
+    justify-content:flex-end;
+    gap:12px;
+    padding:20px 50px 0;
+}
+.carousel-btn{
+    width:44px; height:44px;
+    border-radius:50%;
+    background:transparent;
+    border: none;
+    color:#fff;
+    font-size:15px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
+    transition:background .2s, border-color .2s, opacity .2s;
+}
+
+/*
+.carousel-btn:hover{
+    background:rgba(255,255,255,.1);
+    border-color:rgba(255,255,255,.6);
+}*/
+
+.carousel-btn:disabled{ opacity:.3; cursor:default; }
+.carousel-btn:disabled:hover{
+    background:transparent;
+    border-color:rgba(255,255,255,.3);
+}
+
+/* match card */
+.match-card{
+    width:350px;
+    background:#fff;
+    border-radius:18px;
+    overflow:hidden;
+    flex-shrink:0;
+    display:flex;
+    flex-direction:column;
+}
+
+.match-banner{
+    position:relative;
+    height:250px;
+    flex-shrink:0;
+    border-radius:0 0 14px 14px;
+    overflow:hidden;
+    background-color: #020710;
+}
+.match-banner > img{
+    width:100%; height:100%;
+    object-fit:cover;
+    opacity: .30;
+}
+
+.overlay{
+    position:absolute;
+    inset:0;
+    background:
+        linear-gradient(
+            rgba(0,0,0,.25),
+            rgba(0,0,0,.45)
+        );
+}
+
+.teams{
+    position:absolute;
+    inset:0;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:8px;
+    padding:16px 14px;
+}
+
+.team{
+    text-align:center;
+    flex:1;
+    min-width:0;
+}
+.team img{
+    width:32px; height:22px;
+    object-fit:cover;
+    margin:0 auto 8px;
+    border-radius:2px;
+}
+.team span{
+    display:block;
+    color:#fff;
+    font-size:15px;
+    font-weight:900;
+    line-height:1.15;
+    letter-spacing:-0.3px;
+    overflow-wrap:break-word;
+}
+
+.vs{
+    color:rgba(255,255,255,.7);
+    font-size:12px;
+    font-weight:700;
+    flex-shrink:0;
+}
+
+.match-info{
+    padding:18px 18px 10px;
+    flex:1 1 auto;
+}
+
+.info-row{
+    display:flex;
+    align-items:flex-start;
+    margin-bottom:14px;
+    color:#666;
+    font-size:13px;
+    gap: 10px;
+}
+.info-row i{ color:#e30b4f; margin-top:3px; }
+.info-row strong{ color:#444; }
+
+.buy-row{
+    border-top:1px solid #ececec;
+    height:50px;
+    flex-shrink:0;
+    padding:0 18px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    font-size:16px;
+    color:#444;
+}
+.buy-row i{ font-size:14px; }
+
+/* ---- SECTION 3: RESPONSIVE ≤768px ---- */
+@media(max-width:768px){
+
+    .single-matches-card{
+        height:auto;
+        min-height:400px;
+    }
+
+    .single-content{
+        flex-direction:column;
+        align-items:flex-start;
+        padding:40px 28px;
+        gap:30px;
+    }
+
+    .single-left h2{
+        font-size:52px;
+    }
+
+    .single-right{
+        width:100%;
+    }
+
+    .single-actions{
+        flex-direction:column;
+        align-items:flex-start;
+    }
+
+    .match-tabs{
+        padding:0 20px;
+        gap:18px;
+    }
+
+    .matches-row-wrap{
+        padding:0;
+    }
+
+    /* moderate padding-left on mobile for the matches row */
+    .matches-row{
+        padding: 0 16px 10px 28px;
+    }
+
+    .carousel-nav{
+        padding:16px 20px 0;
+    }
+
+    .match-card{
+        width:320px;
+    }
+}
+
+
+/* ============================================================
+   SECTION 4 — PRIVATE SUITES
+============================================================ */
+.section-4{
+    background:#f2f2f2;
+    padding:32px;
+}
+
+.private-suites-card{
+    position:relative;
+    max-width:1240px;
+    margin:auto;
+    overflow:hidden;
+    border-radius:30px;
+    background:#24146e;
+}
+
+.suite-bg-shape{
+    position:absolute;
+    top:-180px; left:520px;
+    width:520px; height:420px;
+    border-radius:50%;
+    background:#4a148c;
+    pointer-events:none;
+}
+
+.suite-content{
+    position:relative;
+    z-index:2;
+    gap:20px;
+    min-height:460px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.suite-text{
+    width:42%;
+    flex-shrink:0;
+    padding-left:48px;
+    box-sizing:border-box;
+}
+
+.suite-text h2{
+    color:#fff;
+    font-size:72px;
+    font-weight:normal;
+    line-height:.95;
+    margin-bottom:24px;
+    text-transform:uppercase;
+}
+
+.suite-text p{
+    max-width:420px;
+    color:rgba(255,255,255,.78);
+    font-size:18px;
+    line-height:1.5;
+    margin-bottom:34px;
+}
+
+.suite-btn{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    height:60px;
+    padding:0 42px;
+    background:#fff;
+    color:#111;
+    text-decoration:none;
+    border-radius:22px 999px 999px 999px;
+    font-size:18px;
+    font-weight:500;
+    white-space:nowrap;
+}
+
+.suite-image-wrapper{
+    position:relative;
+    right: -5%;
+    bottom: -20px;
+    width: 52%;
+    border:5px solid #b99b53;
+    flex-shrink:0;
+    aspect-ratio: 600 / 370;
+    align-self:stretch;
+    margin-top: 40px;
+    border-radius:128px 0 0 0;
+    overflow: hidden;
+}
+
+.suite-image{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    border-radius:120px 0 0 0;
+    z-index:2;
+    display:block;
+}
+
+/* ---- SECTION 4: RESPONSIVE ≤1024px ---- */
+@media (max-width:1024px){
+
+    .suite-text h2{ font-size:54px; }
+    .suite-text p{ font-size:16px; }
+    .suite-content{ min-height:0; }
+}
+
+/* ---- SECTION 4: RESPONSIVE ≤768px ---- */
+@media (max-width:768px){
+
+    .section-4{ padding:20px 16px; }
+
+    .private-suites-card{ border-radius:24px; }
+
+    .suite-bg-shape{
+        top:-140px;
+        left:auto;
+        right:-160px;
+        width:360px;
+        height:300px;
+    }
+
+    .suite-content{
+        flex-direction:column;
+        align-items:stretch;
+        min-height:0;
+        gap:0;
+    }
+
+    .suite-text{
+        width:100%;
+        padding:36px 24px 8px;
+    }
+
+    .suite-text h2{ font-size:42px; }
+
+    .suite-text p{
+        max-width:none;
+        font-size:15px;
+        margin-bottom:24px;
+    }
+
+    .suite-btn{
+        height:54px;
+        padding:0 32px;
+        font-size:16px;
+    }
+
+    .suite-image-wrapper{
+        width:100%;
+        margin:24px 0 0;
+        aspect-ratio: 4 / 3;
+    }
+
+    .suite-image-border,
+    .suite-image{
+        border-radius:0 0 0 0;
+    }
+}
+
+/* ---- SECTION 4: RESPONSIVE ≤420px ---- */
+@media (max-width:420px){
+
+    .suite-text h2{ font-size:34px; }
+    .suite-btn{ width:100%; }
+}
+
+
+/* ============================================================
+   SECTION 5 — ADDITIONAL OFFERINGS
+============================================================ */
+.section-5{
+    background:#eef1f6;
+    padding:56px 0;
+}
+
+.add-off-inner{
+    max-width:1240px;
+    margin:0 auto;
+    padding:0 32px;
+}
+
+.add-off-title{
+    color:#0a0a0a;
+    font-size:46px;
+    font-weight:normal;
+    letter-spacing:-1.5px;
+    text-transform:uppercase;
+    line-height:1;
+    margin-bottom:18px;
+}
+
+.add-off-note{
+    color:#333;
+    font-size:15px;
+    line-height:1.5;
+    margin-bottom:30px;
+}
+
+.add-off-link{
+    color:#333;
+    text-decoration:underline;
+}
+
+.add-off-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:28px;
+}
+
+.add-off-card{
+    background:#fff;
+    border-radius:14px;
+    overflow:hidden;
+}
+
+.add-off-img{
+    width:100%;
+    height:300px;
+    overflow:hidden;
+}
+.add-off-img img{
+    width:100%; height:100%;
+    object-fit:cover;
+    display:block;
+}
+
+.add-off-body{
+    padding:24px 28px 30px;
+}
+.add-off-body h3{
+    font-size:24px;
+    font-weight:normal;
+    letter-spacing:-0.5px;
+    text-transform:uppercase;
+    color:#0a0a0a;
+    margin-bottom:12px;
+}
+.add-off-body p{
+    font-size:15px;
+    line-height:1.55;
+    color:#444;
+    margin-bottom:22px;
+    max-width:440px;
+}
+
+.add-off-btn{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    height:50px;
+    padding:0 26px;
+    border:1.5px solid #111;
+    border-radius: 0 30px 30px 30px;
+    color:#111;
+    font-size:15px;
+    font-weight:500;
+    text-decoration:none;
+    transition:background .2s, color .2s;
+}
+.add-off-btn:hover{
+    background:#111;
+    color:#fff;
+}
+
+/* ---- SECTION 5: RESPONSIVE ≤768px ---- */
+@media(max-width:768px){
+
+    .section-5{ padding:40px 0; }
+    .add-off-inner{ padding:0 20px; }
+    .add-off-title{ font-size:32px; }
+    .add-off-grid{ grid-template-columns:1fr; gap:20px; }
+    .add-off-img{ height:220px; }
+    .add-off-body{ padding:20px 22px 26px; }
+    .add-off-body h3{ font-size:20px; }
+}
+
+
+
+/* ============================================================
+   SECTION 7 — WHY CHOOSE ON LOCATION
+============================================================ */
+.why-location-section{
+    padding:80px 32px;
+    background:#fff;
+}
+
+.why-location-grid{
+    width: 100%;
+    margin:auto;
+    display:grid;
+    grid-template-columns:580px 1fr;
+    gap:80px;
+    align-items:center;
+}
+
+.why-location-art{
+    position:relative;
+    width:580px;
+    height:525px;
+    overflow:hidden;
+    border-bottom-right-radius:165px;
+}
+
+.player-layer{
+    position:absolute;
+    inset:0;
+    background-image:url('images/68d67ace3a6c8af1a0962d9e_Frame 1321317561.webp');
+    background-size:cover;
+    background-position:center;
+}
+
+.mask-layer{
+    position:absolute;
+    inset:0;
+    background-image:url('images/68dab0f405fa8f3c5b1847ca_mask.webp');
+    background-size:cover;
+    background-position:center;
+}
+
+.why-location-content{
+    max-width:500px;
+}
+
+.why-location-content h2{
+    font-size:72px;
+    line-height:.92;
+    font-weight:900;
+    color:#040814;
+    margin-bottom:36px;
+}
+
+.why-location-content p{
+    font-size:17px;
+    line-height:1.75;
+    color:#5f6470;
+    margin-bottom:52px;
+}
+
+.stat-block{
+    display:flex;
+    align-items:flex-start;
+    gap:18px;
+}
+
+.stat-line{
+    width:2px;
+    height:86px;
+    background:#ff6d42;
+}
+
+.stat-number{
+    font-size:56px;
+    font-weight:900;
+    line-height:1;
+    color:#040814;
+    margin-bottom:8px;
+}
+
+.stat-label{
+    font-size:18px;
+    color:#5f6470;
+}
+
+/* ---- SECTION 7: RESPONSIVE ≤1024px ---- */
+@media(max-width:1024px){
+
+    .why-location-grid{
+        grid-template-columns: 1fr;
+    }
+
+    .why-location-art{
+        width:100%;
+        max-width:580px;
+        margin:0 auto;
+    }
+}
+
+/* ---- SECTION 7: RESPONSIVE ≤768px ---- */
+@media(max-width:768px){
+
+    /* section padding restored on mobile view */
+    .why-location-section{
+        padding: 48px 20px;
+    }
+
+    .why-location-grid{
+        gap: 36px;
+    }
+
+    .why-location-art{
+        height: 360px;
+        border-bottom-right-radius: 80px;
+    }
+
+    .why-location-content h2{
+        font-size: 40px;
+        margin-bottom: 22px;
+    }
+
+    .why-location-content p{
+        font-size: 15px;
+        margin-bottom: 32px;
+    }
+
+    .stat-number{ font-size: 40px; }
+    .stat-label{ font-size: 15px; }
+    .stat-line{ height: 64px; }
+}
+
+
+/* ============================================================
+   SECTION 8 — FREQUENTLY ASKED QUESTIONS
+============================================================ */
+.faq-section{
+    background:#fff;
+    padding:80px 32px;
+}
+
+.faq-container{
+    max-width:1240px;
+    margin:auto;
+}
+
+.faq-title{
+    font-size:64px;
+    line-height:.92;
+    font-weight:900;
+    color:#07101c;
+    margin-bottom:36px;
+}
+
+.faq-item{
+    border-bottom:1px solid #e5e5e5;
+}
+
+.faq-question{
+    width:100%;
+    background:none;
+    border:none;
+    padding:30px 0;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    cursor:pointer;
+    text-align:left;
+}
+
+.faq-question span{
+    font-size:18px;
+    color:#111;
+    font-weight:500;
+}
+
+.faq-question i{
+    color:#ff295d;
+    font-size:22px;
+    transition:transform .3s;
+}
+
+/* expandable / collapsible answer */
+.faq-answer{
+    max-height:0;
+    overflow:hidden;
+    transition:max-height .35s ease;
+}
+
+.faq-answer p{
+    max-width:900px;
+    padding-bottom:32px;
+    color:#6a7078;
+    line-height:1.8;
+    font-size:15px;
+}
+
+.faq-answer ul{
+    max-width:900px;
+    padding-bottom:32px;
+    color:#6a7078;
+    line-height:1.8;
+    font-size:15px;
+
+}
+
+/* expanded state — toggled via JS by adding/removing .active */
+.faq-item.active .faq-answer{
+    max-height:400px;
+}
+
+.faq-item.active .faq-question i{
+    transform:rotate(45deg);
+}
+
+.faq-footer{
+    text-align:center;
+    margin-top:28px;
+}
+
+.faq-button{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    height:56px;
+    padding:0 28px;
+    border:1px solid #222;
+    border-radius:20px 999px 999px 999px;
+    color:#111;
+    text-decoration:none;
+    font-size:15px;
+    transition: 500ms;
+}
+
+.faq-button:hover{
+  color: white;
+  background-color: #111;
+}
+
+/* ---- SECTION 8: RESPONSIVE ≤768px ---- */
+@media(max-width:768px){
+
+    .faq-section{ padding:48px 20px; }
+    .faq-title{ font-size:36px; margin-bottom:24px; }
+    .faq-question{ padding:22px 0; }
+    .faq-question span{ font-size:16px; }
+    .faq-answer p{ font-size:14px; }
+}
+
+
+/* ============================================================
+   SECTION 9 — FOOTER
+============================================================ */
+.site-footer{
+    background:#020915;
+    color:#fff;
+}
+
+.footer-container{
+    max-width:1240px;
+    margin:auto;
+    padding:60px 32px 40px;
+    display:grid;
+    grid-template-columns:240px 1fr 180px;
+    gap:40px;
+}
+
+.footer-branding{
+    display:flex;
+    align-items:center;
+}
+
+.footer-branding img{
+  width: 180px;
+}
+
+.footer-logo{
+    width:72px;
+    height:auto;
+    display:block;
+}
+
+.footer-divider{
+    width:1px;
+    height:92px;
+    background:rgba(255,255,255,.2);
+    margin:0 20px;
+}
+
+.footer-onlocation{
+    width:95px;
+    height:auto;
+}
+
+.footer-social{
+    display:flex;
+    gap:22px;
+    margin-top:28px;
+}
+.footer-social a{
+    color:#9ea6b5;
+    font-size:28px;
+    transition:.3s;
+}
+.footer-social a:hover{ color:#fff; }
+
+.footer-center h4{
+    font-size:18px;
+    margin-bottom:28px;
+}
+
+.footer-center{
+    display: flex;
+    flex-direction: column;
+}
+
+
+
+.footer-links{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  align-items: space-between;
+}
+
+.footer-links a,
+.accessible-link{
+    color:#d0d5df;
+    text-decoration:none;
+    font-size:14px;
+}
+
+
+
+.footer-right{
+    display:flex;
+    flex-direction:column;
+    align-items:flex-start;
+}
+
+.footer-right h4{
+    font-size:18px;
+    line-height:1.45;
+    margin-bottom:18px;
+}
+
+.register-btn{
+    height:56px;
+    padding:0 28px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border:1px solid rgba(255,255,255,.4);
+    border-radius:20px 999px 999px 999px;
+    color:#fff;
+    text-decoration:none;
+    transition: 400ms;
+}
+
+.register-btn:hover{
+  color: #111;
+  background-color: rgba(255, 255, 255, 0.801);
+}
+
+.footer-bottom{
+    border-top:1px solid rgba(255,255,255,.08);
+    text-align:center;
+    padding:28px 32px 60px;
+}
+
+.copyright{
+    color:#c0c7d4;
+    font-size:14px;
+    margin-bottom:20px;
+}
+
+.legal-links{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:18px;
+    margin-bottom:18px;
+}
+.legal-links a{
+    color:#c0c7d4;
+    text-decoration:none;
+    font-size:14px;
+}
+
+.footer-phone{
+    color:#c0c7d4;
+    font-size:14px;
+    line-height:1.7;
+}
+
+/* ---- SECTION 9: RESPONSIVE ≤991px ---- */
+@media(max-width:991px){
+
+    .footer-container{
+        grid-template-columns:1fr;
+    }
+    .footer-right{
+        margin-top:20px;
+    }
+    .footer-links{
+        flex-direction: column;
+        gap: 15px;
+    }
+}
+
+</style>
+
+<style>
+  /* =======================================
+   SECTION 6 — UNRIVALED LOUNGE ACCESS
+======================================= */
+
+.section-6{
+    background:#0a0a0a;
+    padding:0;
+    overflow:hidden;
+    position:relative;
+}
+
+.lounge-inner{
+    width:100%;
+    margin:0 auto;
+    padding:70px 32px;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:40px;
+    align-items:start;
+    position:relative;
+}
+
+.lounge-left{
+    z-index:2;
+}
+
+.lounge-badge{ margin-bottom:22px; }
+.lounge-badge img{ display:block; }
+
+.lounge-title{
+    color:#fff;
+    font-family: Impact, 'Arial Narrow Bold', 'Haettenschweiler', sans-serif;
+    font-size:48px;
+    font-weight:normal;
+    letter-spacing:.5px;
+    text-transform:uppercase;
+    line-height:1.05;
+    margin-bottom:22px;
+}
+
+.lounge-lead{
+    color:#fff;
+    font-size:17px;
+    line-height:1.6;
+    margin-bottom:14px;
+    max-width:400px;
+}
+
+.lounge-desc{
+    color:#9a9a9a;
+    font-size:15px;
+    line-height:1.65;
+    margin-bottom:32px;
+    max-width:400px;
+}
+
+.lounge-list{
+    position:relative;
+    padding-left:20px;
+}
+
+/* single continuous thin gray track spanning the full list height — the general track */
+.lounge-list::before{
+    content:"";
+    position:absolute;
+    left:8px; top:0;
+    width:1px;
+    height:100%;
+    background:rgba(255,255,255,.15);
+}
+
+.lounge-item{
+    position:relative;
+    padding:14px 0;
+    cursor:pointer;
+}
+
+.lounge-item span{
+    display:block;
+    color:#777;
+    font-size:16px;
+    font-weight:700;
+    letter-spacing:.4px;
+    text-transform:uppercase;
+    transition:color .2s;
+}
+
+.lounge-item.active span{ color:#fff; }
+
+/* thicker progress bar — centered exactly on the thin track's line,
+   grows from this item's header down to the end of its own content over 5s */
+.lounge-item .lounge-progress{
+    position:absolute;
+    left:-15px; top:0;
+    width:6px; height:0px;
+    background:#1ec8d6;
+    border-radius:3px;
+    z-index:1;
+}
+
+.lounge-item-desc{
+    display:none;
+    color:#9a9a9a;
+    font-size:14.5px;
+    line-height:1.7;
+    margin-top:10px;
+    padding-bottom:4px;
+    max-width:380px;
+}
+.lounge-item.active .lounge-item-desc{ display:block; }
+
+.lounge-right{
+ display: grid;
+ gap: 20px;
+ grid-template-columns: 1fr 1fr
+}
+
+.lounge-right-inner{
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+}
+
+.lounge-right-inner left{
+  margin-top: 200px;
+}
+
+.lounge-right-inner img{
+  height: 100%;
+  width: 100%;
+}
+
+.lounge-right-inner div{
+  min-height: 100px;
+  width: 100%;
+  background-color: teal;
+  border-radius: 30px;
+  overflow: hidden;
+}
+
+
+
+.lounge-teal-shape{
+    position:absolute;
+    right:0;
+    width:100%;
+    height:100%;
+    z-index:0;
+    pointer-events:none;
+    background-image:url('images/unrivaled-section-background-material.png');
+    background-size:contain;
+    background-repeat:no-repeat;
+    background-position:right;
+    overflow:hidden;
+}
+
+.lounge-img{
+    position:absolute;
+    border-radius:18px;
+    overflow:hidden;
+    background:#1a1a1a;
+}
+.lounge-img img{
+    width:100%; height:100%;
+    object-fit:cover;
+    display:block;
+}
+
+.lounge-img-tall{ top:0; right:0; width:270px; height:330px; z-index:2; }
+.lounge-img-mid{ top:170px; left:0; width:265px; height:185px; z-index:1; }
+.lounge-img-bottom-left{ top:380px; left:30px; width:235px; height:140px; z-index:1; }
+.lounge-img-bottom-right{ top:355px; right:0; width:265px; height:165px; z-index:1; }
+
+@media(max-width:1024px){
+    .lounge-inner{ grid-template-columns:1fr; gap: 30px}
+}
+
+@media(max-width:768px){
+    .lounge-inner{ padding:70px 20px; }
+    .lounge-title{ font-size:36px; }
+
+
+.lounge-right-inner .left{
+  margin: 0px;
+}
+
+
+.lounge-teal-shape{
+
+    overflow: hidden;
+background-size: auto 100%;
+background-position: calc(100% + 650px) center;
+top: -100px;
+
+}
+
+
+    .lounge-img-tall{
+        top: 0;
+        right: 0;
+        width: calc(270px * var(--scale));
+        height: calc(330px * var(--scale));
+    }
+    .lounge-img-mid{
+        top: calc(170px * var(--scale));
+        left: 0;
+        width: calc(265px * var(--scale));
+        height: calc(185px * var(--scale));
+    }
+    .lounge-img-bottom-left{
+        top: calc(380px * var(--scale));
+        left: calc(30px * var(--scale));
+        width: calc(235px * var(--scale));
+        height: calc(140px * var(--scale));
+    }
+    .lounge-img-bottom-right{
+        top: calc(355px * var(--scale));
+        right: 0;
+        width: calc(265px * var(--scale));
+        height: calc(165px * var(--scale));
+    }
+}
+</style>
+
+</head>
+<body>
+
+<!-- nav + mobile drawer injected by main.js -->
+<div id="site-nav"></div>
+
+<!-- ============================================================
+     HERO
+============================================================ -->
+<section class="hero">
+
+  <div class="hero-bg-img">
+    <img src="images/home-hero-background-shape.png" alt="">
+  </div>
+
+  <div class="hero-images">
+    <div class="hero-img player">
+      <img src="images/69d95f1cd329a58ab5240e4b_FWC26_Ecomm_Photo_Update_A_788x1000.webp" alt="Player">
+    </div>
+    <div class="hero-img stadium-top">
+      <img src="images/69d95f4c71d00684ba1d8e76_FWC26_Ecomm_Photo_Update_B_1000x720.webp" alt="Stadium">
+    </div>
+    <div class="hero-img crowd">
+      <img src="images/68f0fa5fb68f41124db8f6d1_Frame 1321317811.webp" alt="Crowd">
+    </div>
+    <div class="hero-img stadium-bottom">
+      <img src="images/68f0fb0a880ae67c65aedc63_Frame 1321317810 (1).webp" alt="Stadium">
+    </div>
+  </div>
+
+  <div class="hero-img-mob-left">
+    <img src="images/69d95f1cd329a58ab5240e4b_FWC26_Ecomm_Photo_Update_A_788x1000.webp" alt="Player">
+  </div>
+  <div class="hero-img-mob-right">
+    <img src="images/69d95f4c71d00684ba1d8e76_FWC26_Ecomm_Photo_Update_B_1000x720.webp" alt="Stadium">
+  </div>
+
+  <div class="hero-content">
+    <div class="hero-eyebrow">Get Closer Than Ever To</div>
+    <div style="display: flex;"><h1 class="hero-h1">FIFA WORLD CUP 26  </h1><h1 style=" font-size: 18px;" class="hero-h1">TM</h1></div>
+    <p class="hero-desc">
+      Experience the best of it all with official hospitality packages
+      featuring premium tickets, food &amp; beverage, entertainment,
+      and more. Now available: single matches and private suites!
+    </p>
+  </div>
+
+  <div class="filter-frost">
+    <div class="filter-inner">
+
+      <div class="filter-col" id="filterColLocation">
+        <svg class="fc-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 21.5C12 21.5 19 15.0823 19 9.92308C19 5.81325 15.866 2.5 12 2.5C8.13401 2.5 5 5.81325 5 9.92308C5 15.0823 12 21.5 12 21.5Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+          <circle cx="12" cy="9.8" r="2.6" stroke="currentColor" stroke-width="1.6"/>
+        </svg>
+        <div>
+          <div class="fc-label">Location</div>
+          <div class="fc-value" id="fcValueLocation">Select match location <i class="fa-solid fa-chevron-down"></i></div>
+        </div>
+        <div class="fc-dropdown" id="fcDropdownLocation"></div>
+      </div>
+
+      <div class="filter-col" id="filterColTeam">
+        <svg class="fc-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M5 21V3.8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+          <path d="M5 4C5 4 6.5 3 9 3C11.5 3 12.5 5 15 5C17 5 18 4 18 4V13C18 13 17 14 15 14C12.5 14 11.5 12 9 12C6.5 12 5 13 5 13V4Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+        </svg>
+        <div>
+          <div class="fc-label">Team</div>
+          <div class="fc-value" id="fcValueTeam">Select your team <i class="fa-solid fa-chevron-down"></i></div>
+        </div>
+        <div class="fc-dropdown" id="fcDropdownTeam"></div>
+      </div>
+
+      <div class="filter-col" id="filterColStage" style="border: none;">
+        <svg class="fc-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="5.5" cy="6" r="2.5" stroke="currentColor" stroke-width="1.6"/>
+          <circle cx="18.5" cy="6" r="2.5" stroke="currentColor" stroke-width="1.6"/>
+          <circle cx="12" cy="18" r="2.5" stroke="currentColor" stroke-width="1.6"/>
+          <path d="M7.8 7.2L11 16" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+          <path d="M16.2 7.2L13 16" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+          <path d="M8 6H16" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+        </svg>
+        <div>
+          <div class="fc-label">Stage</div>
+          <div class="fc-value" id="fcValueStage">Select stage <i class="fa-solid fa-chevron-down"></i></div>
+        </div>
+        <div class="fc-dropdown" id="fcDropdownStage"></div>
+      </div>
+
+      <div class="mob-filter-tabs">
+        <div class="mob-filter-tab active" data-field="location">
+          <svg class="fc-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 21.5C12 21.5 19 15.0823 19 9.92308C19 5.81325 15.866 2.5 12 2.5C8.13401 2.5 5 5.81325 5 9.92308C5 15.0823 12 21.5 12 21.5Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+            <circle cx="12" cy="9.8" r="2.6" stroke="currentColor" stroke-width="1.6"/>
+          </svg>
+          <p>Location</p>
+        </div>
+        <div class="mob-filter-tab" data-field="team">
+          <svg class="fc-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M5 21V3.8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+            <path d="M5 4C5 4 6.5 3 9 3C11.5 3 12.5 5 15 5C17 5 18 4 18 4V13C18 13 17 14 15 14C12.5 14 11.5 12 9 12C6.5 12 5 13 5 13V4Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+          </svg>
+          <p>Team</p>
+        </div>
+        <div class="mob-filter-tab" data-field="stage">
+          <svg class="fc-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="5.5" cy="6" r="2.5" stroke="currentColor" stroke-width="1.6"/>
+            <circle cx="18.5" cy="6" r="2.5" stroke="currentColor" stroke-width="1.6"/>
+            <circle cx="12" cy="18" r="2.5" stroke="currentColor" stroke-width="1.6"/>
+            <path d="M7.8 7.2L11 16" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+            <path d="M16.2 7.2L13 16" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+            <path d="M8 6H16" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+          </svg>
+          <p>Stage</p>
+        </div>
+      </div>
+
+      <div class="mob-filter-input" id="mobFilterInput">
+        <span id="mobFilterLabel">Select match location</span>
+        <i class="fa-solid fa-chevron-down"></i>
+        <div class="fc-dropdown" id="fcDropdownMobile"></div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="hero-cta-wrap">
+    <button class="hero-cta">Browse All Matches</button>
+  </div>
+
+  <div class="hero-note">
+    <strong>Don't risk unofficial* sources or leave tickets to chance!</strong>
+    <p>
+      <a href="#" style="text-decoration: underline;">*Official sources listed here. </a>
+      <p>Secure your place with ticket-inclusive hospitality packages from On Location,
+      Official Hospitality Provider of FIFA World Cup 2026™.</p>
+      <p>Up to six (6) packages per order. To purchase more, call +1‑844‑652‑1685. Seats not guaranteed to be together.</p>
+    </p>
+  </div>
+
+</section>
+
+<!-- ============================================================
+     SECTION 2 — APP / KNOW BEFORE YOU GO
+============================================================ -->
+<section class="section-2">
+
+    <div class="promo-grid">
+
+        <div class="promo-card app-card">
+
+
+            <div class="app-bg-right"></div>
+
+            <img
+                src="images/69f0ae3d3d6fca5a795b40bc_iPhone 12 Pro.png"
+                class="phone-image"
+                alt="Phone App"
+            >
+
+            <div class="app-content">
+                <h2>DOWNLOAD OUR APP</h2>
+                <div class="store-buttons">
+                    <a href="#" class="store-btn">
+                        <img src="images/app store.svg" alt="" style="height: 30px;">
+                    </a>
+                    <a href="#" class="store-btn">
+                        <img src="images/google play.svg" alt="" style="height: 30px;">
+                    </a>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="promo-card know-card">
+
+            <div class="know-deco-clip">
+                <div class="promo-card-bg-clip">
+                    <div class="card-bg know-bg-left"></div>
+                    <div class="card-bg know-bg-circle"></div>
+                </div>
+                <div class="know-bg-img"></div>
+            </div>
+
+            <div class="know-content">
+                <h2>
+                    KNOW BEFORE YOU <br>
+                    GO
+                </h2>
+                <div class="location-select" id="kbygSelect">
+                    <span id="kbygLabel">Choose Location</span>
+                    <i class="fa-solid fa-chevron-down"></i>
+                    <div class="kbyg-dropdown" id="kbygDropdown"></div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ============================================================
+     SECTION 3 — SINGLE MATCHES + CAROUSEL
+============================================================ -->
+<section class="section-3">
+
+    <div class="single-matches-card">
+
+        <div class="single-bg"></div>
+
+        <div class="single-content">
+
+            <div class="single-left">
+                <h2>
+                    SINGLE<br>
+                    MATCHES
+                </h2>
+            </div>
+
+            <div class="single-right">
+                <p>
+                    Choose from 104 matches across 16 dynamic host cities and venues*.
+                </p>
+                <div class="single-actions">
+                    <a href="#" class="explore-btn">
+                        Explore All Matches
+                    </a>
+                    <a href="#" class="schedule-link">
+                        View Schedule
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="matches-carousel-section">
+
+        <div class="match-tabs">
+            <button class="active" data-tab="popular">Popular</button>
+            <button data-tab="group">Group Stage</button>
+            <button data-tab="round32">Round of 32</button>
+        </div>
+
+        <div class="matches-row-wrap">
+            <div class="matches-row" id="matchesRow">
+                <!-- match cards rendered dynamically by JS -->
+            </div>
+        </div>
+
+        <div class="carousel-nav">
+            <button class="carousel-btn" id="prevBtn" aria-label="Previous matches">
+                <i class="fa-solid fa-chevron-left"></i>
+            </button>
+            <button class="carousel-btn" id="nextBtn" aria-label="Next matches">
+                <i class="fa-solid fa-chevron-right"></i>
+            </button>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ============================================================
+     SECTION 4 — PRIVATE SUITES
+============================================================ -->
+<section class="section-4">
+
+    <div class="private-suites-card">
+
+        <div class="suite-bg-shape"></div>
+
+        <div class="suite-content">
+
+            <div class="suite-text">
+                <h2>
+                    PRIVATE SUITES
+                </h2>
+                <p>
+                    Level up with this exclusive offering that includes
+                    preferred entry, direct seating access, and
+                    dedicated service – all to be enjoyed privately
+                    among you and your guests.
+                </p>
+                <a href="#" class="suite-btn">
+                    Buy Now
+                </a>
+            </div>
+
+            <div class="suite-image-wrapper">
+                <img
+                    src="images/68c8434f194725f4b9bd0016_suites-p-800.webp"
+                    alt="Private Suite"
+                    class="suite-image"
+                >
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ============================================================
+     SECTION 5 — ADDITIONAL OFFERINGS
+============================================================ -->
+<section class="section-5">
+
+    <div class="add-off-inner">
+
+        <h2 class="add-off-title">Additional Offerings</h2>
+
+        <p class="add-off-note">
+            These specialty offerings are only available via inquiry (they cannot be purchased online). Please
+            <a href="#" class="add-off-link">contact us here</a> or call us at 1-844-652-1685.
+        </p>
+
+        <div class="add-off-grid">
+
+            <div class="add-off-card">
+                <div class="add-off-img">
+                    <img src="images/platinum-access.webp" alt="Platinum Access">
+                </div>
+                <div class="add-off-body">
+                    <h3>Platinum Access</h3>
+                    <p>The most exclusive offering. It delivers an all-encompassing experience with full-service customization and the most premium access available.</p>
+                    <a href="#" class="add-off-btn">Register Interest</a>
+                </div>
+            </div>
+
+            <div class="add-off-card">
+                <div class="add-off-img">
+                    <img src="images/accommodations.webp" alt="Accommodations">
+                </div>
+                <div class="add-off-body">
+                    <h3>Accommodations</h3>
+                    <p>Select your preferred hotels, experiences, and/or car rentals to create your ideal trip package.</p>
+                    <a href="#" class="add-off-btn">Buy Now</a>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ============================================================
+     SECTION 6 — UNRIVALED LOUNGE ACCESS
+============================================================ -->
+<section class="section-6">
+    <div class="lounge-teal-shape"></div>
+    <div class="lounge-inner">
+
+
+        <div class="lounge-left">
+
+            <div class="lounge-badge">
+                <img src="images/FIFA_26_Logo.webp" alt="" style="width: 40px;">
+            </div>
+
+            <h2 class="lounge-title">Unrivaled<br>Lounge Access</h2>
+
+            <p class="lounge-lead">
+                After selecting your series, choose from a selection of dynamic lounge offerings at every venue.
+            </p>
+
+            <p class="lounge-desc">
+                Each of the 16 FIFA World Cup 2026™ host venues offers multiple lounge options, all of which blend luxury comfort with extraordinary viewing access. Note lounge quantities, sizes, and features vary by venue.
+            </p>
+
+            <div class="lounge-list" id="loungeList">
+
+                <div class="lounge-item active" data-lounge="pitchside">
+                    <div class="lounge-progress"></div>
+                    <span>Pitchside Lounge</span>
+                    <p class="lounge-item-desc">   
+                        Step into a realm where luxury hospitality and thrilling on-field 
+                        action converge. Enjoy upscale dining with live-action cooking stations 
+                        plus other gourmet offerings – as well as premium beverage service – served 
+                        both pre- and post-match. With unrivaled seat views located near the field along 
+                        the sidelines, you are not just a spectator – you are part of the action.
+                    </p>
+                </div>
+
+                <div class="lounge-item" data-lounge="vip">
+                    <div class="lounge-progress"></div>
+                    <span>VIP</span>
+                    <p class="lounge-item-desc">
+                        Your entry to an exclusive experience that 
+                        blends luxurious comfort with electrifying energy. Witness the action in premium 
+                        sideline seats while enjoying elevated amenities – including curated, themed-menu 
+                        stations and sommelier-guided beverage service. All of which are offered before the 
+                        match, at halftime, and after the final whistle.ion for the VIP lounge experience coming soon.
+                    </p>
+                </div>
+
+                <div class="lounge-item" data-lounge="trophy">
+                    <div class="lounge-progress"></div>
+                    <span>Trophy Lounge</span>
+                    <p class="lounge-item-desc">
+                        This elevated lounge delivers top-tier hospitality with a focus on convenience, comfort, 
+                        and service. Featuring excellent sideline seat views, it provides a dynamic atmosphere to 
+                        enjoy premium beverage service and upscale culinary offerings – including a chef-driven menu 
+                        featuring local flavors and ingredients – all to be enjoyed pre-match, halftime, and post-match.
+                    </p>
+                </div>
+
+                <div class="lounge-item" data-lounge="champions">
+                    <div class="lounge-progress"></div>
+                    <span>Champions Club</span>
+                    <p class="lounge-item-desc">
+                        A vibrant, elevated atmosphere designed to balance energy and comfort. Just steps from exclusive 
+                        hospitality spaces, these seats offer easy access to premium amenities – including beverage service 
+                        along with a full-course menu featuring chef-carved selections and gourmet shareable plates – all 
+                        of which are available pre- and post-match.
+                    </p>
+                </div>
+
+                <div class="lounge-item" data-lounge="pavilion">
+                    <div class="lounge-progress"></div>
+                    <span>FIFA Pavilion</span>
+                    <p class="lounge-item-desc">
+                        Welcome to an exclusive retreat set against the backdrop of the stadium. Within our secure 
+                        perimeter immediately outside the venue, the excitement of the game extends beyond the pitch 
+                        with a range of amenities – including elevated dining featuring street food classics infused 
+                        with local flavors as well as beverage service – all to be enjoyed both pre- and post-match.
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="lounge-right">
+          <div class="lounge-right-inner left" >
+            <div class="lounge-image-1">
+              <img src="images/lounge-group.webp" alt="Lounge guests watching match">
+            </div> 
+
+            <div class="lounge-image-2">
+              <img src="images/lounge-hex.webp" alt="Lounge interior">              
+            </div>
+          </div>
+
+          <div class="lounge-right-inner">
+            <div class="lounge-image-3">
+              <img src="images/lounge-food.webp" alt="Lounge food service"> 
+            </div> 
+
+            <div class="lounge-image-4">
+                <img src="images/lounge-chef.webp" alt="Chef plating food">          
+            </div>            
+          </div>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+<script>
+(function(){
+    var ITEM_DURATION = 5000;
+    var list = document.getElementById('loungeList');
+    if(!list) return;
+
+    var items = Array.prototype.slice.call(list.querySelectorAll('.lounge-item'));
+    var current = 0;
+    var timer = null;
+
+    function fullHeight(item){
+        // header + description height, regardless of current active state
+        var span = item.querySelector('span');
+        var desc = item.querySelector('.lounge-item-desc');
+        var h = span ? span.offsetHeight : 0;
+        if(desc){
+            var prevDisplay = desc.style.display;
+            desc.style.display = 'block';
+            h += desc.offsetHeight + 10; // + margin-top
+            desc.style.display = prevDisplay;
+        }
+        // include the item's own top/bottom padding
+        var cs = getComputedStyle(item);
+        h += parseFloat(cs.paddingTop) + parseFloat(cs.paddingBottom);
+        return h;
+    }
+
+    function activate(index){
+        items.forEach(function(item, i){
+            var bar = item.querySelector('.lounge-progress');
+            item.classList.toggle('active', i === index);
+            if(bar){
+                if(i === index){
+                    var target = fullHeight(item);
+                    bar.style.transition = 'none';
+                    bar.style.height = '0px';
+                    void bar.offsetHeight;
+                    bar.style.transition = 'height ' + ITEM_DURATION + 'ms linear';
+                    requestAnimationFrame(function(){
+                        bar.style.height = target + 'px';
+                    });
+                } else {
+                    bar.style.transition = 'none';
+                    bar.style.height = '0px';
+                }
+            }
+        });
+        current = index;
+    }
+
+    function advance(){
+        var next = (current + 1) % items.length;
+        activate(next);
+    }
+
+    function startAutoplay(){
+        clearInterval(timer);
+        timer = setInterval(advance, ITEM_DURATION);
+    }
+
+    items.forEach(function(item, i){
+        item.addEventListener('click', function(){
+            activate(i);
+            startAutoplay();
+        });
+    });
+
+    activate(0);
+    startAutoplay();
+
+    window.addEventListener('resize', function(){
+        activate(current);
+    });
+})();
+</script>
+
+
+
+
+<!-- ============================================================
+     SECTION 7 — WHY CHOOSE ON LOCATION
+============================================================ -->
+<section class="why-location-section">
+
+    <div class="why-location-grid">
+
+        <div class="why-location-art">
+            <div class="player-layer"></div>
+            <div class="mask-layer"></div>
+        </div>
+
+        <div class="why-location-content">
+
+            <h2>
+                WHY CHOOSE ON<br>
+                LOCATION?
+            </h2>
+
+            <p>
+                As the official hospitality provider of world-renowned events like
+                the Olympic Games and Super Bowl, On Location has redefined the
+                live event experience across sports, music, fashion, and beyond.
+
+                On Location believes fandom shouldn't be limited to just watching
+                an event; as a result, it creates extraordinary experiences for
+                memories that last a lifetime.
+            </p>
+
+            <div class="stat-block">
+                <div class="stat-line"></div>
+                <div>
+                    <div class="stat-number">
+                        2 MILLION
+                    </div>
+                    <div class="stat-label">
+                        Global Guests Hosted Annually
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ============================================================
+     SECTION 8 — FREQUENTLY ASKED QUESTIONS
+============================================================ -->
+<section class="faq-section">
+
+    <div class="faq-container">
+
+        <h2 class="faq-title">
+            FREQUENTLY ASKED QUESTIONS
+        </h2>
+
+        <div class="faq-list">
+
+            <div class="faq-item active">
+                <button class="faq-question">
+                    <span>How is hospitality different from a general ticket?</span>
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+                <div class="faq-answer">
+                    <p>
+                        FIFA World Cup 26™ Hospitality packages are ticket-inclusive
+                        offerings and series that provide premium seating,
+                        exclusive entertainment, and upscale food and beverages,
+                        with service levels ranging from private suites to shared
+                        lounges – and other festive product options within the
+                        stadium's secure perimeter – along with a variety of
+                        additional one-of-a-kind experiences.
+
+                        These packages provide an elevated experience beyond
+                        standard event offerings.
+                    </p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">
+                    <span>Can I buy hospitality packages from other companies?</span>
+                    <i class="fa-solid fa-plus"></i>
+                </button>
+                <div class="faq-answer">
+                    <p>On Location is the only Official Hospitality Provider of the FIFA World Cup 26. Ticket-inclusive hospitality packages will be sold exclusively by On Location and its Officially Appointed Sales Agents (see list here). Fans are urged to purchase hospitality packages through FIFA.com/hospitality. Hospitality packages and tickets sourced from unofficial sales channels may not be valid.</p>
+                    <p>We strongly advise against purchasing packages from unauthorized platforms or sellers.</p>
+                  </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">
+                    <span>
+                        Why are there separate FIFA Hospitality Digital Checkout Store
+                        for each of the three host nations (Canada, Mexico, and the U.S.)?
+                    </span>
+                    <i class="fa-solid fa-plus"></i>
+                </button>
+                <div class="faq-answer">
+                    <p>Due to regulations related to processing transactions in the local currency of each host nation, there are three separate ticket shops which each feature their local currency: Canadian Dollars (CAD), Mexican Pesos (MXN), and U.S. Dollars (USD).</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">
+                    <span>What do I need to know re: purchasing packages in different host nations?</span>
+                    <i class="fa-solid fa-plus"></i>
+                </button>
+                <div class="faq-answer">
+                    <p>Purchases need to be made in each host nation’s currency (in their related digital checkout store):</p>
+                    <ul>
+                      <li>Match packages in Canada must be paid for in CAD in the Canadian Digital Checkout Store.</li>
+                      <li>Match packages in Mexico must be paid for in MXN in the Mexican Digital Checkout Store.</li>
+                      <li>Match packages in the U.S. must be paid for in USD in the U.S. Digital Checkout Store.</li>
+                    </ul>
+                    <p>Separate purchases are required for match packages in different host nations. For example, a Venue Series package in Mexico City is purchased separate from a Single-Match package in Boston. (This applies to subsequent installment payments for each package.)</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">
+                    <span>
+                        Is it possible for different purchasers – those who have purchased
+                        packages using separate accounts – to sit together at a match?
+                    </span>
+                    <i class="fa-solid fa-plus"></i>
+                </button>
+                <div class="faq-answer">
+                    <p>While not guaranteed, seating requests for separate bookings will be considered on a best-efforts basis and are strictly subject to availability and operational constraints. Please note that exact seating locations are not guaranteed.</p>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="faq-footer">
+            <a href="#" class="faq-button">
+                See All FAQs
+            </a>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- footer injected by main.js -->
+<div id="site-footer"></div>
+
+<script src="main.js"></script>
+
+<script>
+/* ── Lounge accordion ── */
+document.querySelectorAll('.lounge-item').forEach(item => {
+  item.addEventListener('click', () => {
+    document.querySelectorAll('.lounge-item').forEach(i => i.classList.remove('active'));
+    item.classList.add('active');
+  });
+});
+
+/* ── FAQ expand / collapse ── */
+document.querySelectorAll('.faq-question').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const item = btn.closest('.faq-item');
+    const isOpen = item.classList.contains('active');
+
+    /* close all */
+    document.querySelectorAll('.faq-item').forEach(i => {
+      i.classList.remove('active');
+      i.querySelector('.faq-question i').className = 'fa-solid fa-plus';
+    });
+
+    /* open clicked one if it wasn't already open */
+    if (!isOpen) {
+      item.classList.add('active');
+      item.querySelector('.faq-question i').className = 'fa-solid fa-xmark';
+    }
+  });
+});
+</script>
+
+<script>
+/* ============================================================
+   HERO FILTER — Location / Team / Stage (desktop columns)
+   Render helpers use data from main.js globals
+============================================================ */
+
+/* ---- Location: grouped ---- */
+function renderLocationDropdown(container, onSelect) {
+  let html = '';
+  wc26LocationGroups.forEach(section => {
+    if (section.group) {
+      html += `<div class="fc-dropdown-group">${section.group}</div>`;
+    }
+    section.items.forEach(item => {
+      html += `<div class="fc-dropdown-item" data-label="${item.label}">${item.label}</div>`;
+    });
+  });
+  container.innerHTML = html;
+
+  container.querySelectorAll('.fc-dropdown-item').forEach(el => {
+    el.addEventListener('click', (e) => {
+      e.stopPropagation();
+      onSelect(el.dataset.label);
+      container.querySelectorAll('.fc-dropdown-item').forEach(c => c.classList.remove('selected'));
+      el.classList.add('selected');
+      closeAllDropdowns();
+    });
+  });
+}
+
+/* ---- Team: every participating nation with its flag ---- */
+function renderTeamDropdown(container, onSelect) {
+  container.innerHTML = wc26Teams.map(t => `
+    <div class="fc-dropdown-item fc-dropdown-item-flag" data-name="${t.name}">
+      <img src="https://flagcdn.com/w40/${t.code}.png" alt="${t.name} flag">
+      <span>${t.name}</span>
+    </div>
+  `).join('');
+
+  container.querySelectorAll('.fc-dropdown-item').forEach((el, i) => {
+    el.addEventListener('click', (e) => {
+      e.stopPropagation();
+      onSelect(wc26Teams[i]);
+      container.querySelectorAll('.fc-dropdown-item').forEach(c => c.classList.remove('selected'));
+      el.classList.add('selected');
+      closeAllDropdowns();
+    });
+  });
+}
+
+/* ---- Stage: flat official stage list ---- */
+function renderStageDropdown(container, onSelect) {
+  container.innerHTML = wc26StagesData.map(s => `
+    <div class="fc-dropdown-item" data-label="${s.label}">${s.label}</div>
+  `).join('');
+
+  container.querySelectorAll('.fc-dropdown-item').forEach((el, i) => {
+    el.addEventListener('click', (e) => {
+      e.stopPropagation();
+      onSelect(wc26StagesData[i]);
+      container.querySelectorAll('.fc-dropdown-item').forEach(c => c.classList.remove('selected'));
+      el.classList.add('selected');
+      closeAllDropdowns();
+    });
+  });
+}
+
+function setupFilterToggle(colId, dropdownId, valueId) {
+  const col = document.getElementById(colId);
+  const dropdown = document.getElementById(dropdownId);
+  const valueEl = document.getElementById(valueId);
+  if (!col || !dropdown || !valueEl) return;
+
+  col.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const isOpen = dropdown.classList.contains('open');
+    closeAllDropdowns();
+    if (!isOpen) {
+      dropdown.classList.add('open');
+      valueEl.classList.add('open');
+    }
+  });
+}
+
+/* Location column */
+const fcDropdownLocation = document.getElementById('fcDropdownLocation');
+const fcValueLocation = document.getElementById('fcValueLocation');
+if (fcDropdownLocation) {
+  renderLocationDropdown(fcDropdownLocation, (label) => {
+    fcValueLocation.innerHTML = `${label} <i class="fa-solid fa-chevron-down"></i>`;
+  });
+}
+setupFilterToggle('filterColLocation', 'fcDropdownLocation', 'fcValueLocation');
+
+/* Team column */
+const fcDropdownTeam = document.getElementById('fcDropdownTeam');
+const fcValueTeam = document.getElementById('fcValueTeam');
+if (fcDropdownTeam) {
+  renderTeamDropdown(fcDropdownTeam, (team) => {
+    fcValueTeam.innerHTML = `
+      <img src="https://flagcdn.com/w40/${team.code}.png" alt="${team.name} flag" style="width:18px;height:13px;object-fit:cover;border-radius:2px;margin-right:2px">
+      ${team.name} <i class="fa-solid fa-chevron-down"></i>
+    `;
+  });
+}
+setupFilterToggle('filterColTeam', 'fcDropdownTeam', 'fcValueTeam');
+
+/* Stage column */
+const fcDropdownStage = document.getElementById('fcDropdownStage');
+const fcValueStage = document.getElementById('fcValueStage');
+if (fcDropdownStage) {
+  renderStageDropdown(fcDropdownStage, (stage) => {
+    fcValueStage.innerHTML = `${stage.label} <i class="fa-solid fa-chevron-down"></i>`;
+  });
+}
+setupFilterToggle('filterColStage', 'fcDropdownStage', 'fcValueStage');
+
+/* ============================================================
+   HERO FILTER — Mobile tabs + single dropdown input
+============================================================ */
+const mobFieldRenderers = {
+  location: { render: renderLocationDropdown, placeholder: 'Select match location', getLabel: (v) => v },
+  team:     { render: renderTeamDropdown,     placeholder: 'Select your team',       getLabel: (v) => v.name },
+  stage:    { render: renderStageDropdown,    placeholder: 'Select stage',           getLabel: (v) => v.label }
+};
+
+const mobTabs        = document.querySelectorAll('.mob-filter-tab');
+const mobFilterInput = document.getElementById('mobFilterInput');
+const mobFilterLabel = document.getElementById('mobFilterLabel');
+const mobDropdown    = document.getElementById('fcDropdownMobile');
+
+let activeMobField = 'location';
+
+function renderMobDropdown(field) {
+  const config = mobFieldRenderers[field];
+  config.render(mobDropdown, (value) => {
+    mobFilterLabel.textContent = config.getLabel(value);
+    closeAllDropdowns();
+  });
+}
+if (mobDropdown) renderMobDropdown(activeMobField);
+
+mobTabs.forEach(tab => {
+  tab.addEventListener('click', (e) => {
+    e.stopPropagation();
+    mobTabs.forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+    activeMobField = tab.dataset.field;
+    mobFilterLabel.textContent = mobFieldRenderers[activeMobField].placeholder;
+    renderMobDropdown(activeMobField);
+    closeAllDropdowns();
+  });
+});
+
+if (mobFilterInput) {
+  mobFilterInput.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const isOpen = mobDropdown.classList.contains('open');
+    closeAllDropdowns();
+    if (!isOpen) {
+      mobDropdown.classList.add('open');
+      mobFilterInput.classList.add('open');
+    }
+  });
+}
+
+/* ============================================================
+   MATCH CARDS — dynamic data + render + carousel controls
+============================================================ */
+
+const matchesData = {
+  popular: [
+    {
+      banner: "images/68e520a0ca5637eed2191a66_Frame 1321317772.webp",
+      team1: { flag: "images/flags/Panama.webp", name: "Panama" },
+      team2: { flag: "images/flags/England.webp", name: "England" },
+      day: "Saturday", date: "June,27", time: "4:00 pm",
+      venue: "New York New Jersey Stadium", country: "USA",
+      ref: "M67: Panama vs. England"
+    },
+    {
+      banner: "images/68e520a0ca5637eed2191a66_Frame 1321317772.webp",
+      team1: { flag: "images/flags/Turkey.webp", name: "Türkiye" },
+      team2: { flag: "images/flags/USA.webp", name: "United States" },
+      day: "Thursday", date: "June,25", time: "4:00 pm",
+      venue: "Los Angeles Stadium", country: "USA",
+      ref: "M59: Türkiye vs. United States"
+    },
+    {
+      banner: "images/68e520a0ca5637eed2191a66_Frame 1321317772.webp",
+      team1: { flag: "images/flags/Colombia.webp", name: "Colombia" },
+      team2: { flag: "images/flags/Portugal.webp", name: "Portugal" },
+      day: "Saturday", date: "June,27", time: "4:00 pm",
+      venue: "Dallas Stadium", country: "USA",
+      ref: "M71: Colombia vs. Portugal"
+    },
+    {
+      banner: "images/68e520a0ca5637eed2191a66_Frame 1321317772.webp",
+      team1: { flag: "images/flags/ecuador.webp", name: "Ecuador" },
+      team2: { flag: "images/flags/germany.webp", name: "Germany" },
+      day: "Thursday", date: "June,25", time: "4:00 pm",
+      venue: "New York New Jersey Stadium", country: "USA",
+      ref: "M56: Ecuador vs. Germany"
+    },
+    {
+      banner: "images/68e520a0ca5637eed2191a66_Frame 1321317772.webp",
+      team1: { flag: "images/flags/brazil.webp", name: "Brazil" },
+      team2: { flag: "images/flags/argentina.webp", name: "Argentina" },
+      day: "Sunday", date: "June,29", time: "6:00 pm",
+      venue: "MetLife Stadium", country: "USA",
+      ref: "M80: Brazil vs. Argentina"
+    },
+    {
+      banner: "images/68e520a0ca5637eed2191a66_Frame 1321317772.webp",
+      team1: { flag: "images/flags/France.webp", name: "France" },
+      team2: { flag: "images/flags/Spain.webp", name: "Spain" },
+      day: "Wednesday", date: "July,2", time: "3:00 pm",
+      venue: "SoFi Stadium", country: "USA",
+      ref: "M88: France vs. Spain"
+    }
+  ],
+  group: [
+    {
+      banner: "images/68e520a0ca5637eed2191a66_Frame 1321317772.webp",
+      team1: { flag: "images/flags/Mexico.webp", name: "Mexico" },
+      team2: { flag: "images/flags/Poland.webp", name: "Poland" },
+      day: "Friday", date: "June,12", time: "1:00 pm",
+      venue: "Estadio Azteca", country: "Mexico",
+      ref: "M3: Mexico vs. Poland"
+    },
+    {
+      banner: "images/68e520a0ca5637eed2191a66_Frame 1321317772.webp",
+      team1: { flag: "images/flags/Canada.webp", name: "Canada" },
+      team2: { flag: "images/flags/Belgium.webp", name: "Belgium" },
+      day: "Saturday", date: "June,13", time: "12:00 pm",
+      venue: "BMO Field", country: "Canada",
+      ref: "M5: Canada vs. Belgium"
+    }
+  ],
+  round32: [
+    {
+      banner: "images/68e520a0ca5637eed2191a66_Frame 1321317772.webp",
+      team1: { flag: "images/flags/Netherlands.webp", name: "Netherlands" },
+      team2: { flag: "images/flags/Senegal.webp", name: "Senegal" },
+      day: "Sunday", date: "June,28", time: "2:00 pm",
+      venue: "AT&T Stadium", country: "USA",
+      ref: "M73: Netherlands vs. Senegal"
+    }
+  ]
+};
+
+function createMatchCard(m) {
+  return `
+    <div class="match-card">
+      <div class="match-banner">
+        <img src="${m.banner}" alt="">
+        <div class="overlay"></div>
+        <div class="teams">
+          <div class="team">
+            <img src="${m.team1.flag}" alt="${m.team1.name}">
+            <span>${m.team1.name.toUpperCase()}</span>
+          </div>
+          <div class="vs">VS</div>
+          <div class="team">
+            <img src="${m.team2.flag}" alt="${m.team2.name}">
+            <span>${m.team2.name.toUpperCase()}</span>
+          </div>
+        </div>
+      </div>
+      <div class="match-info">
+        <div class="info-row">
+          <i class="fa-regular fa-calendar"></i>
+         <p> ${m.day}, <strong> ${m.date} </strong> at <span> ${m.time} </span> </p>
+        </div>
+        <div class="info-row">
+          <i class="fa-solid fa-location-dot"></i>
+          <p><strong>${m.venue}</strong>, ${m.country}</p>
+        </div>
+        <div class="info-row">
+          <i class="fa-regular fa-futbol"></i>
+          ${m.ref}
+        </div>
+      </div>
+      <div class="buy-row">
+        <span>Buy Now</span>
+        <i class="fa-solid fa-chevron-right"></i>
+      </div>
+    </div>
+  `;
+}
+
+const matchesRow   = document.getElementById('matchesRow');
+const prevBtn      = document.getElementById('prevBtn');
+const nextBtn      = document.getElementById('nextBtn');
+const tabButtons   = document.querySelectorAll('.match-tabs button');
+
+function renderMatches(key) {
+  const list = matchesData[key] || [];
+  matchesRow.innerHTML = list.map(createMatchCard).join('');
+  matchesRow.scrollTo({ left: 0 });
+  updateCarouselButtons();
+}
+
+function updateCarouselButtons() {
+  const maxScroll = matchesRow.scrollWidth - matchesRow.clientWidth - 2;
+  prevBtn.disabled = matchesRow.scrollLeft <= 0;
+  nextBtn.disabled = matchesRow.scrollLeft >= maxScroll;
+}
+
+function scrollByCard(direction) {
+  const card = matchesRow.querySelector('.match-card');
+  const cardWidth = card ? card.getBoundingClientRect().width : 260;
+  const gap = 20;
+  matchesRow.scrollBy({ left: direction * (cardWidth + gap) * 2, behavior: 'smooth' });
+}
+
+prevBtn.addEventListener('click', () => scrollByCard(-1));
+nextBtn.addEventListener('click', () => scrollByCard(1));
+matchesRow.addEventListener('scroll', () => {
+  window.requestAnimationFrame(updateCarouselButtons);
+});
+window.addEventListener('resize', updateCarouselButtons);
+
+tabButtons.forEach(btn => {
+  btn.addEventListener('click', () => {
+    tabButtons.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    renderMatches(btn.dataset.tab);
+  });
+});
+
+/* initial render */
+renderMatches('popular');
+</script>
+
+</body>
+</html>
