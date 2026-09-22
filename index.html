@@ -2,3233 +2,932 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FIFA World Cup 26™ – Official Hospitality</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-<link rel="stylesheet" href="style.css">
-
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Road, Air &amp; Sea Freight | Pacific Express Logistics Services</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 <style>
-
-/* ============================================================
-   RESET & BASE
-============================================================ */
-*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
-
-body {
-  font-family: 'Arial', sans-serif;
-  background: #fff;
-  color: #111;
-  overflow-x: hidden;
-}
-
-
-
-/* ============================================================
-   SECTION — HERO
-============================================================ */
-.hero {
-  position: relative;
-  background: #130b44;
-  border-bottom-left-radius: 300px;
-  overflow: hidden;
-}
-
-.hero-bg-img {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  height: 600px;
-  z-index: 0;
-  pointer-events: none;
-}
-
-.hero-bg-img img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-  display: block;
-}
-
-.hero-images {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-}
-
-.hero-img {
-  position: absolute;
-  border-radius: 16px;
-  overflow: hidden;
-}
-
-.hero-img.player {
-  left: 52px;
-  top: -22px;
-  width: 178px;
-  height: 248px;
-}
-
-.hero-img.stadium-top {
-  right: 36px;
-  top: -15px;
-  width: 250px;
-  height: 185px;
-}
-
-.hero-img.crowd {
-  left: 188px;
-  top: 290px;
-  width: 200px;
-  height: 148px;
-  opacity: .32;
-}
-
-.hero-img.stadium-bottom {
-  right: 162px;
-  top: 212px;
-  width: 158px;
-  height: 188px;
-  opacity: .3;
-}
-
-.hero-content {
-  position: relative;
-  z-index: 1;
-  text-align: center;
-  color: #fff;
-  padding: 150px 20px 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.hero-eyebrow {
-  font-size: 24px;
-  letter-spacing: 1px;
-  margin-bottom: 10px;
-  text-transform: uppercase;
-}
-
-.hero-h1 {
-  font-size: clamp(48px, 7vw, 78px);
-  font-weight: normal;
-  line-height: 1;
-  letter-spacing: -3px;
-}
-
-.hero-desc {
-  max-width: 680px;
-  margin: 20px auto 0;
-  font-size: 16px;
-  line-height: 1.65;
-  color: rgba(255,255,255,.85);
-}
-
-/* filter box */
-.filter-frost {
-  position: relative;
-  z-index: 5;
-  margin: 32px auto 0;
-  width: min(72%, 860px);
-  background: #100c3a49;
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(255,255,255,.2);
-  border-radius: 26px;
-  padding: 14px;
-}
-
-.filter-inner {
-  display: flex;
-  background: #0e0734;
-  border-radius: 18px;
-  padding: 22px;
-}
-
-.filter-col {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  padding: 0 24px;
-}
-.filter-col:not(:last-child) {
-  border-right: 1px solid rgba(255,255,255,.1);
-}
-.filter-col > .fc-icon {
-  width: 20px;
-  height: 20px;
-  color: #8ed8ff;
-  flex-shrink: 0;
-}
-.fc-label {
-  font-size: 13px;
-  font-weight: 700;
-  color: #8ed8ff;
-  margin-bottom: 6px;
-  letter-spacing: .5px;
-}
-.fc-value {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  color: #fff;
-  font-size: 14px;
-}
-.fc-value i { font-size: 11px; color: rgba(255,255,255,.5); transition: transform .2s; }
-
-/* ---- Functional dropdown panels (Location / Team / Stage) ---- */
-.filter-col { position: relative; cursor: pointer; }
-
-.fc-value.open i { transform: rotate(180deg); }
-
-.fc-dropdown {
-  display: none;
-  position: absolute;
-  top: calc(100% + 14px);
-  left: 0;
-  right: 0;
-  max-height: 320px;
-  overflow-y: auto;
-  background: #fff;
-  border: 1px solid #e6e6e6;
-  border-radius: 12px;
-  box-shadow: 0 18px 40px rgba(0,0,0,.35);
-  z-index: 2000;
-  padding: 6px;
-}
-.fc-dropdown.open { display: block; }
-
-.fc-dropdown-item {
-  padding: 10px 12px;
-  font-size: 13px;
-  color: #222;
-  border-radius: 8px;
-  cursor: pointer;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-.fc-dropdown-item:hover { background: #f5f5f7; color: #111; }
-.fc-dropdown-item.selected { background: #eef3ff; color: #1a46c8; font-weight: 600; }
-
-.fc-dropdown-group {
-  padding: 10px 12px 6px;
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.5px;
-  text-transform: uppercase;
-  color: #999;
-  margin-top: 4px;
-}
-.fc-dropdown-group:first-child { margin-top: 0; }
-
-.fc-dropdown-item-flag {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-.fc-dropdown-item-flag img {
-  width: 22px;
-  height: 16px;
-  object-fit: cover;
-  border-radius: 2px;
-  flex-shrink: 0;
-}
-
-.fc-dropdown::-webkit-scrollbar { width: 6px; }
-.fc-dropdown::-webkit-scrollbar-thumb { background: #ddd; border-radius: 4px; }
-
-/* ---- Header country dropdown ---- */
-.hd-country { position: relative; }
-.hd-country-dropdown {
-  display: none;
-  position: absolute;
-  top: calc(100% + 8px);
-  left: 0;
-  min-width: 200px;
-  max-height: 260px;
-  overflow-y: auto;
-  background: #fff;
-  border: 1px solid #e0e0e0;
-  border-radius: 10px;
-  box-shadow: 0 12px 32px rgba(0,0,0,.15);
-  z-index: 50;
-  padding: 6px;
-}
-.hd-country-dropdown.open { display: block; }
-.hd-country-item {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 8px 10px;
-  font-size: 14px;
-  color: #222;
-  border-radius: 7px;
-  cursor: pointer;
-}
-.hd-country-item img { width: 20px; height: 14px; border-radius: 2px; object-fit: cover; }
-.hd-country-item:hover { background: #f5f5f5; }
-.hd-country-item.selected { background: #eef3ff; font-weight: 600; }
-
-/* ---- Header language dropdown ---- */
-.hd-lang { position: relative; }
-.hd-lang-dropdown {
-  display: none;
-  position: absolute;
-  top: calc(100% + 8px);
-  right: 0;
-  min-width: 160px;
-  background: #fff;
-  border: 1px solid #e0e0e0;
-  border-radius: 10px;
-  box-shadow: 0 12px 32px rgba(0,0,0,.15);
-  z-index: 50;
-  padding: 6px;
-}
-.hd-lang-dropdown.open { display: block; }
-.hd-lang-item {
-  padding: 8px 10px;
-  font-size: 14px;
-  color: #222;
-  border-radius: 7px;
-  cursor: pointer;
-}
-.hd-lang-item:hover { background: #f5f5f5; }
-.hd-lang-item.selected { background: #eef3ff; font-weight: 600; }
-
-/* ---- Know Before You Go location dropdown ---- */
-.location-select { position: relative; cursor: pointer; }
-.kbyg-dropdown {
-  display: none;
-  position: absolute;
-  top: calc(100% + 8px);
-  left: 0;
-  right: 0;
-  max-height: 240px;
-  overflow-y: auto;
-  background: #fff;
-  border: 1px solid #e0e0e0;
-  border-radius: 10px;
-  box-shadow: 0 12px 32px rgba(0,0,0,.18);
-  z-index: 100;
-  padding: 6px;
-}
-.kbyg-dropdown.open { display: block; }
-.kbyg-dropdown-item {
-  padding: 9px 12px;
-  font-size: 14px;
-  color: #222;
-  border-radius: 7px;
-  cursor: pointer;
-}
-.kbyg-dropdown-item:hover { background: #f5f5f5; }
-.kbyg-dropdown-item.selected { background: #eef3ff; font-weight: 600; }
-
-/* ============================================================
-   CHOOSE COUNTRY MODAL
-============================================================ */
-.country-modal-backdrop {
-  display: none;
-  position: fixed;
-  inset: 0;
-  z-index: 5000;
-  background: rgba(8, 6, 30, .55);
-  align-items: center;
-  justify-content: center;
-  padding: 24px;
-}
-.country-modal-backdrop.open {
-  display: flex;
-}
-
-.country-modal {
-  position: relative;
-  width: 100%;
-  max-width: 800px;
-  background: #fff;
-  border-radius: 18px;
-  padding: 48px;
-  box-shadow: 0 30px 70px rgba(0,0,0,.35);
-}
-
-.country-modal-close {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  width: 34px;
-  height: 34px;
-  border: none;
-  background: transparent;
-  color: #555;
-  font-size: 18px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-}
-.country-modal-close:hover { background: #f2f2f2; color: #111; }
-
-.country-modal-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 40px;
-  align-items: start;
-}
-
-.country-modal-title {
-  font-size: 28px;
-  font-weight: normal;
-  letter-spacing: -0.5px;
-  text-transform: uppercase;
-  color: #0a0a0a;
-  margin-bottom: 18px;
-}
-
-.country-modal-desc {
-  font-size: 14px;
-  line-height: 1.6;
-  color: #555;
-  margin-bottom: 18px;
-}
-
-.country-modal-note {
-  font-size: 13px;
-  line-height: 1.6;
-  color: #888;
-}
-
-.country-modal-options {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-  justify-content: center;
-  height: 100%;
-}
-
-.country-modal-option {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  border: 1px solid #e2e2e2;
-  border-radius: 10px;
-  padding: 16px 20px;
-  cursor: pointer;
-  transition: border-color .15s, box-shadow .15s;
-}
-.country-modal-option:hover {
-  border-color: #b8c4f0;
-}
-.country-modal-option.selected {
-  border-color: #5b8def;
-  box-shadow: 0 0 0 1px #5b8def;
-}
-
-.country-modal-option-left {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-}
-.country-modal-option-left img {
-  width: 28px;
-  height: 20px;
-  object-fit: cover;
-  border-radius: 3px;
-}
-.country-modal-option-left span {
-  font-size: 17px;
-  font-weight: 600;
-  color: #111;
-}
-.country-modal-option i {
-  font-size: 13px;
-  color: #999;
-}
-
-/* ---- MODAL: RESPONSIVE ≤768px ---- */
-@media (max-width: 768px) {
-
-  .country-modal {
-    padding: 28px 22px;
-    border-radius: 16px;
-  }
-
-  .country-modal-grid {
-    gap: 24px;
-  }
-
-  .country-modal-title {
-    font-size: 22px;
-    margin-bottom: 12px;
-  }
-
-  .country-modal-option {
-    padding: 14px 16px;
-  }
-
-  .country-modal-option-left span {
-    font-size: 15px;
-  }
-}
-
-.mob-filter-tabs,
-.mob-filter-input { display: none; }
-
-.mob-country-pill,
-.mob-header-right { display: none !important; }
-
-/* CTA */
-.hero-cta-wrap {
-  position: relative;
-  z-index: 1;
-  display: flex;
-  justify-content: center;
-  margin-top: 30px;
-  margin-bottom: 30px;
-}
-
-.hero-cta {
-  background: transparent;
-  border: 1.5px solid rgba(255,255,255,.8);
-  color: #fff;
-  border-radius: 20px 100px 100px 100px;
-  padding: 20px 25px;
-  font-size: 17px;
-  font-weight: 500;
-  letter-spacing: .3px;
-  transition: background .2s, color .2s;
-}
-.hero-cta:hover { background: #fff; color: #100c3a; }
-
-/* hero footer note */
-.hero-note {
-  position: relative;
-  z-index: 1;
-  text-align: center;
-  color: #ffffff67;
-  padding: 28px 24px 36px;
-  font-size: 14px;
-  font-weight: 700;
-  line-height: 1.6;
-}
-.hero-note p {
-  font-size: 15px;
-  font-weight: 400;
-  color: #f5f5f59a;
-  margin-top: 6px;
-  line-height: 40px;
-  max-width: 75%;
-  margin-left: auto;
-  margin-right: auto;
-}
-.hero-note strong{
-  color: white;
-  font-size: 16px;
-}
-
-/* mobile peek images, hidden by default (shown on mobile below) */
-.hero-img-mob-left,
-.hero-img-mob-right {
-  display: none;
-}
-
-/* ---- HERO: RESPONSIVE ≤768px ---- */
-@media (max-width: 768px) {
-
-  .hero {
-    border-bottom-left-radius: 150px;
-  }
-
-  .hero-bg-img {
-    height: 500px;
-
-  }
-
-  .hero-bg-img img{
-      object-position: right;
-  }
-
-  .hero-images { display: none; }
-
-  .hero-img-mob-left,
-  .hero-img-mob-right {
-    display: block;
-    position: absolute;
-    z-index: 0;
-    border-radius: 14px;
-    overflow: hidden;
-  }
-  .hero-img-mob-left {
-    top: 10px;
-    left: 50px;
-    width: 140px;
-    height: 160px;
-    border-top-left-radius: 0;
-    opacity: .5;
-  }
-  .hero-img-mob-right {
-    top: 0;
-    right: -10px;
-    width: 145px;
-    height: 120px;
-    border-top-right-radius: 0;
-  }
-  .hero-img-mob-left img,
-  .hero-img-mob-right img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
-  .hero-content {
-    padding: 170px 20px 0;
-  }
-
-  .hero-eyebrow {
-    font-size: 13px;
-    letter-spacing: 2px;
-    font-weight: 800;
-  }
-
-  .hero-h1 {
-    font-size: clamp(34px, 9vw, 52px);
-    letter-spacing: -1.5px;
-    line-height: 1;
-    display: flex;
-  }
-
-  .hero-desc {
-    font-size: 15px;
-    margin-top: 14px;
-  }
-
-  .filter-frost {
-    width: calc(100% - 24px);
-    margin: 20px auto 0;
-    border-radius: 30px;
-    background: #9b9b9b10;
-    padding: 18px;
-  }
-
-  .filter-inner {
-    flex-direction: column;
-    border-radius: 16px;
-    background: #100c3a;
-    padding: 12px;
-    display: block;
-  }
-
-  .mob-filter-tabs {
-    display: flex;
-    background: #6e6e6e28;
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    padding: 8px;
-    border-radius: 500px;
-    border: 2px solid #ffffff2a;
-  }
-
-  .mob-filter-tab {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 5px;
-    padding: 5px 8px;
-    cursor: pointer;
-    border-radius: 500px;
-    color: rgba(255,255,255,.7);
-    font-weight: 600;
-    transition: background .15s;
-    font-size: 18px;
-  }
-
-  .mob-filter-tab .fc-icon{
-    width: 20px;
-    height: 20px;
-    color: #ffffff7a;
-  }
-
-  .mob-filter-tab p{
-    font-size: 12px;
-  }
-
-  .mob-filter-tab.active {
-    background: white;
-    color: #100c3a;
-  }
-
-  .mob-filter-tab.active .fc-icon{
-    color: #100c3a;
-  }
-
-  .mob-filter-input {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border: 1px solid #ffffff1e;
-    border-radius: 10px;
-    margin: 10px 4px 4px;
-    padding: 16px 16px;
-    color: rgba(255,255,255,.6);
-    font-size: 18px;
-  }
-  .mob-filter-input i { color: rgba(255,255,255,.4); font-size: 12px; transition: transform .2s; }
-  .mob-filter-input.open i { transform: rotate(180deg); }
-
-  .mob-filter-input { position: relative; cursor: pointer; }
-
-  .fc-dropdown {
-    position: absolute;
-    top: calc(100% + 8px);
-    left: 0;
-    right: 0;
-    background: #fff;
-  }
-
-  .hd-country-dropdown,
-  .kbyg-dropdown { left: 0; right: 0; }
-
-  .filter-col { display: none; }
-  .mob-filter-tabs { display: flex; }
-  .mob-filter-input { display: flex; }
-  .mob-header-right { display: flex !important; }
-
-  .hero-cta-wrap { margin-top: 20px; margin-bottom: 0px; padding: 0; }
-  .hero-cta { margin: 0 12px; font-size: 16px; padding: 16px; }
-
-  .hero-note { font-size: 12px; }
-  .hero-note p { line-height: normal; max-width: none; width: 96%; font-size: 13px; }
-}
-
-
-/* ============================================================
-   SECTION 2 — APP / KNOW BEFORE YOU GO PROMO
-============================================================ */
-.section-2{
-    padding:40px 28px;
-    background:#fff;
-}
-
-.promo-grid{
-    max-width:1220px;
-    margin:auto;
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:28px;
-}
-
-.promo-card{
-    position:relative;
-    border-radius:18px;
-    height:152px;
-}
-
-.promo-card-bg-clip{
-    position:absolute;
-    inset:0;
-    overflow:hidden;
-    border-radius:18px;
-    z-index:0;
-}
-
-.card-bg{
-    position:absolute;
-    pointer-events:none;
-    background-repeat:no-repeat;
-    background-size:contain;
-}
-
-/* app card */
-.app-card{
-    background:#24146e;
-    overflow:hidden;
-}
-
-.app-bg-center{
-    right:120px; top:-30px;
-    width:320px; height:180px;
-    background-image:url('demo/purple-circle-shape.webp');
-    background-position:center;
-}
-/* decorative background image on the right half, behind the phone */
-.app-bg-right{
-    position:absolute;
-    inset:0;
-    background-image:url('images/download-our-app-card-background-material.png');
-    background-position:right center;
-    background-size:auto 100%;
-    background-repeat:no-repeat;
-    pointer-events:none;
-    z-index:1;
-}
-.phone-image{
-    position:absolute;
-    right:22px; bottom:-15px;
-    height:165px; width:auto;
-    z-index:3;
-}
-.app-content{
-    position:relative;
-    z-index:4;
-    padding:28px 32px;
-}
-.app-content h2{
-    color:#fff;
-    font-size:24px;
-    font-weight:normal;
-    line-height:1;
-    margin-bottom:16px;
-}
-.store-buttons{
-    display:flex;
-    gap:10px;
-}
-.store-btn{
-    display:flex;
-    align-items:center;
-    gap:10px;
-    text-decoration:none;
-    color:#fff;
-    border:1px solid rgba(255,255,255,.8);
-    border-radius:8px;
-    padding:10px 14px;
-    background:transparent;
-}
-.store-btn i{ font-size:24px; }
-.store-btn small{ display:block; font-size:10px; opacity:.8; }
-.store-btn span{ display:block; font-size:15px; font-weight:600; }
-
-/* know before you go card */
-.know-card{
-    background:#751412;
-    overflow:visible;
-    border-radius:18px;
-}
-/* clips decorative backgrounds inside the card without clipping the dropdown */
-.know-deco-clip{
-    position:absolute;
-    inset:0;
-    border-radius:18px;
-    overflow:hidden;
-    pointer-events:none;
-    z-index:0;
-}
-.know-bg-left{
-    left:0; top:0;
-    width:100%; height:100%;
-    background-image:url('demo/red-left-shape.webp');
-    background-position:left center;
-    background-size:cover;
-}
-.know-bg-circle{
-    left:-40px; top:-50px;
-    width:250px; height:250px;
-    background-image:url('demo/red-circle.webp');
-    background-position:center;
-}
-/* decorative background image on the left side */
-.know-bg-img{
-    position:absolute;
-    inset:0;
-    background-image:url('images/know-before-you-go-card-background-material.png');
-    background-position:left center;
-    background-size:auto 100%;
-    background-repeat:no-repeat;
-    pointer-events:none;
-    z-index:1;
-}
-.know-content{
-    position:relative;
-    z-index:5;
-    height:100%;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    padding:0 32px;
-}
-.know-content h2{
-    color:#fff;
-    font-size:24px;
-    font-weight:normal;
-    line-height:1.1;
-}
-.location-select{
-    width:260px; height:60px;
-    background:#fff;
-    border-radius:10px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    padding:0 18px;
-    color:#333;
-    font-size:16px;
-}
-.location-select i{ color:#777; }
-
-/* ---- SECTION 2: RESPONSIVE ≤768px ---- */
-@media(max-width:768px){
-
-.app-bg-right{
-    position:absolute;
-    inset:0;
-    right: -40%;
-    background-image:url('images/download-our-app-card-background-material.png');
-    background-position:right center;
-    background-size:auto 100%;
-
-}
-
-    .promo-grid{
-        grid-template-columns:1fr;
-    }
-
-    .promo-card{
-        height:auto;
-        min-height:170px;
-    }
-
-    .know-content{
-        padding:24px;
-        flex-direction:column;
-        align-items:flex-start;
-        gap:18px;
-    }
-
-    .location-select{
-        width:100%;
-    }
-
-    .phone-image{
-        height:180px;
-        right:10px;
-        bottom:-12px;
-    }
-
-    .store-buttons{
-        flex-direction: column;
-        width: fit-content;
-    }
-}
-
-
-/* ============================================================
-   SECTION 3 — SINGLE MATCHES + CAROUSEL
-============================================================ */
-.section-3{
-  width: 100%;
-  background:#fff;
-  padding: 0px;
-}
-
-.single-matches-card{
-    position:relative;
-    width: 100%;
-    height:350px;
-    margin:auto;
-    overflow:hidden;
-    border-radius:42px 42px 0 0;
-    background:#020813;
-}
-
-.single-bg{
-    position:absolute;
-    inset:0;
-    background-image:url('demo/single-matches-bg.webp');
-    background-size:cover;
-    background-position:center;
-    opacity:.35;
-}
-
-.single-bg::after{
-    content:"";
-    position:absolute;
-    inset:0;
-    background:
-        linear-gradient(
-            90deg,
-            rgba(0,0,0,.55) 0%,
-            rgba(0,0,0,.25) 100%
-        );
-}
-
-.single-content{
-    position:relative;
-    z-index:2;
-    height:100%;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    padding:0 70px;
-}
-
-.single-left h2{
-    color:#fff;
-    font-size:72px;
-    line-height:.92;
-    font-weight:normal;
-    letter-spacing:-2px;
-    text-transform:uppercase;
-}
-
-.single-right{
-    width:460px;
-}
-
-.single-right p{
-    color:rgba(255,255,255,.8);
-    font-size:18px;
-    line-height:1.5;
-    margin-bottom:24px;
-}
-
-.single-actions{
-    display:flex;
-    align-items:center;
-    gap:18px;
-}
-
-.explore-btn{
-    height:60px;
-    padding:0 28px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    border-radius:22px 999px 999px 999px;
-    background:#55d6ea;
-    color:#05141d;
-    font-weight:600;
-    text-decoration:none;
-}
-
-.schedule-link{
-    display:flex;
-    align-items:center;
-    gap:10px;
-    color:#fff;
-    text-decoration:none;
-    font-size:16px;
-    font-weight:600;
-}
-.schedule-link i{ color:#d70f3f; }
-
-/* matches carousel */
-.matches-carousel-section{
-    background:#030813;
-    padding-bottom:50px;
-}
-
-.match-tabs{
-    display:flex;
-    justify-content:flex-end;
-    gap:24px;
-    padding: 0 50px;
-    margin-bottom:20px;
-}
-
-.match-tabs button{
-    background:none;
-    border:none;
-    color:#c6c6c6;
-    font-size:16px;
-    cursor:pointer;
-    position:relative;
-}
-.match-tabs button.active{ color:#fff; }
-.match-tabs button.active::after{
-    content:"";
-    position:absolute;
-    left:0; bottom:-8px;
-    width:100%; height:4px;
-    background:#ff1148;
-    border-radius:10px;
-}
-
-.matches-row-wrap{
-    padding: 0;
-}
-
-.matches-row{
-    display:flex;
-    gap:20px;
-    overflow-x:auto;
-    scroll-behavior:smooth;
-    padding: 0px 70px;
-    padding-bottom:10px;
-}
-.matches-row::-webkit-scrollbar{ display:none; }
-
-/* carousel nav buttons */
-.carousel-nav{
-    display:flex;
-    justify-content:flex-end;
-    gap:12px;
-    padding:20px 50px 0;
-}
-.carousel-btn{
-    width:44px; height:44px;
-    border-radius:50%;
-    background:transparent;
-    border: none;
-    color:#fff;
-    font-size:15px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    cursor:pointer;
-    transition:background .2s, border-color .2s, opacity .2s;
-}
-
-/*
-.carousel-btn:hover{
-    background:rgba(255,255,255,.1);
-    border-color:rgba(255,255,255,.6);
-}*/
-
-.carousel-btn:disabled{ opacity:.3; cursor:default; }
-.carousel-btn:disabled:hover{
-    background:transparent;
-    border-color:rgba(255,255,255,.3);
-}
-
-/* match card */
-.match-card{
-    width:350px;
-    background:#fff;
-    border-radius:18px;
-    overflow:hidden;
-    flex-shrink:0;
-    display:flex;
-    flex-direction:column;
-}
-
-.match-banner{
-    position:relative;
-    height:250px;
-    flex-shrink:0;
-    border-radius:0 0 14px 14px;
-    overflow:hidden;
-    background-color: #020710;
-}
-.match-banner > img{
-    width:100%; height:100%;
-    object-fit:cover;
-    opacity: .30;
-}
-
-.overlay{
-    position:absolute;
-    inset:0;
-    background:
-        linear-gradient(
-            rgba(0,0,0,.25),
-            rgba(0,0,0,.45)
-        );
-}
-
-.teams{
-    position:absolute;
-    inset:0;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    gap:8px;
-    padding:16px 14px;
-}
-
-.team{
-    text-align:center;
-    flex:1;
-    min-width:0;
-}
-.team img{
-    width:32px; height:22px;
-    object-fit:cover;
-    margin:0 auto 8px;
-    border-radius:2px;
-}
-.team span{
-    display:block;
-    color:#fff;
-    font-size:15px;
-    font-weight:900;
-    line-height:1.15;
-    letter-spacing:-0.3px;
-    overflow-wrap:break-word;
-}
-
-.vs{
-    color:rgba(255,255,255,.7);
-    font-size:12px;
-    font-weight:700;
-    flex-shrink:0;
-}
-
-.match-info{
-    padding:18px 18px 10px;
-    flex:1 1 auto;
-}
-
-.info-row{
-    display:flex;
-    align-items:flex-start;
-    margin-bottom:14px;
-    color:#666;
-    font-size:13px;
-    gap: 10px;
-}
-.info-row i{ color:#e30b4f; margin-top:3px; }
-.info-row strong{ color:#444; }
-
-.buy-row{
-    border-top:1px solid #ececec;
-    height:50px;
-    flex-shrink:0;
-    padding:0 18px;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    font-size:16px;
-    color:#444;
-}
-.buy-row i{ font-size:14px; }
-
-/* ---- SECTION 3: RESPONSIVE ≤768px ---- */
-@media(max-width:768px){
-
-    .single-matches-card{
-        height:auto;
-        min-height:400px;
-    }
-
-    .single-content{
-        flex-direction:column;
-        align-items:flex-start;
-        padding:40px 28px;
-        gap:30px;
-    }
-
-    .single-left h2{
-        font-size:52px;
-    }
-
-    .single-right{
-        width:100%;
-    }
-
-    .single-actions{
-        flex-direction:column;
-        align-items:flex-start;
-    }
-
-    .match-tabs{
-        padding:0 20px;
-        gap:18px;
-    }
-
-    .matches-row-wrap{
-        padding:0;
-    }
-
-    /* moderate padding-left on mobile for the matches row */
-    .matches-row{
-        padding: 0 16px 10px 28px;
-    }
-
-    .carousel-nav{
-        padding:16px 20px 0;
-    }
-
-    .match-card{
-        width:320px;
-    }
-}
-
-
-/* ============================================================
-   SECTION 4 — PRIVATE SUITES
-============================================================ */
-.section-4{
-    background:#f2f2f2;
-    padding:32px;
-}
-
-.private-suites-card{
-    position:relative;
-    max-width:1240px;
-    margin:auto;
-    overflow:hidden;
-    border-radius:30px;
-    background:#24146e;
-}
-
-.suite-bg-shape{
-    position:absolute;
-    top:-180px; left:520px;
-    width:520px; height:420px;
-    border-radius:50%;
-    background:#4a148c;
-    pointer-events:none;
-}
-
-.suite-content{
-    position:relative;
-    z-index:2;
-    gap:20px;
-    min-height:460px;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-}
-
-.suite-text{
-    width:42%;
-    flex-shrink:0;
-    padding-left:48px;
+  :root{
+    --navy:#0a1f44;
+    --navy-deep:#071630;
+    --sky:#42b0e8;
+    --sky-deep:#1a7fb8;
+    --ink:#14213d;
+    --paper:#ffffff;
+    --mist:#f4f6f8;
+    --line:#e1e5ea;
+    --grey:#5b6472;
     box-sizing:border-box;
-}
-
-.suite-text h2{
-    color:#fff;
-    font-size:72px;
-    font-weight:normal;
-    line-height:.95;
-    margin-bottom:24px;
-    text-transform:uppercase;
-}
-
-.suite-text p{
-    max-width:420px;
-    color:rgba(255,255,255,.78);
-    font-size:18px;
+    padding-top:env(safe-area-inset-top,0px);
+    padding-bottom:env(safe-area-inset-bottom,0px);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-padding-top:env(safe-area-inset-top,0px); scroll-behavior:smooth;}
+  body{
+    margin:0;
+    font-family:"Helvetica Neue", Arial, sans-serif;
+    color:var(--ink);
+    background:var(--paper);
     line-height:1.5;
-    margin-bottom:34px;
-}
+  }
+  img,.ph{max-width:100%;}
+  a{color:inherit;}
+  .wrap{max-width:1180px; margin:0 auto; padding:0 24px;}
 
-.suite-btn{
-    display:inline-flex;
+  /* placeholder image block */
+  .ph{
+    display:flex;
     align-items:center;
     justify-content:center;
-    height:60px;
-    padding:0 42px;
-    background:#fff;
-    color:#111;
-    text-decoration:none;
-    border-radius:22px 999px 999px 999px;
-    font-size:18px;
-    font-weight:500;
-    white-space:nowrap;
-}
-
-.suite-image-wrapper{
-    position:relative;
-    right: -5%;
-    bottom: -20px;
-    width: 52%;
-    border:5px solid #b99b53;
+    background:repeating-linear-gradient(45deg, #d7dee6, #d7dee6 10px, #cbd4dd 10px, #cbd4dd 20px);
+    color:#5b6472;
+    font-size:13px;
+    letter-spacing:.02em;
+    text-align:center;
+    border-radius:4px;
+    width:100%;
+    overflow:hidden;
     flex-shrink:0;
-    aspect-ratio: 600 / 370;
-    align-self:stretch;
-    margin-top: 40px;
-    border-radius:128px 0 0 0;
-    overflow: hidden;
-}
+  }
+  .ph span{background:rgba(255,255,255,.75); padding:4px 10px; border-radius:3px;}
+  .ph img{width:100%; height:100%; object-fit:cover; display:block;}
 
-.suite-image{
-    position:absolute;
-    inset:0;
-    width:100%;
-    height:100%;
-    object-fit:cover;
-    border-radius:120px 0 0 0;
-    z-index:2;
-    display:block;
-}
-
-/* ---- SECTION 4: RESPONSIVE ≤1024px ---- */
-@media (max-width:1024px){
-
-    .suite-text h2{ font-size:54px; }
-    .suite-text p{ font-size:16px; }
-    .suite-content{ min-height:0; }
-}
-
-/* ---- SECTION 4: RESPONSIVE ≤768px ---- */
-@media (max-width:768px){
-
-    .section-4{ padding:20px 16px; }
-
-    .private-suites-card{ border-radius:24px; }
-
-    .suite-bg-shape{
-        top:-140px;
-        left:auto;
-        right:-160px;
-        width:360px;
-        height:300px;
-    }
-
-    .suite-content{
-        flex-direction:column;
-        align-items:stretch;
-        min-height:0;
-        gap:0;
-    }
-
-    .suite-text{
-        width:100%;
-        padding:36px 24px 8px;
-    }
-
-    .suite-text h2{ font-size:42px; }
-
-    .suite-text p{
-        max-width:none;
-        font-size:15px;
-        margin-bottom:24px;
-    }
-
-    .suite-btn{
-        height:54px;
-        padding:0 32px;
-        font-size:16px;
-    }
-
-    .suite-image-wrapper{
-        width:100%;
-        margin:24px 0 0;
-        aspect-ratio: 4 / 3;
-    }
-
-    .suite-image-border,
-    .suite-image{
-        border-radius:0 0 0 0;
-    }
-}
-
-/* ---- SECTION 4: RESPONSIVE ≤420px ---- */
-@media (max-width:420px){
-
-    .suite-text h2{ font-size:34px; }
-    .suite-btn{ width:100%; }
-}
-
-
-/* ============================================================
-   SECTION 5 — ADDITIONAL OFFERINGS
-============================================================ */
-.section-5{
-    background:#eef1f6;
-    padding:56px 0;
-}
-
-.add-off-inner{
-    max-width:1240px;
-    margin:0 auto;
-    padding:0 32px;
-}
-
-.add-off-title{
-    color:#0a0a0a;
-    font-size:46px;
-    font-weight:normal;
-    letter-spacing:-1.5px;
-    text-transform:uppercase;
-    line-height:1;
-    margin-bottom:18px;
-}
-
-.add-off-note{
-    color:#333;
-    font-size:15px;
-    line-height:1.5;
-    margin-bottom:30px;
-}
-
-.add-off-link{
-    color:#333;
-    text-decoration:underline;
-}
-
-.add-off-grid{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:28px;
-}
-
-.add-off-card{
+  /* header */
+  header{
+    position:sticky; top:0; z-index:50;
     background:#fff;
-    border-radius:14px;
-    overflow:hidden;
-}
+    color:var(--ink);
+    padding-top:env(safe-area-inset-top,0px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:14px 24px;
+    max-width:1180px; margin:0 auto;
+  }
+  .logo{display:flex; align-items:center; gap:10px; font-weight:700; font-size:18px; white-space:nowrap;}
+  .logo .mark{
+    width:36px;height:36px;flex-shrink:0;
+    background:repeating-linear-gradient(45deg, #c7cfd9, #c7cfd9 6px, #b8c1cd 6px, #b8c1cd 12px);
+    border-radius:6px;display:flex;align-items:center;justify-content:center;
+    color:#5b6472; font-size:13px;
+  }
+  footer .logo .mark{
+    background:repeating-linear-gradient(45deg, #2a3a5c, #2a3a5c 6px, #223252 6px, #223252 12px);
+    color:#9fb0c9;
+  }
+  .navlinks{display:flex; gap:4px; font-size:14px; list-style:none; margin:0; padding:0;}
+  .navlinks li{
+    cursor:pointer; padding:9px 14px; border-radius:6px; color:var(--ink);
+    transition:background-color .18s ease, color .18s ease;
+  }
+  .navlinks li:hover,
+  .navlinks li:focus-visible{
+    background:var(--mist); color:var(--sky-deep);
+  }
+  .navlinks li:active{
+    background:#e4ebf2; color:var(--sky-deep);
+  }
+  .navlinks li:focus-visible{outline:2px solid var(--sky-deep); outline-offset:-2px;}
+  .navcta{display:flex; gap:10px; align-items:center;}
+  .hamburger{
+    display:none; background:none; border:none; color:var(--ink); font-size:20px;
+    cursor:pointer; padding:8px; line-height:1; border-radius:6px;
+    transition:background-color .18s ease, color .18s ease, transform .12s ease;
+  }
+  .hamburger:hover,
+  .hamburger:focus-visible{background:var(--mist); color:var(--sky-deep);}
+  .hamburger:active{transform:scale(.92); background:#e4ebf2;}
+  .hamburger:focus-visible{outline:2px solid var(--sky-deep); outline-offset:1px;}
+  @media (max-width:900px){
+    .navlinks{display:none;}
+    .navcta .btn-outline-dark{display:none;}
+    .hamburger{display:inline-block;}
+  }
 
-.add-off-img{
-    width:100%;
-    height:300px;
-    overflow:hidden;
-}
-.add-off-img img{
-    width:100%; height:100%;
-    object-fit:cover;
-    display:block;
-}
+  /* mobile drawer */
+  .drawer-overlay{
+    position:fixed; inset:0; background:rgba(7,22,48,.55);
+    opacity:0; pointer-events:none; transition:opacity .25s ease;
+    z-index:90;
+  }
+  .drawer-overlay.open{opacity:1; pointer-events:auto;}
+  .drawer{
+    position:fixed; top:0; right:0; height:100%; width:78%; max-width:320px;
+    background:var(--navy); color:#fff; z-index:100;
+    transform:translateX(100%); transition:transform .28s ease;
+    padding:env(safe-area-inset-top,0px) 0 env(safe-area-inset-bottom,0px) 0;
+    display:flex; flex-direction:column;
+  }
+  .drawer.open{transform:translateX(0);}
+  .drawer-head{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:14px 20px; border-bottom:1px solid rgba(255,255,255,.12);background-color: white;
+  }
+  .drawer-close{
+    background:rgba(0, 0, 0, 0.055); border:none; color:#000; font-size:20px; cursor:pointer; padding:8px;
+    border-radius:6px; transition:background-color .18s ease, transform .12s ease;
+  }
+  .drawer-close:hover,
+  .drawer-close:focus-visible{background:rgba(255,255,255,.12);}
+  .drawer-close:active{transform:scale(.92); background:rgba(255,255,255,.2);}
+  .drawer-close:focus-visible{outline:2px solid var(--sky); outline-offset:1px;}
+  .drawer ul{list-style:none; margin:0; padding:10px 8px; flex:1; overflow-y:auto;}
+  .drawer ul li{
+    padding:14px 12px; font-size:15px; border-bottom:1px solid rgba(255,255,255,.08);
+    cursor:pointer; border-radius:6px; transition:background-color .18s ease, color .18s ease, padding-left .18s ease;
+  }
+  .drawer ul li:hover,
+  .drawer ul li:focus-visible{
+    background:rgba(255,255,255,.08); color:var(--sky); padding-left:18px;
+  }
+  .drawer ul li:active{background:rgba(255,255,255,.15);}
+  .drawer ul li:focus-visible{outline:2px solid var(--sky); outline-offset:-2px;}
+  .drawer-actions{padding:18px 20px; display:flex; flex-direction:column; gap:12px; border-top:1px solid rgba(255,255,255,.12);}
+  .drawer-actions .btn{text-align:center;}
+  .btn{
+    display:inline-block; padding:10px 20px; font-size:14px; border-radius:2px;
+    text-decoration:none; font-weight:600; cursor:pointer; border:1.5px solid transparent;
+    transition:transform .15s ease, box-shadow .15s ease, background-color .15s ease, border-color .15s ease, color .15s ease;
+  }
+  .btn:hover{transform:translateY(-2px); box-shadow:0 6px 16px rgba(10,31,68,.18);}
+  .btn:active{transform:translateY(0); box-shadow:none;}
+  .btn:focus-visible{outline:2px solid var(--sky-deep); outline-offset:2px;}
+  .btn-sky{background:var(--sky); color:var(--navy-deep);}
+  .btn-sky:hover{background:#5cc0f0;}
+  .btn-sky:active{background:var(--sky-deep); color:#fff;}
+  .btn-outline{border-color:rgba(255,255,255,.5); color:#fff;}
+  .btn-outline:hover{background:rgba(255,255,255,.12); border-color:#fff;}
+  .btn-outline:active{background:rgba(255,255,255,.2);}
+  .btn-outline-dark{border-color:var(--navy); color:var(--navy);}
+  .btn-outline-dark:hover{background:var(--navy); color:#fff;}
+  .btn-outline-dark:active{background:var(--navy-deep);}
+  .btn-navy{background:var(--navy); color:#fff;}
+  .btn-navy:hover{background:var(--navy-deep);}
+  .btn-navy:active{background:#050f22;}
 
-.add-off-body{
-    padding:24px 28px 30px;
-}
-.add-off-body h3{
-    font-size:24px;
-    font-weight:normal;
-    letter-spacing:-0.5px;
-    text-transform:uppercase;
-    color:#0a0a0a;
-    margin-bottom:12px;
-}
-.add-off-body p{
-    font-size:15px;
-    line-height:1.55;
-    color:#444;
-    margin-bottom:22px;
-    max-width:440px;
-}
-
-.add-off-btn{
-    display:inline-flex;
-    align-items:center;
-    justify-content:center;
-    height:50px;
-    padding:0 26px;
-    border:1.5px solid #111;
-    border-radius: 0 30px 30px 30px;
-    color:#111;
-    font-size:15px;
-    font-weight:500;
-    text-decoration:none;
-    transition:background .2s, color .2s;
-}
-.add-off-btn:hover{
-    background:#111;
-    color:#fff;
-}
-
-/* ---- SECTION 5: RESPONSIVE ≤768px ---- */
-@media(max-width:768px){
-
-    .section-5{ padding:40px 0; }
-    .add-off-inner{ padding:0 20px; }
-    .add-off-title{ font-size:32px; }
-    .add-off-grid{ grid-template-columns:1fr; gap:20px; }
-    .add-off-img{ height:220px; }
-    .add-off-body{ padding:20px 22px 26px; }
-    .add-off-body h3{ font-size:20px; }
-}
-
-
-
-/* ============================================================
-   SECTION 7 — WHY CHOOSE ON LOCATION
-============================================================ */
-.why-location-section{
-    padding:80px 32px;
-    background:#fff;
-}
-
-.why-location-grid{
-    width: 100%;
-    margin:auto;
-    display:grid;
-    grid-template-columns:580px 1fr;
-    gap:80px;
-    align-items:center;
-}
-
-.why-location-art{
+  /* hero */
+  .hero{
     position:relative;
-    width:580px;
-    height:525px;
+    background:var(--navy-deep);
+    color:#fff;
+    padding:64px 0 0 0;
     overflow:hidden;
-    border-bottom-right-radius:165px;
-}
-
-.player-layer{
-    position:absolute;
-    inset:0;
-    background-image:url('images/68d67ace3a6c8af1a0962d9e_Frame 1321317561.webp');
-    background-size:cover;
-    background-position:center;
-}
-
-.mask-layer{
-    position:absolute;
-    inset:0;
-    background-image:url('images/68dab0f405fa8f3c5b1847ca_mask.webp');
-    background-size:cover;
-    background-position:center;
-}
-
-.why-location-content{
-    max-width:500px;
-}
-
-.why-location-content h2{
-    font-size:72px;
-    line-height:.92;
-    font-weight:900;
-    color:#040814;
-    margin-bottom:36px;
-}
-
-.why-location-content p{
-    font-size:17px;
-    line-height:1.75;
-    color:#5f6470;
-    margin-bottom:52px;
-}
-
-.stat-block{
-    display:flex;
-    align-items:flex-start;
-    gap:18px;
-}
-
-.stat-line{
-    width:2px;
-    height:86px;
-    background:#ff6d42;
-}
-
-.stat-number{
-    font-size:56px;
-    font-weight:900;
-    line-height:1;
-    color:#040814;
-    margin-bottom:8px;
-}
-
-.stat-label{
-    font-size:18px;
-    color:#5f6470;
-}
-
-/* ---- SECTION 7: RESPONSIVE ≤1024px ---- */
-@media(max-width:1024px){
-
-    .why-location-grid{
-        grid-template-columns: 1fr;
-    }
-
-    .why-location-art{
-        width:100%;
-        max-width:580px;
-        margin:0 auto;
-    }
-}
-
-/* ---- SECTION 7: RESPONSIVE ≤768px ---- */
-@media(max-width:768px){
-
-    /* section padding restored on mobile view */
-    .why-location-section{
-        padding: 48px 20px;
-    }
-
-    .why-location-grid{
-        gap: 36px;
-    }
-
-    .why-location-art{
-        height: 360px;
-        border-bottom-right-radius: 80px;
-    }
-
-    .why-location-content h2{
-        font-size: 40px;
-        margin-bottom: 22px;
-    }
-
-    .why-location-content p{
-        font-size: 15px;
-        margin-bottom: 32px;
-    }
-
-    .stat-number{ font-size: 40px; }
-    .stat-label{ font-size: 15px; }
-    .stat-line{ height: 64px; }
-}
-
-
-/* ============================================================
-   SECTION 8 — FREQUENTLY ASKED QUESTIONS
-============================================================ */
-.faq-section{
-    background:#fff;
-    padding:80px 32px;
-}
-
-.faq-container{
-    max-width:1240px;
-    margin:auto;
-}
-
-.faq-title{
-    font-size:64px;
-    line-height:.92;
-    font-weight:900;
-    color:#07101c;
-    margin-bottom:36px;
-}
-
-.faq-item{
-    border-bottom:1px solid #e5e5e5;
-}
-
-.faq-question{
-    width:100%;
-    background:none;
-    border:none;
-    padding:30px 0;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    cursor:pointer;
-    text-align:left;
-}
-
-.faq-question span{
-    font-size:18px;
-    color:#111;
-    font-weight:500;
-}
-
-.faq-question i{
-    color:#ff295d;
-    font-size:22px;
-    transition:transform .3s;
-}
-
-/* expandable / collapsible answer */
-.faq-answer{
-    max-height:0;
-    overflow:hidden;
-    transition:max-height .35s ease;
-}
-
-.faq-answer p{
-    max-width:900px;
-    padding-bottom:32px;
-    color:#6a7078;
-    line-height:1.8;
-    font-size:15px;
-}
-
-.faq-answer ul{
-    max-width:900px;
-    padding-bottom:32px;
-    color:#6a7078;
-    line-height:1.8;
-    font-size:15px;
-
-}
-
-/* expanded state — toggled via JS by adding/removing .active */
-.faq-item.active .faq-answer{
-    max-height:400px;
-}
-
-.faq-item.active .faq-question i{
-    transform:rotate(45deg);
-}
-
-.faq-footer{
-    text-align:center;
-    margin-top:28px;
-}
-
-.faq-button{
-    display:inline-flex;
-    align-items:center;
-    justify-content:center;
-    height:56px;
-    padding:0 28px;
-    border:1px solid #222;
-    border-radius:20px 999px 999px 999px;
-    color:#111;
-    text-decoration:none;
-    font-size:15px;
-    transition: 500ms;
-}
-
-.faq-button:hover{
-  color: white;
-  background-color: #111;
-}
-
-/* ---- SECTION 8: RESPONSIVE ≤768px ---- */
-@media(max-width:768px){
-
-    .faq-section{ padding:48px 20px; }
-    .faq-title{ font-size:36px; margin-bottom:24px; }
-    .faq-question{ padding:22px 0; }
-    .faq-question span{ font-size:16px; }
-    .faq-answer p{ font-size:14px; }
-}
-
-
-/* ============================================================
-   SECTION 9 — FOOTER
-============================================================ */
-.site-footer{
-    background:#020915;
-    color:#fff;
-}
-
-.footer-container{
-    max-width:1240px;
-    margin:auto;
-    padding:60px 32px 40px;
-    display:grid;
-    grid-template-columns:240px 1fr 180px;
-    gap:40px;
-}
-
-.footer-branding{
-    display:flex;
-    align-items:center;
-}
-
-.footer-branding img{
-  width: 180px;
-}
-
-.footer-logo{
-    width:72px;
-    height:auto;
-    display:block;
-}
-
-.footer-divider{
-    width:1px;
-    height:92px;
-    background:rgba(255,255,255,.2);
-    margin:0 20px;
-}
-
-.footer-onlocation{
-    width:95px;
-    height:auto;
-}
-
-.footer-social{
-    display:flex;
-    gap:22px;
-    margin-top:28px;
-}
-.footer-social a{
-    color:#9ea6b5;
-    font-size:28px;
-    transition:.3s;
-}
-.footer-social a:hover{ color:#fff; }
-
-.footer-center h4{
-    font-size:18px;
-    margin-bottom:28px;
-}
-
-.footer-center{
-    display: flex;
-    flex-direction: column;
-}
-
-
-
-.footer-links{
-  display: flex;
-  flex-wrap: wrap;
-  gap: 30px;
-  align-items: space-between;
-}
-
-.footer-links a,
-.accessible-link{
-    color:#d0d5df;
-    text-decoration:none;
-    font-size:14px;
-}
-
-
-
-.footer-right{
-    display:flex;
-    flex-direction:column;
-    align-items:flex-start;
-}
-
-.footer-right h4{
-    font-size:18px;
-    line-height:1.45;
-    margin-bottom:18px;
-}
-
-.register-btn{
-    height:56px;
-    padding:0 28px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    border:1px solid rgba(255,255,255,.4);
-    border-radius:20px 999px 999px 999px;
-    color:#fff;
-    text-decoration:none;
-    transition: 400ms;
-}
-
-.register-btn:hover{
-  color: #111;
-  background-color: rgba(255, 255, 255, 0.801);
-}
-
-.footer-bottom{
-    border-top:1px solid rgba(255,255,255,.08);
-    text-align:center;
-    padding:28px 32px 60px;
-}
-
-.copyright{
-    color:#c0c7d4;
-    font-size:14px;
-    margin-bottom:20px;
-}
-
-.legal-links{
-    display:flex;
-    flex-wrap:wrap;
-    justify-content:center;
-    gap:18px;
-    margin-bottom:18px;
-}
-.legal-links a{
-    color:#c0c7d4;
-    text-decoration:none;
-    font-size:14px;
-}
-
-.footer-phone{
-    color:#c0c7d4;
-    font-size:14px;
-    line-height:1.7;
-}
-
-/* ---- SECTION 9: RESPONSIVE ≤991px ---- */
-@media(max-width:991px){
-
-    .footer-container{
-        grid-template-columns:1fr;
-    }
-    .footer-right{
-        margin-top:20px;
-    }
-    .footer-links{
-        flex-direction: column;
-        gap: 15px;
-    }
-}
-
-</style>
-
-<style>
-  /* =======================================
-   SECTION 6 — UNRIVALED LOUNGE ACCESS
-======================================= */
-
-.section-6{
-    background:#0a0a0a;
-    padding:0;
-    overflow:hidden;
-    position:relative;
-}
-
-.lounge-inner{
-    width:100%;
-    margin:0 auto;
-    padding:70px 32px;
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:40px;
-    align-items:start;
-    position:relative;
-}
-
-.lounge-left{
-    z-index:2;
-}
-
-.lounge-badge{ margin-bottom:22px; }
-.lounge-badge img{ display:block; }
-
-.lounge-title{
-    color:#fff;
-    font-family: Impact, 'Arial Narrow Bold', 'Haettenschweiler', sans-serif;
-    font-size:48px;
-    font-weight:normal;
-    letter-spacing:.5px;
-    text-transform:uppercase;
-    line-height:1.05;
-    margin-bottom:22px;
-}
-
-.lounge-lead{
-    color:#fff;
-    font-size:17px;
-    line-height:1.6;
-    margin-bottom:14px;
-    max-width:400px;
-}
-
-.lounge-desc{
-    color:#9a9a9a;
-    font-size:15px;
-    line-height:1.65;
-    margin-bottom:32px;
-    max-width:400px;
-}
-
-.lounge-list{
-    position:relative;
-    padding-left:20px;
-}
-
-/* single continuous thin gray track spanning the full list height — the general track */
-.lounge-list::before{
-    content:"";
-    position:absolute;
-    left:8px; top:0;
-    width:1px;
-    height:100%;
-    background:rgba(255,255,255,.15);
-}
-
-.lounge-item{
-    position:relative;
-    padding:14px 0;
-    cursor:pointer;
-}
-
-.lounge-item span{
-    display:block;
-    color:#777;
-    font-size:16px;
-    font-weight:700;
-    letter-spacing:.4px;
-    text-transform:uppercase;
-    transition:color .2s;
-}
-
-.lounge-item.active span{ color:#fff; }
-
-/* thicker progress bar — centered exactly on the thin track's line,
-   grows from this item's header down to the end of its own content over 5s */
-.lounge-item .lounge-progress{
-    position:absolute;
-    left:-15px; top:0;
-    width:6px; height:0px;
-    background:#1ec8d6;
-    border-radius:3px;
-    z-index:1;
-}
-
-.lounge-item-desc{
-    display:none;
-    color:#9a9a9a;
-    font-size:14.5px;
-    line-height:1.7;
-    margin-top:10px;
-    padding-bottom:4px;
-    max-width:380px;
-}
-.lounge-item.active .lounge-item-desc{ display:block; }
-
-.lounge-right{
- display: grid;
- gap: 20px;
- grid-template-columns: 1fr 1fr
-}
-
-.lounge-right-inner{
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  justify-content: center;
-  align-items: center;
-}
-
-.lounge-right-inner left{
-  margin-top: 200px;
-}
-
-.lounge-right-inner img{
-  height: 100%;
-  width: 100%;
-}
-
-.lounge-right-inner div{
-  min-height: 100px;
-  width: 100%;
-  background-color: teal;
-  border-radius: 30px;
-  overflow: hidden;
-}
-
-
-
-.lounge-teal-shape{
-    position:absolute;
-    right:0;
-    width:100%;
-    height:100%;
-    z-index:0;
+  }
+  .hero-bg-stack{position:absolute; inset:0; z-index:0;}
+  .hero-bg-stack .hero-bg{
+    position:absolute; inset:0; height:100%;
+    opacity:0; transform:scale(1.06);
+    transition:opacity 1.4s ease, transform 8s ease;
+    display:flex; align-items:center; justify-content:center;
+    background:repeating-linear-gradient(45deg,#13294f,#13294f 14px,#0f2242 14px,#0f2242 28px);
+  }
+  .hero-bg-stack .hero-bg:nth-child(2){background:repeating-linear-gradient(45deg,#123a4f,#123a4f 14px,#0e2c3b 14px,#0e2c3b 28px);}
+  .hero-bg-stack .hero-bg:nth-child(3){background:repeating-linear-gradient(45deg,#1a2f4f,#1a2f4f 14px,#13233c 14px,#13233c 28px);}
+  .hero-bg-stack .hero-bg:nth-child(4){background:repeating-linear-gradient(45deg,#123049,#123049 14px,#0d2338 14px,#0d2338 28px);}
+  .hero-bg-stack .hero-bg span{
+    font-size:13px; letter-spacing:.02em; color:#aebfd9;
+    background:rgba(7,22,48,.55); padding:6px 14px; border-radius:20px;
+    border:1px solid rgba(255,255,255,.12);
+  }
+  .hero-bg-stack .hero-bg img{
+    position:absolute; inset:0; width:100%; height:100%; object-fit:cover;
+  }
+  .hero-bg-stack .hero-bg.is-active{opacity:1; transform:scale(1);}
+  .hero-overlay{
+    position:absolute; inset:0; z-index:1;
+    background:linear-gradient(120deg, rgba(7,22,48,.92) 0%, rgba(10,31,68,.82) 55%, rgba(10,31,68,.55) 100%);
+  }
+  .hero > .wrap{position:relative; z-index:2;}
+  @media (prefers-reduced-motion:reduce){
+    .hero-bg-stack .hero-bg{transition:opacity .3s linear; transform:none;}
+  }
+  .hero-grid{
+    display:grid; grid-template-columns:1.1fr 1fr; gap:40px; align-items:center;
+  }
+  .eyebrow-tags{display:flex; gap:10px; margin-bottom:22px; flex-wrap:wrap;}
+  .tag{
+    font-size:12.5px; padding:6px 12px; border:1px solid rgba(255,255,255,.35);
+    border-radius:20px; color:#cfe6f7;
+  }
+  h1{font-size:44px; line-height:1.12; margin:0 0 18px 0; font-weight:700; max-width:16ch;}
+  .hero p.lead{font-size:18px; color:#cfd8e4; max-width:46ch; margin:0 0 30px 0;}
+  .hero-actions{display:flex; gap:14px; margin-bottom:28px; flex-wrap:wrap;}
+
+  /* hero image slideshow */
+  .hero-img{position:relative; height:360px;}
+  .hero-img .hero-slide{
+    position:absolute; inset:0; height:100%;
+    opacity:0; transform:scale(1.03);
+    transition:opacity 1.1s ease, transform 6s ease;
     pointer-events:none;
-    background-image:url('images/unrivaled-section-background-material.png');
-    background-size:contain;
-    background-repeat:no-repeat;
-    background-position:right;
-    overflow:hidden;
-}
+  }
+  .hero-img .hero-slide.is-active{
+    opacity:1; transform:scale(1);
+    pointer-events:auto;
+  }
+  @media (max-width:860px){ .hero-img{height:220px;} }
 
-.lounge-img{
-    position:absolute;
-    border-radius:18px;
-    overflow:hidden;
-    background:#1a1a1a;
-}
-.lounge-img img{
-    width:100%; height:100%;
-    object-fit:cover;
-    display:block;
-}
+  /* hero caption text animation */
+  #heroTags, #heroHeadline, #heroLead{
+    transition:opacity .45s ease, transform .45s ease;
+  }
+  .hero-copy.caption-out #heroTags,
+  .hero-copy.caption-out #heroHeadline,
+  .hero-copy.caption-out #heroLead{
+    opacity:0; transform:translateY(10px);
+  }
+  .hero-copy.caption-out #heroHeadline{transition-delay:.03s;}
+  .hero-copy.caption-out #heroLead{transition-delay:.06s;}
 
-.lounge-img-tall{ top:0; right:0; width:270px; height:330px; z-index:2; }
-.lounge-img-mid{ top:170px; left:0; width:265px; height:185px; z-index:1; }
-.lounge-img-bottom-left{ top:380px; left:30px; width:235px; height:140px; z-index:1; }
-.lounge-img-bottom-right{ top:355px; right:0; width:265px; height:165px; z-index:1; }
+  .hero-dots{display:flex; gap:8px; margin-top:8px;}
+  .hero-dots button{
+    width:26px; height:4px; border:none; border-radius:2px;
+    background:rgba(255,255,255,.3); cursor:pointer; padding:0;
+    transition:background .25s ease;
+  }
+  .hero-dots button.is-active{background:var(--sky);}
 
-@media(max-width:1024px){
-    .lounge-inner{ grid-template-columns:1fr; gap: 30px}
-}
+  @media (prefers-reduced-motion:reduce){
+    .hero-img .hero-slide{transition:opacity .3s linear; transform:none;}
+    #heroTags, #heroHeadline, #heroLead{transition:none;}
+  }
+  @media (max-width:860px){
+    .hero-grid{grid-template-columns:1fr;}
+    h1{font-size:32px;}
+  }
 
-@media(max-width:768px){
-    .lounge-inner{ padding:70px 20px; }
-    .lounge-title{ font-size:36px; }
+  section{padding:72px 0;}
+  .section-tight{padding:48px 0;}
+  h2{font-size:30px; margin:0 0 14px 0; font-weight:700; max-width:22ch;}
+  h3{font-size:19px; margin:0 0 8px 0; font-weight:700;}
+  .subhead{color:var(--grey); font-size:16px; max-width:60ch; margin:0 0 36px 0;}
 
+  /* services intro */
+  .services-intro{background:var(--mist);}
+  .services-intro-grid{display:flex; align-items:flex-start; justify-content:space-between; gap:40px; flex-wrap:wrap;}
+  .services-intro-grid > div:first-child{max-width:520px;}
 
-.lounge-right-inner .left{
-  margin: 0px;
-}
+  /* main air freight block */
+  .af-grid{display:grid; grid-template-columns:0.9fr 1.1fr; gap:48px; align-items:center;}
+  .af-grid .ph{height:300px;}
+  .af-list{list-style:none; padding:0; margin:22px 0 0 0;}
+  .af-list li{
+    position:relative; padding-left:26px; margin-bottom:14px; color:var(--ink); font-size:15.5px;
+  }
+  .af-list li::before{
+    content:"✓"; position:absolute; left:0; top:0; color:var(--sky-deep); font-weight:700;
+  }
+  @media (max-width:860px){ .af-grid{grid-template-columns:1fr;} }
 
+  /* service level cards */
+  .levels{display:grid; grid-template-columns:repeat(3,1fr); gap:20px; margin-top:36px;}
+  .level-card{
+    border:1px solid var(--line); border-radius:6px; padding:26px; background:#fff;
+  }
+  .level-card .badge{
+    display:inline-block; font-size:12px; font-weight:700; color:var(--sky-deep);
+    text-transform:uppercase; letter-spacing:.04em; margin-bottom:10px;
+  }
+  .level-card h3{font-size:20px;}
+  .level-card .priority{color:var(--grey); font-size:14px; margin-bottom:16px;}
+  .level-card .delivery{
+    border-top:1px solid var(--line); padding-top:14px; margin-top:14px; font-size:14px;
+  }
+  .level-card .delivery b{display:block; color:var(--ink); font-size:15px; margin-top:2px;}
+  @media (max-width:860px){ .levels{grid-template-columns:1fr;} }
 
-.lounge-teal-shape{
+  /* digital booking */
+  .booking{
+    background:var(--navy); color:#fff; border-radius:10px; overflow:hidden;
+    display:grid; grid-template-columns:1fr 1fr; align-items:center;
+  }
+  .booking-copy{padding:48px;}
+  .booking .ph{height:100%; min-height:280px; border-radius:0;}
+  .booking h2{color:#fff; max-width:none;}
+  .booking p{color:#cfd8e4; font-size:16px; max-width:44ch;}
+  @media (max-width:860px){ .booking{grid-template-columns:1fr;} .booking-copy{padding:32px;} }
 
-    overflow: hidden;
-background-size: auto 100%;
-background-position: calc(100% + 650px) center;
-top: -100px;
+  /* case study */
+  .case{background:var(--mist);}
+  .case-grid{display:grid; grid-template-columns:1fr 1fr; gap:48px; align-items:center;}
+  .case-grid .ph{height:280px;}
+  .case-tag{font-size:13px; font-weight:700; color:var(--sky-deep); text-transform:uppercase; letter-spacing:.04em; margin-bottom:10px;}
+  @media (max-width:860px){ .case-grid{grid-template-columns:1fr;} }
 
-}
+  /* stats */
+  .stats{background:var(--navy-deep); color:#fff;}
+  .stats-grid{display:grid; grid-template-columns:1fr 1.4fr; gap:48px; align-items:center;}
+  .stat-list{display:flex; gap:40px; flex-wrap:wrap;}
+  .stat-list .num{font-size:42px; font-weight:700; color:var(--sky); margin-bottom:4px;}
+  .stat-list .label{font-size:14px; color:#c3cee0;}
+  .stats h2{color:#fff;}
+  .stats .ph{height:240px;}
+  @media (max-width:860px){ .stats-grid{grid-template-columns:1fr;} }
 
+  /* why choose */
+  .why-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:28px; margin-top:8px;}
+  .why-card{padding:8px 0;}
+  .why-card .icon{
+    width:46px; height:46px; border-radius:8px; background:var(--mist);
+    display:flex; align-items:center; justify-content:center; margin-bottom:16px;
+    color:var(--sky-deep); font-size:18px;
+  }
+  @media (max-width:860px){ .why-grid{grid-template-columns:1fr 1fr;} }
+  @media (max-width:560px){ .why-grid{grid-template-columns:1fr;} }
 
-    .lounge-img-tall{
-        top: 0;
-        right: 0;
-        width: calc(270px * var(--scale));
-        height: calc(330px * var(--scale));
-    }
-    .lounge-img-mid{
-        top: calc(170px * var(--scale));
-        left: 0;
-        width: calc(265px * var(--scale));
-        height: calc(185px * var(--scale));
-    }
-    .lounge-img-bottom-left{
-        top: calc(380px * var(--scale));
-        left: calc(30px * var(--scale));
-        width: calc(235px * var(--scale));
-        height: calc(140px * var(--scale));
-    }
-    .lounge-img-bottom-right{
-        top: calc(355px * var(--scale));
-        right: 0;
-        width: calc(265px * var(--scale));
-        height: calc(165px * var(--scale));
-    }
-}
+  /* additional services */
+  .addl-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:24px; margin-top:8px;}
+  .addl-card{border:1px solid var(--line); border-radius:6px; overflow:hidden; background:#fff;}
+  .addl-card .ph{height:150px; border-radius:0;}
+  .addl-card-body{padding:20px;}
+  .addl-card p{font-size:14.5px; color:var(--grey); margin:8px 0 0 0;}
+  @media (max-width:860px){ .addl-grid{grid-template-columns:1fr;} }
+
+  /* how it works */
+  .steps{counter-reset:step; margin-top:8px; display:grid; grid-template-columns:repeat(4,1fr); gap:24px;}
+  .step{position:relative; padding-top:8px;}
+  .step .stepnum{
+    font-size:13px; font-weight:700; color:var(--sky-deep); margin-bottom:10px; display:block;
+  }
+  @media (max-width:860px){ .steps{grid-template-columns:1fr 1fr;} }
+  @media (max-width:560px){ .steps{grid-template-columns:1fr;} }
+
+  /* cta band */
+  .cta-band{
+    background:var(--sky); color:var(--navy-deep); border-radius:10px; padding:48px;
+    display:flex; align-items:center; justify-content:space-between; gap:24px; flex-wrap:wrap;
+  }
+  .cta-band h2{color:var(--navy-deep); max-width:none; margin:0;}
+
+  footer{background:var(--navy-deep); color:#c3cee0; padding:56px 0 30px 0; font-size:14px;}
+  .foot-grid{display:grid; grid-template-columns:2fr repeat(4,1fr); gap:32px;}
+  .foot-grid h4{color:#fff; font-size:14px; margin:0 0 14px 0;}
+  .foot-grid ul{list-style:none; padding:0; margin:0;}
+  .foot-grid li{margin-bottom:10px; opacity:.85;}
+  .foot-bottom{
+    border-top:1px solid rgba(255,255,255,.12); margin-top:40px; padding-top:24px;
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap:12px; font-size:12.5px; color:#8b98ad;
+  }
+  @media (max-width:860px){ .foot-grid{grid-template-columns:1fr 1fr;} }
 </style>
-
 </head>
 <body>
 
-<!-- nav + mobile drawer injected by main.js -->
-<div id="site-nav"></div>
-
-<!-- ============================================================
-     HERO
-============================================================ -->
-<section class="hero">
-
-  <div class="hero-bg-img">
-    <img src="images/home-hero-background-shape.png" alt="">
-  </div>
-
-  <div class="hero-images">
-    <div class="hero-img player">
-      <img src="images/69d95f1cd329a58ab5240e4b_FWC26_Ecomm_Photo_Update_A_788x1000.webp" alt="Player">
-    </div>
-    <div class="hero-img stadium-top">
-      <img src="images/69d95f4c71d00684ba1d8e76_FWC26_Ecomm_Photo_Update_B_1000x720.webp" alt="Stadium">
-    </div>
-    <div class="hero-img crowd">
-      <img src="images/68f0fa5fb68f41124db8f6d1_Frame 1321317811.webp" alt="Crowd">
-    </div>
-    <div class="hero-img stadium-bottom">
-      <img src="images/68f0fb0a880ae67c65aedc63_Frame 1321317810 (1).webp" alt="Stadium">
+<header>
+  <div class="nav">
+    <a class="logo" href="index.html" style="text-decoration:none;"><img src="images/pacific-express-logo.png" alt="" style="height: 60px;"></a>
+    <ul class="navlinks">
+      <li tabindex="0" onclick="location.hash='road'">Road Freight</li>
+      <li tabindex="0" onclick="location.hash='air'">Air Freight</li>
+      <li tabindex="0" onclick="location.hash='sea'">Sea Freight</li>
+      <li tabindex="0">Sustainability</li>
+      <li tabindex="0">Insights</li>
+      <li tabindex="0">Support</li>
+    </ul>
+    <div class="navcta">
+      <a class="btn btn-outline-dark" href="track.html"><i class="fa-solid fa-location-crosshairs" style="margin-right:6px;"></i>Track</a>
+      <a class="btn btn-sky" href="#">Sign in</a>
+      <button class="hamburger" id="menuOpenBtn" aria-label="Open menu" aria-expanded="false" aria-controls="mobileDrawer">
+        <i class="fa-solid fa-bars"></i>
+      </button>
     </div>
   </div>
+</header>
 
-  <div class="hero-img-mob-left">
-    <img src="images/69d95f1cd329a58ab5240e4b_FWC26_Ecomm_Photo_Update_A_788x1000.webp" alt="Player">
+<div class="drawer-overlay" id="drawerOverlay"></div>
+<nav class="drawer" id="mobileDrawer" aria-hidden="true">
+  <div class="drawer-head">
+    <div class="logo" style="color:#fff;"><img src="images/pacific-express-logo.png" alt="" style="height: 40px;"></div>
+    <button class="drawer-close" id="menuCloseBtn" aria-label="Close menu"><i class="fa-solid fa-xmark"></i></button>
   </div>
-  <div class="hero-img-mob-right">
-    <img src="images/69d95f4c71d00684ba1d8e76_FWC26_Ecomm_Photo_Update_B_1000x720.webp" alt="Stadium">
+  <ul>
+    <li tabindex="0" onclick="location.hash='road'">Road Freight</li>
+    <li tabindex="0" onclick="location.hash='air'">Air Freight</li>
+    <li tabindex="0" onclick="location.hash='sea'">Sea Freight</li>
+    <li tabindex="0">Sustainability</li>
+    <li tabindex="0">Insights</li>
+    <li tabindex="0">Support</li>
+  </ul>
+  <div class="drawer-actions">
+    <a class="btn btn-outline" href="track.html"><i class="fa-solid fa-location-crosshairs" style="margin-right:6px;"></i>Track</a>
+    <a class="btn btn-sky" href="#">Sign in</a>
   </div>
+</nav>
 
-  <div class="hero-content">
-    <div class="hero-eyebrow">Get Closer Than Ever To</div>
-    <div style="display: flex;"><h1 class="hero-h1">FIFA WORLD CUP 26  </h1><h1 style=" font-size: 18px;" class="hero-h1">TM</h1></div>
-    <p class="hero-desc">
-      Experience the best of it all with official hospitality packages
-      featuring premium tickets, food &amp; beverage, entertainment,
-      and more. Now available: single matches and private suites!
-    </p>
-  </div>
-
-  <div class="filter-frost">
-    <div class="filter-inner">
-
-      <div class="filter-col" id="filterColLocation">
-        <svg class="fc-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M12 21.5C12 21.5 19 15.0823 19 9.92308C19 5.81325 15.866 2.5 12 2.5C8.13401 2.5 5 5.81325 5 9.92308C5 15.0823 12 21.5 12 21.5Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
-          <circle cx="12" cy="9.8" r="2.6" stroke="currentColor" stroke-width="1.6"/>
-        </svg>
-        <div>
-          <div class="fc-label">Location</div>
-          <div class="fc-value" id="fcValueLocation">Select match location <i class="fa-solid fa-chevron-down"></i></div>
-        </div>
-        <div class="fc-dropdown" id="fcDropdownLocation"></div>
+<section class="hero" id="heroSection">
+  <div class="hero-bg-stack" id="heroBgStack"></div>
+  <div class="hero-overlay"></div>
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <div class="eyebrow-tags" id="heroTags">
+        <span class="tag">Global</span>
+        <span class="tag">Reliable</span>
+        <span class="tag">Owned Fleet</span>
       </div>
-
-      <div class="filter-col" id="filterColTeam">
-        <svg class="fc-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M5 21V3.8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
-          <path d="M5 4C5 4 6.5 3 9 3C11.5 3 12.5 5 15 5C17 5 18 4 18 4V13C18 13 17 14 15 14C12.5 14 11.5 12 9 12C6.5 12 5 13 5 13V4Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
-        </svg>
-        <div>
-          <div class="fc-label">Team</div>
-          <div class="fc-value" id="fcValueTeam">Select your team <i class="fa-solid fa-chevron-down"></i></div>
-        </div>
-        <div class="fc-dropdown" id="fcDropdownTeam"></div>
+      <h1 id="heroHeadline">Pacific Express Sea Freight</h1>
+      <p class="lead" id="heroLead">Bypass disruptions with a faster, more frequent, and reliable service.</p>
+      <div class="hero-actions">
+        <a class="btn btn-sky" href="#">Get a quote</a>
+        <a class="btn btn-outline" href="track.html"><i class="fa-solid fa-location-crosshairs" style="margin-right:6px;"></i>Track</a>
       </div>
+      <div class="hero-dots" id="heroDots" role="tablist" aria-label="Hero slides"></div>
+    </div>
+    <div class="hero-img" id="heroImgStack"></div>
+  </div>
+</section>
 
-      <div class="filter-col" id="filterColStage" style="border: none;">
-        <svg class="fc-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="5.5" cy="6" r="2.5" stroke="currentColor" stroke-width="1.6"/>
-          <circle cx="18.5" cy="6" r="2.5" stroke="currentColor" stroke-width="1.6"/>
-          <circle cx="12" cy="18" r="2.5" stroke="currentColor" stroke-width="1.6"/>
-          <path d="M7.8 7.2L11 16" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
-          <path d="M16.2 7.2L13 16" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
-          <path d="M8 6H16" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
-        </svg>
-        <div>
-          <div class="fc-label">Stage</div>
-          <div class="fc-value" id="fcValueStage">Select stage <i class="fa-solid fa-chevron-down"></i></div>
-        </div>
-        <div class="fc-dropdown" id="fcDropdownStage"></div>
-      </div>
+<section class="services-intro">
+  <div class="wrap services-intro-grid">
+    <div>
+      <h2>Services</h2>
+      <p class="subhead" style="margin-bottom:0;">Take control and resilience-proof your supply chain with our fast and flexible road, air, and sea freight services.</p>
+    </div>
+    <a class="btn btn-outline-dark" href="#" style="border:1.5px solid var(--navy); white-space:nowrap;">View all services</a>
+  </div>
+</section>
 
-      <div class="mob-filter-tabs">
-        <div class="mob-filter-tab active" data-field="location">
-          <svg class="fc-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M12 21.5C12 21.5 19 15.0823 19 9.92308C19 5.81325 15.866 2.5 12 2.5C8.13401 2.5 5 5.81325 5 9.92308C5 15.0823 12 21.5 12 21.5Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
-            <circle cx="12" cy="9.8" r="2.6" stroke="currentColor" stroke-width="1.6"/>
-          </svg>
-          <p>Location</p>
-        </div>
-        <div class="mob-filter-tab" data-field="team">
-          <svg class="fc-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M5 21V3.8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
-            <path d="M5 4C5 4 6.5 3 9 3C11.5 3 12.5 5 15 5C17 5 18 4 18 4V13C18 13 17 14 15 14C12.5 14 11.5 12 9 12C6.5 12 5 13 5 13V4Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
-          </svg>
-          <p>Team</p>
-        </div>
-        <div class="mob-filter-tab" data-field="stage">
-          <svg class="fc-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="5.5" cy="6" r="2.5" stroke="currentColor" stroke-width="1.6"/>
-            <circle cx="18.5" cy="6" r="2.5" stroke="currentColor" stroke-width="1.6"/>
-            <circle cx="12" cy="18" r="2.5" stroke="currentColor" stroke-width="1.6"/>
-            <path d="M7.8 7.2L11 16" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
-            <path d="M16.2 7.2L13 16" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
-            <path d="M8 6H16" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
-          </svg>
-          <p>Stage</p>
-        </div>
-      </div>
-
-      <div class="mob-filter-input" id="mobFilterInput">
-        <span id="mobFilterLabel">Select match location</span>
-        <i class="fa-solid fa-chevron-down"></i>
-        <div class="fc-dropdown" id="fcDropdownMobile"></div>
-      </div>
-
+<section id="road">
+  <div class="wrap af-grid">
+    <div class="ph"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTuaTF2o3qUhvGnqWYezBHqXMMxWk8SEH-ox1T1qAq-eDvZUqxGBn52reb-&s=10" alt="Pacific Express truck on highway"></div>
+    <div>
+      <h2>Road Freight</h2>
+      <p class="subhead" style="margin-bottom:0;">Door-to-door coverage across every major hub. Be ready for dependable transit times, flexible load options, and full visibility with Pacific Express driving your cargo all the way.</p>
+      <ul class="af-list">
+        <li>Extensive road network connecting major hubs with dependable transit times</li>
+        <li>Full truckload (FTL) and less-than-truckload (LTL) options to match your shipment size</li>
+        <li>Real-time GPS tracking for complete visibility from pickup to delivery</li>
+      </ul>
     </div>
   </div>
+</section>
 
-  <div class="hero-cta-wrap">
-    <button class="hero-cta">Browse All Matches</button>
+<section class="section-tight">
+  <div class="wrap">
+    <h2>Choose the speed you need — by road</h2>
+    <p class="subhead">Choose between 3 service levels with varying priorities to deliver at the speed you need.</p>
+    <div class="levels">
+      <div class="level-card">
+        <span class="badge">When speed is essential</span>
+        <h3>Express Road</h3>
+        <div class="priority">Priority</div>
+        <div class="delivery">Delivery time<b>Door-to-door in 1–2 days</b></div>
+      </div>
+      <div class="level-card">
+        <span class="badge">When flexibility is key</span>
+        <h3>Standard Road</h3>
+        <div class="priority">Priority</div>
+        <div class="delivery">Delivery time<b>Door-to-door, flexible scheduling</b></div>
+      </div>
+      <div class="level-card">
+        <span class="badge">When cost matters most</span>
+        <h3>Groupage Road</h3>
+        <div class="priority">Standard</div>
+        <div class="delivery">Delivery time<b>Door-to-door, consolidated capacity</b></div>
+      </div>
+    </div>
   </div>
+</section>
 
-  <div class="hero-note">
-    <strong>Don't risk unofficial* sources or leave tickets to chance!</strong>
-    <p>
-      <a href="#" style="text-decoration: underline;">*Official sources listed here. </a>
-      <p>Secure your place with ticket-inclusive hospitality packages from On Location,
-      Official Hospitality Provider of FIFA World Cup 2026™.</p>
-      <p>Up to six (6) packages per order. To purchase more, call +1‑844‑652‑1685. Seats not guaranteed to be together.</p>
-    </p>
+<section id="air" style="background:var(--mist);">
+  <div class="wrap af-grid">
+    <div class="ph"><img src="https://thumbs.dreamstime.com/b/airport-ground-crew-loading-cargo-onto-airplane-sunset-airport-ground-crew-loading-cargo-onto-airplane-sunset-vivid-373546525.jpg" alt="Pacific Express airplane on tarmac"></div>
+    <div>
+      <h2>Air Freight</h2>
+      <p class="subhead" style="margin-bottom:0;">Speed and global reach are just the beginning. Be ready for price transparency, reliability, and cost efficiency with Pacific Express flying your cargo all the way.</p>
+      <ul class="af-list">
+        <li>Transparent real-time prices for routes across 75,000+ trade lanes worldwide</li>
+        <li>First-class reliability — enabled by Pacific Express-owned fleet combined with a strategic network of partner airlines</li>
+        <li>Accurate, real-time status of your shipments via air cargo tracking</li>
+      </ul>
+    </div>
   </div>
-
 </section>
 
-<!-- ============================================================
-     SECTION 2 — APP / KNOW BEFORE YOU GO
-============================================================ -->
-<section class="section-2">
-
-    <div class="promo-grid">
-
-        <div class="promo-card app-card">
-
-
-            <div class="app-bg-right"></div>
-
-            <img
-                src="images/69f0ae3d3d6fca5a795b40bc_iPhone 12 Pro.png"
-                class="phone-image"
-                alt="Phone App"
-            >
-
-            <div class="app-content">
-                <h2>DOWNLOAD OUR APP</h2>
-                <div class="store-buttons">
-                    <a href="#" class="store-btn">
-                        <img src="images/app store.svg" alt="" style="height: 30px;">
-                    </a>
-                    <a href="#" class="store-btn">
-                        <img src="images/google play.svg" alt="" style="height: 30px;">
-                    </a>
-                </div>
-            </div>
-
-        </div>
-
-        <div class="promo-card know-card">
-
-            <div class="know-deco-clip">
-                <div class="promo-card-bg-clip">
-                    <div class="card-bg know-bg-left"></div>
-                    <div class="card-bg know-bg-circle"></div>
-                </div>
-                <div class="know-bg-img"></div>
-            </div>
-
-            <div class="know-content">
-                <h2>
-                    KNOW BEFORE YOU <br>
-                    GO
-                </h2>
-                <div class="location-select" id="kbygSelect">
-                    <span id="kbygLabel">Choose Location</span>
-                    <i class="fa-solid fa-chevron-down"></i>
-                    <div class="kbyg-dropdown" id="kbygDropdown"></div>
-                </div>
-            </div>
-
-        </div>
-
+<section class="section-tight" style="background:var(--mist);">
+  <div class="wrap">
+    <h2>Choose the speed you need — by air</h2>
+    <p class="subhead">Choose between 3 service levels with varying priorities to deliver at the speed you need.</p>
+    <div class="levels">
+      <div class="level-card">
+        <span class="badge">When speed is essential</span>
+        <h3>Priority Air</h3>
+        <div class="priority">Priority</div>
+        <div class="delivery">Delivery time<b>Airport-to-airport in 1–3 days</b></div>
+      </div>
+      <div class="level-card">
+        <span class="badge">When flexibility is key</span>
+        <h3>Premium Air</h3>
+        <div class="priority">Priority</div>
+        <div class="delivery">Delivery time<b>Airport-to-airport, flexible scheduling</b></div>
+      </div>
+      <div class="level-card">
+        <span class="badge">When cost matters most</span>
+        <h3>Economy Air</h3>
+        <div class="priority">Standard</div>
+        <div class="delivery">Delivery time<b>Airport-to-airport, consolidated capacity</b></div>
+      </div>
     </div>
-
+  </div>
 </section>
 
-<!-- ============================================================
-     SECTION 3 — SINGLE MATCHES + CAROUSEL
-============================================================ -->
-<section class="section-3">
-
-    <div class="single-matches-card">
-
-        <div class="single-bg"></div>
-
-        <div class="single-content">
-
-            <div class="single-left">
-                <h2>
-                    SINGLE<br>
-                    MATCHES
-                </h2>
-            </div>
-
-            <div class="single-right">
-                <p>
-                    Choose from 104 matches across 16 dynamic host cities and venues*.
-                </p>
-                <div class="single-actions">
-                    <a href="#" class="explore-btn">
-                        Explore All Matches
-                    </a>
-                    <a href="#" class="schedule-link">
-                        View Schedule
-                        <i class="fa-solid fa-arrow-right"></i>
-                    </a>
-                </div>
-            </div>
-
-        </div>
-
+<section id="sea">
+  <div class="wrap af-grid">
+    <div class="ph"><img src="https://media.istockphoto.com/id/600101128/photo/sea-bearing-cargo-ship.jpg?s=612x612&w=0&k=20&c=KZNdAv_yiCcdGn3tnCsJSGtsxsYap5tYtBJQ07Xj86k=" alt="Pacific Express container ship at port"></div>
+    <div>
+      <h2>Sea Freight</h2>
+      <p class="subhead" style="margin-bottom:0;">Cost-efficient capacity at global scale. Be ready for reliable ocean schedules, flexible container options, and port-to-port or door-to-door service with Pacific Express shipping your cargo all the way.</p>
+      <ul class="af-list">
+        <li>Full container load (FCL) and less-than-container load (LCL) options worldwide</li>
+        <li>Access to major shipping lanes with owned and chartered vessel capacity</li>
+        <li>Port-to-port and door-to-door service across our global network</li>
+      </ul>
     </div>
-
-    <div class="matches-carousel-section">
-
-        <div class="match-tabs">
-            <button class="active" data-tab="popular">Popular</button>
-            <button data-tab="group">Group Stage</button>
-            <button data-tab="round32">Round of 32</button>
-        </div>
-
-        <div class="matches-row-wrap">
-            <div class="matches-row" id="matchesRow">
-                <!-- match cards rendered dynamically by JS -->
-            </div>
-        </div>
-
-        <div class="carousel-nav">
-            <button class="carousel-btn" id="prevBtn" aria-label="Previous matches">
-                <i class="fa-solid fa-chevron-left"></i>
-            </button>
-            <button class="carousel-btn" id="nextBtn" aria-label="Next matches">
-                <i class="fa-solid fa-chevron-right"></i>
-            </button>
-        </div>
-
-    </div>
-
+  </div>
 </section>
 
-<!-- ============================================================
-     SECTION 4 — PRIVATE SUITES
-============================================================ -->
-<section class="section-4">
-
-    <div class="private-suites-card">
-
-        <div class="suite-bg-shape"></div>
-
-        <div class="suite-content">
-
-            <div class="suite-text">
-                <h2>
-                    PRIVATE SUITES
-                </h2>
-                <p>
-                    Level up with this exclusive offering that includes
-                    preferred entry, direct seating access, and
-                    dedicated service – all to be enjoyed privately
-                    among you and your guests.
-                </p>
-                <a href="#" class="suite-btn">
-                    Buy Now
-                </a>
-            </div>
-
-            <div class="suite-image-wrapper">
-                <img
-                    src="images/68c8434f194725f4b9bd0016_suites-p-800.webp"
-                    alt="Private Suite"
-                    class="suite-image"
-                >
-            </div>
-
-        </div>
-
+<section class="section-tight">
+  <div class="wrap">
+    <h2>Choose the speed you need — by sea</h2>
+    <p class="subhead">Choose between 3 service levels with varying priorities to deliver at the speed you need.</p>
+    <div class="levels">
+      <div class="level-card">
+        <span class="badge">When speed is essential</span>
+        <h3>Express Ocean</h3>
+        <div class="priority">Priority</div>
+        <div class="delivery">Delivery time<b>Port-to-port, fastest available transit</b></div>
+      </div>
+      <div class="level-card">
+        <span class="badge">When flexibility is key</span>
+        <h3>Standard Ocean</h3>
+        <div class="priority">Priority</div>
+        <div class="delivery">Delivery time<b>Port-to-port, flexible scheduling</b></div>
+      </div>
+      <div class="level-card">
+        <span class="badge">When cost matters most</span>
+        <h3>Economy Ocean</h3>
+        <div class="priority">Standard</div>
+        <div class="delivery">Delivery time<b>Port-to-port, consolidated capacity</b></div>
+      </div>
     </div>
-
+  </div>
 </section>
 
-<!-- ============================================================
-     SECTION 5 — ADDITIONAL OFFERINGS
-============================================================ -->
-<section class="section-5">
-
-    <div class="add-off-inner">
-
-        <h2 class="add-off-title">Additional Offerings</h2>
-
-        <p class="add-off-note">
-            These specialty offerings are only available via inquiry (they cannot be purchased online). Please
-            <a href="#" class="add-off-link">contact us here</a> or call us at 1-844-652-1685.
-        </p>
-
-        <div class="add-off-grid">
-
-            <div class="add-off-card">
-                <div class="add-off-img">
-                    <img src="images/platinum-access.webp" alt="Platinum Access">
-                </div>
-                <div class="add-off-body">
-                    <h3>Platinum Access</h3>
-                    <p>The most exclusive offering. It delivers an all-encompassing experience with full-service customization and the most premium access available.</p>
-                    <a href="#" class="add-off-btn">Register Interest</a>
-                </div>
-            </div>
-
-            <div class="add-off-card">
-                <div class="add-off-img">
-                    <img src="images/accommodations.webp" alt="Accommodations">
-                </div>
-                <div class="add-off-body">
-                    <h3>Accommodations</h3>
-                    <p>Select your preferred hotels, experiences, and/or car rentals to create your ideal trip package.</p>
-                    <a href="#" class="add-off-btn">Buy Now</a>
-                </div>
-            </div>
-
-        </div>
-
+<section>
+  <div class="wrap">
+    <div class="booking">
+      <div class="booking-copy">
+        <h2>Book road, air, or sea freight online</h2>
+        <p>Take advantage of getting instant prices on your shipment, browse through an easy-to-navigate booking interface and even track your goods. All in one convenient and easy-to-navigate platform.</p>
+        <p>Let us guide you through the first steps of your digital journey and help you choose the best service to match your needs.</p>
+        <a class="btn btn-sky" href="#" style="margin-top:8px; display:inline-block;">Explore the booking platform</a>
+      </div>
+      <div class="ph"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_ShdIMYab6T2KQs592shq_Edg3KFZYkf7YmQ7WcCwPw&s=10" alt="Booking platform screenshot"></div>
     </div>
-
+  </div>
 </section>
 
-<!-- ============================================================
-     SECTION 6 — UNRIVALED LOUNGE ACCESS
-============================================================ -->
-<section class="section-6">
-    <div class="lounge-teal-shape"></div>
-    <div class="lounge-inner">
-
-
-        <div class="lounge-left">
-
-            <div class="lounge-badge">
-                <img src="images/FIFA_26_Logo.webp" alt="" style="width: 40px;">
-            </div>
-
-            <h2 class="lounge-title">Unrivaled<br>Lounge Access</h2>
-
-            <p class="lounge-lead">
-                After selecting your series, choose from a selection of dynamic lounge offerings at every venue.
-            </p>
-
-            <p class="lounge-desc">
-                Each of the 16 FIFA World Cup 2026™ host venues offers multiple lounge options, all of which blend luxury comfort with extraordinary viewing access. Note lounge quantities, sizes, and features vary by venue.
-            </p>
-
-            <div class="lounge-list" id="loungeList">
-
-                <div class="lounge-item active" data-lounge="pitchside">
-                    <div class="lounge-progress"></div>
-                    <span>Pitchside Lounge</span>
-                    <p class="lounge-item-desc">   
-                        Step into a realm where luxury hospitality and thrilling on-field 
-                        action converge. Enjoy upscale dining with live-action cooking stations 
-                        plus other gourmet offerings – as well as premium beverage service – served 
-                        both pre- and post-match. With unrivaled seat views located near the field along 
-                        the sidelines, you are not just a spectator – you are part of the action.
-                    </p>
-                </div>
-
-                <div class="lounge-item" data-lounge="vip">
-                    <div class="lounge-progress"></div>
-                    <span>VIP</span>
-                    <p class="lounge-item-desc">
-                        Your entry to an exclusive experience that 
-                        blends luxurious comfort with electrifying energy. Witness the action in premium 
-                        sideline seats while enjoying elevated amenities – including curated, themed-menu 
-                        stations and sommelier-guided beverage service. All of which are offered before the 
-                        match, at halftime, and after the final whistle.ion for the VIP lounge experience coming soon.
-                    </p>
-                </div>
-
-                <div class="lounge-item" data-lounge="trophy">
-                    <div class="lounge-progress"></div>
-                    <span>Trophy Lounge</span>
-                    <p class="lounge-item-desc">
-                        This elevated lounge delivers top-tier hospitality with a focus on convenience, comfort, 
-                        and service. Featuring excellent sideline seat views, it provides a dynamic atmosphere to 
-                        enjoy premium beverage service and upscale culinary offerings – including a chef-driven menu 
-                        featuring local flavors and ingredients – all to be enjoyed pre-match, halftime, and post-match.
-                    </p>
-                </div>
-
-                <div class="lounge-item" data-lounge="champions">
-                    <div class="lounge-progress"></div>
-                    <span>Champions Club</span>
-                    <p class="lounge-item-desc">
-                        A vibrant, elevated atmosphere designed to balance energy and comfort. Just steps from exclusive 
-                        hospitality spaces, these seats offer easy access to premium amenities – including beverage service 
-                        along with a full-course menu featuring chef-carved selections and gourmet shareable plates – all 
-                        of which are available pre- and post-match.
-                    </p>
-                </div>
-
-                <div class="lounge-item" data-lounge="pavilion">
-                    <div class="lounge-progress"></div>
-                    <span>FIFA Pavilion</span>
-                    <p class="lounge-item-desc">
-                        Welcome to an exclusive retreat set against the backdrop of the stadium. Within our secure 
-                        perimeter immediately outside the venue, the excitement of the game extends beyond the pitch 
-                        with a range of amenities – including elevated dining featuring street food classics infused 
-                        with local flavors as well as beverage service – all to be enjoyed both pre- and post-match.
-                    </p>
-                </div>
-
-            </div>
-
-        </div>
-
-        <div class="lounge-right">
-          <div class="lounge-right-inner left" >
-            <div class="lounge-image-1">
-              <img src="images/lounge-group.webp" alt="Lounge guests watching match">
-            </div> 
-
-            <div class="lounge-image-2">
-              <img src="images/lounge-hex.webp" alt="Lounge interior">              
-            </div>
-          </div>
-
-          <div class="lounge-right-inner">
-            <div class="lounge-image-3">
-              <img src="images/lounge-food.webp" alt="Lounge food service"> 
-            </div> 
-
-            <div class="lounge-image-4">
-                <img src="images/lounge-chef.webp" alt="Chef plating food">          
-            </div>            
-          </div>
-
-        </div>
-
-
+<section class="case">
+  <div class="wrap case-grid">
+    <div>
+      <div class="case-tag">Customer story</div>
+      <h2>How Pacific Express moved a critical safety component from Asia to Europe</h2>
+      <p class="subhead">When a leading German carmaker needed urgent transport for a Class 9 dangerous good (DG), Pacific Express combined air and road legs to deliver fast, safely, and in full compliance.</p>
+      <p class="subhead" style="margin-bottom:0;">Our own-controlled freight network and strict SOPs ensured fewer touchpoints, smoother handling, and built-in flexibility to avoid disruptions.</p>
     </div>
-
+    <div class="ph"><img src="https://cdn.prod.website-files.com/6246d8c921709e497eef110f/67b7285491c16c44b926a0a4_marine%20traffic.jpg" alt="Automotive part being loaded onto aircraft"></div>
+  </div>
 </section>
+
+<section class="stats">
+  <div class="wrap stats-grid">
+    <div>
+      <h2>Proof is in the numbers</h2>
+      <p class="subhead" style="color:#c3cee0;">Our global road, air, and sea freight services reach every corner of the world.</p>
+      <div class="stat-list">
+        <div><div class="num">1,900</div><div class="label">Logistics Specialists</div></div>
+        <div><div class="num">94+</div><div class="label">Countries served</div></div>
+        <div><div class="num">75K+</div><div class="label">Trade lanes</div></div>
+      </div>
+    </div>
+    <div class="ph"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-FMdJL3-wjgcCQlRaAKghoCBXGUTt1SM2tYJ8n83-xGRO7F99GoRq75-k&s=10" alt="World map of Pacific Express air routes"></div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>Why Pacific Express Logistics Services?</h2>
+    <div class="why-grid">
+      <div class="why-card">
+        <div class="icon"><i class="fa-solid fa-arrow-trend-up"></i></div>
+        <h3>Increased flexibility</h3>
+        <p class="subhead" style="margin-bottom:0;">Tackle disruptions effortlessly with our own-controlled assets and global partnerships.</p>
+      </div>
+      <div class="why-card">
+        <div class="icon"><i class="fa-solid fa-gear"></i></div>
+        <h3>Enhanced agility</h3>
+        <p class="subhead" style="margin-bottom:0;">Get better control by slowing down or speeding up your supply chain as per your needs.</p>
+      </div>
+      <div class="why-card">
+        <div class="icon"><i class="fa-solid fa-lock"></i></div>
+        <h3>Secure movement</h3>
+        <p class="subhead" style="margin-bottom:0;">Best-in-class ground handling protocols, limiting risks of theft and damage.</p>
+      </div>
+      <div class="why-card">
+        <div class="icon"><i class="fa-regular fa-clock"></i></div>
+        <h3>More reliability</h3>
+        <p class="subhead" style="margin-bottom:0;">More lead time transparency with on-time arrival and departure schedules.</p>
+      </div>
+      <div class="why-card">
+        <div class="icon"><i class="fa-solid fa-globe"></i></div>
+        <h3>Wider reach</h3>
+        <p class="subhead" style="margin-bottom:0;">Leverage our global network to reach more locations and customers globally.</p>
+      </div>
+      <div class="why-card">
+        <div class="icon"><i class="fa-solid fa-shop"></i></div>
+        <h3>One-stop shop</h3>
+        <p class="subhead" style="margin-bottom:0;">Integrate with our other services (Ocean, Customs) for true end-to-end transportation.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section-tight" style="background:var(--mist);">
+  <div class="wrap">
+    <h2>Need transport? Here's how it works</h2>
+    <div class="steps">
+      <div class="step">
+        <span class="stepnum">Step 1</span>
+        <h3>Get an instant quote</h3>
+        <p class="subhead" style="margin-bottom:0;">Enter your shipment details online for transparent, real-time pricing.</p>
+      </div>
+      <div class="step">
+        <span class="stepnum">Step 2</span>
+        <h3>Choose your service</h3>
+        <p class="subhead" style="margin-bottom:0;">Pick road, air, or sea, then choose a Priority, Standard, or Economy service level based on your timeline and budget.</p>
+      </div>
+      <div class="step">
+        <span class="stepnum">Step 3</span>
+        <h3>Book online</h3>
+        <p class="subhead" style="margin-bottom:0;">Confirm your booking through our easy-to-navigate digital platform.</p>
+      </div>
+      <div class="step">
+        <span class="stepnum">Step 4</span>
+        <h3>Track your cargo</h3>
+        <p class="subhead" style="margin-bottom:0;">Follow your shipment in real time, door-to-door or port-to-port.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>Additional services</h2>
+    <p class="subhead">Fast and flexible for all your supply chain needs.</p>
+    <div class="addl-grid">
+      <div class="addl-card">
+        <div class="ph"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZ0nDReoU0qSQP7Mha_4oggoUDU7QyNKjPzHDm6aaOPQ&s=10" alt="Dangerous goods icon/photo"></div>
+        <div class="addl-card-body">
+          <h3>Dangerous goods</h3>
+          <p>Pacific Express is certified to transport all 9 classes of dangerous goods by road, air, and sea. Rely on our DG certified staff to move your cargo across 63 countries and 112 stations.</p>
+        </div>
+      </div>
+      <div class="addl-card">
+        <div class="ph"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTekEP2uO4r9U7mQGN85EvHGzlN_x8d_IvVIVUGt8Z_zw&s=10" alt="Special/oversized cargo photo"></div>
+        <div class="addl-card-body">
+          <h3>Special cargo</h3>
+          <p>Be ready for special treatment of your special cargo — from dismantling, transporting, and assembling machines and plants, to relocation projects.</p>
+        </div>
+      </div>
+      <div class="addl-card">
+        <div class="ph"><img src="https://thumbs.dreamstime.com/b/airport-ground-crew-loading-cargo-onto-airplane-sunset-airport-ground-crew-loading-cargo-onto-airplane-sunset-vivid-373546525.jpg" alt="Air charter aircraft photo"></div>
+        <div class="addl-card-body">
+          <h3>Air charter</h3>
+          <p>Highly customisable solutions to and from any destination, 24/7/365, with live tracking and proactive status updates — no broker involvement.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section-tight">
+  <div class="wrap">
+    <div class="cta-band">
+      <h2>Ready to move your cargo?</h2>
+      <a class="btn btn-navy" href="#">Get a quote</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <div class="logo" style="color:#fff; margin-bottom:14px;"><img src="images/pacific-express-logo.png" alt="" height="100px"></div>
+        <p style="max-width:32ch; opacity:.8;">Integrated container logistics — connecting the world for a global economy in growth.</p>
+      </div>
+      <div>
+        <h4>Services</h4>
+        <ul>
+          <li><a href="#road" style="color:inherit; text-decoration:none;">Road freight</a></li>
+          <li><a href="#air" style="color:inherit; text-decoration:none;">Air freight</a></li>
+          <li><a href="#sea" style="color:inherit; text-decoration:none;">Sea freight</a></li>
+          <li>Warehousing</li>
+        </ul>
+      </div>
+      <div>
+        <h4>Solutions</h4>
+        <ul>
+          <li>Supply chain management</li>
+          <li>Customs</li>
+          <li>Cold chain</li>
+          <li>Dangerous goods</li>
+        </ul>
+      </div>
+      <div>
+        <h4>Company</h4>
+        <ul>
+          <li>About us</li>
+          <li>Sustainability</li>
+          <li>Newsroom</li>
+          <li>Careers</li>
+        </ul>
+      </div>
+      <div>
+        <h4>Support</h4>
+        <ul>
+          <li><a href="track.html" style="color:inherit; text-decoration:none;">Track a shipment</a></li>
+          <li>Contact us</li>
+          <li>Help centre</li>
+          <li>Sign in</li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <div>© 2026 Pacific Express Logistics Services. Clone for demonstration purposes only.</div>
+      <div>Privacy &nbsp;·&nbsp; Terms &nbsp;·&nbsp; Cookies</div>
+    </div>
+  </div>
+</footer>
 
 <script>
-(function(){
-    var ITEM_DURATION = 5000;
-    var list = document.getElementById('loungeList');
-    if(!list) return;
+  (function(){
+    var slides = [
+      {
+        tags:['Global','Reliable','Owned Fleet'],
+        title:'Pacific Express Sea Freight',
+        lead:'Bypass disruptions with a faster, more frequent, and reliable service.',
+        img:'Hero image — Pacific Express cargo aircraft',
+        photo:'https://media.istockphoto.com/id/600101128/photo/sea-bearing-cargo-ship.jpg?s=612x612&w=0&k=20&c=KZNdAv_yiCcdGn3tnCsJSGtsxsYap5tYtBJQ07Xj86k='
+      },
+      {
+        tags:['Door-to-Door','FTL & LTL'],
+        title:'Pacific Express Road Freight',
+        lead:'Dependable trucking across every major hub, with full or partial loads to match your shipment.',
+        img:'Hero image — Pacific Express truck on highway',
+        photo:'https://logitrustglobal.com/wp-content/uploads/2024/12/Road-freight-2.jpg'
+      },
+      {
+        tags:['75,000+ Trade Lanes','Real-Time Pricing'],
+        title:'Price transparency, worldwide.',
+        lead:'Transparent real-time prices for routes across 75,000+ trade lanes worldwide.',
+        img:'Hero image — global trade lane map',
+        photo:'https://cdn.prod.website-files.com/6246d8c921709e497eef110f/67b7285491c16c44b926a0a4_marine%20traffic.jpg'
+      },
+      {
+        tags:['94+ Countries','1,900 Air Specialists'],
+        title:'A network built to move fast.',
+        lead:'First-class reliability, enabled by our owned fleet combined with a strategic network of partner airlines.',
+        img:'Hero image — ground crew loading cargo aircraft',
+        photo:'https://thumbs.dreamstime.com/b/airport-ground-crew-loading-cargo-onto-airplane-sunset-airport-ground-crew-loading-cargo-onto-airplane-sunset-vivid-373546525.jpg'
+      },
+      {
+        tags:['Live Tracking'],
+        title:'Know where your cargo is, always.',
+        lead:'Accurate, real-time status of your shipments via air cargo tracking.',
+        img:'Hero image — live shipment tracking dashboard',
+        photo:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTDRYtA6i6XaqciWQmy3L3Xi2e_lUUX-xrBZH1DDXxK_G1KicB_-Ei6U8M&s=10'
+      }
+    ];
 
-    var items = Array.prototype.slice.call(list.querySelectorAll('.lounge-item'));
+    var heroCopy = document.querySelector('.hero-copy');
+    var tagsEl = document.getElementById('heroTags');
+    var headlineEl = document.getElementById('heroHeadline');
+    var leadEl = document.getElementById('heroLead');
+    var imgStack = document.getElementById('heroImgStack');
+    var bgStack = document.getElementById('heroBgStack');
+    var dotsEl = document.getElementById('heroDots');
+    var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
     var current = 0;
     var timer = null;
+    var AUTOPLAY_MS = 6000;
 
-    function fullHeight(item){
-        // header + description height, regardless of current active state
-        var span = item.querySelector('span');
-        var desc = item.querySelector('.lounge-item-desc');
-        var h = span ? span.offsetHeight : 0;
-        if(desc){
-            var prevDisplay = desc.style.display;
-            desc.style.display = 'block';
-            h += desc.offsetHeight + 10; // + margin-top
-            desc.style.display = prevDisplay;
-        }
-        // include the item's own top/bottom padding
-        var cs = getComputedStyle(item);
-        h += parseFloat(cs.paddingTop) + parseFloat(cs.paddingBottom);
-        return h;
+    // build the stacked slide images
+    slides.forEach(function(slide, i){
+      var div = document.createElement('div');
+      div.className = 'ph hero-slide' + (i === 0 ? ' is-active' : '');
+      div.innerHTML = '<img src="' + slide.photo + '" alt="' + slide.img + '">';
+      imgStack.appendChild(div);
+    });
+
+    // build the full-bleed background slides behind the whole hero
+    slides.forEach(function(slide, i){
+      var bg = document.createElement('div');
+      bg.className = 'hero-bg' + (i === 0 ? ' is-active' : '');
+      bg.innerHTML = '<img src="' + slide.photo + '" alt="">';
+      bgStack.appendChild(bg);
+    });
+
+    // build the dots
+    slides.forEach(function(_, i){
+      var dot = document.createElement('button');
+      dot.type = 'button';
+      dot.setAttribute('role','tab');
+      dot.setAttribute('aria-label','Show slide ' + (i + 1));
+      if (i === 0) dot.classList.add('is-active');
+      dot.addEventListener('click', function(){ goTo(i); resetAutoplay(); });
+      dotsEl.appendChild(dot);
+    });
+
+    var slideEls = imgStack.querySelectorAll('.hero-slide');
+    var bgEls = bgStack.querySelectorAll('.hero-bg');
+    var dotEls = dotsEl.querySelectorAll('button');
+
+    function renderCaption(slide){
+      tagsEl.innerHTML = slide.tags.map(function(t){ return '<span class="tag">' + t + '</span>'; }).join('');
+      headlineEl.textContent = slide.title;
+      leadEl.textContent = slide.lead;
     }
 
-    function activate(index){
-        items.forEach(function(item, i){
-            var bar = item.querySelector('.lounge-progress');
-            item.classList.toggle('active', i === index);
-            if(bar){
-                if(i === index){
-                    var target = fullHeight(item);
-                    bar.style.transition = 'none';
-                    bar.style.height = '0px';
-                    void bar.offsetHeight;
-                    bar.style.transition = 'height ' + ITEM_DURATION + 'ms linear';
-                    requestAnimationFrame(function(){
-                        bar.style.height = target + 'px';
-                    });
-                } else {
-                    bar.style.transition = 'none';
-                    bar.style.height = '0px';
-                }
-            }
-        });
-        current = index;
+    function goTo(index){
+      if (index === current) return;
+      current = index;
+
+      slideEls.forEach(function(el, i){ el.classList.toggle('is-active', i === current); });
+      bgEls.forEach(function(el, i){ el.classList.toggle('is-active', i === current); });
+      dotEls.forEach(function(el, i){ el.classList.toggle('is-active', i === current); });
+
+      if (reduceMotion) {
+        renderCaption(slides[current]);
+        return;
+      }
+      heroCopy.classList.add('caption-out');
+      setTimeout(function(){
+        renderCaption(slides[current]);
+        heroCopy.classList.remove('caption-out');
+      }, 260);
     }
 
-    function advance(){
-        var next = (current + 1) % items.length;
-        activate(next);
-    }
+    function next(){ goTo((current + 1) % slides.length); }
 
     function startAutoplay(){
-        clearInterval(timer);
-        timer = setInterval(advance, ITEM_DURATION);
+      if (reduceMotion) return;
+      timer = setInterval(next, AUTOPLAY_MS);
+    }
+    function stopAutoplay(){
+      if (timer) clearInterval(timer);
+    }
+    function resetAutoplay(){
+      stopAutoplay();
+      startAutoplay();
     }
 
-    items.forEach(function(item, i){
-        item.addEventListener('click', function(){
-            activate(i);
-            startAutoplay();
-        });
-    });
+    var heroSection = document.getElementById('heroSection');
+    heroSection.addEventListener('mouseenter', stopAutoplay);
+    heroSection.addEventListener('mouseleave', startAutoplay);
 
-    activate(0);
     startAutoplay();
-
-    window.addEventListener('resize', function(){
-        activate(current);
-    });
-})();
-</script>
-
-
-
-
-<!-- ============================================================
-     SECTION 7 — WHY CHOOSE ON LOCATION
-============================================================ -->
-<section class="why-location-section">
-
-    <div class="why-location-grid">
-
-        <div class="why-location-art">
-            <div class="player-layer"></div>
-            <div class="mask-layer"></div>
-        </div>
-
-        <div class="why-location-content">
-
-            <h2>
-                WHY CHOOSE ON<br>
-                LOCATION?
-            </h2>
-
-            <p>
-                As the official hospitality provider of world-renowned events like
-                the Olympic Games and Super Bowl, On Location has redefined the
-                live event experience across sports, music, fashion, and beyond.
-
-                On Location believes fandom shouldn't be limited to just watching
-                an event; as a result, it creates extraordinary experiences for
-                memories that last a lifetime.
-            </p>
-
-            <div class="stat-block">
-                <div class="stat-line"></div>
-                <div>
-                    <div class="stat-number">
-                        2 MILLION
-                    </div>
-                    <div class="stat-label">
-                        Global Guests Hosted Annually
-                    </div>
-                </div>
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-<!-- ============================================================
-     SECTION 8 — FREQUENTLY ASKED QUESTIONS
-============================================================ -->
-<section class="faq-section">
-
-    <div class="faq-container">
-
-        <h2 class="faq-title">
-            FREQUENTLY ASKED QUESTIONS
-        </h2>
-
-        <div class="faq-list">
-
-            <div class="faq-item active">
-                <button class="faq-question">
-                    <span>How is hospitality different from a general ticket?</span>
-                    <i class="fa-solid fa-xmark"></i>
-                </button>
-                <div class="faq-answer">
-                    <p>
-                        FIFA World Cup 26™ Hospitality packages are ticket-inclusive
-                        offerings and series that provide premium seating,
-                        exclusive entertainment, and upscale food and beverages,
-                        with service levels ranging from private suites to shared
-                        lounges – and other festive product options within the
-                        stadium's secure perimeter – along with a variety of
-                        additional one-of-a-kind experiences.
-
-                        These packages provide an elevated experience beyond
-                        standard event offerings.
-                    </p>
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <button class="faq-question">
-                    <span>Can I buy hospitality packages from other companies?</span>
-                    <i class="fa-solid fa-plus"></i>
-                </button>
-                <div class="faq-answer">
-                    <p>On Location is the only Official Hospitality Provider of the FIFA World Cup 26. Ticket-inclusive hospitality packages will be sold exclusively by On Location and its Officially Appointed Sales Agents (see list here). Fans are urged to purchase hospitality packages through FIFA.com/hospitality. Hospitality packages and tickets sourced from unofficial sales channels may not be valid.</p>
-                    <p>We strongly advise against purchasing packages from unauthorized platforms or sellers.</p>
-                  </div>
-            </div>
-
-            <div class="faq-item">
-                <button class="faq-question">
-                    <span>
-                        Why are there separate FIFA Hospitality Digital Checkout Store
-                        for each of the three host nations (Canada, Mexico, and the U.S.)?
-                    </span>
-                    <i class="fa-solid fa-plus"></i>
-                </button>
-                <div class="faq-answer">
-                    <p>Due to regulations related to processing transactions in the local currency of each host nation, there are three separate ticket shops which each feature their local currency: Canadian Dollars (CAD), Mexican Pesos (MXN), and U.S. Dollars (USD).</p>
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <button class="faq-question">
-                    <span>What do I need to know re: purchasing packages in different host nations?</span>
-                    <i class="fa-solid fa-plus"></i>
-                </button>
-                <div class="faq-answer">
-                    <p>Purchases need to be made in each host nation’s currency (in their related digital checkout store):</p>
-                    <ul>
-                      <li>Match packages in Canada must be paid for in CAD in the Canadian Digital Checkout Store.</li>
-                      <li>Match packages in Mexico must be paid for in MXN in the Mexican Digital Checkout Store.</li>
-                      <li>Match packages in the U.S. must be paid for in USD in the U.S. Digital Checkout Store.</li>
-                    </ul>
-                    <p>Separate purchases are required for match packages in different host nations. For example, a Venue Series package in Mexico City is purchased separate from a Single-Match package in Boston. (This applies to subsequent installment payments for each package.)</p>
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <button class="faq-question">
-                    <span>
-                        Is it possible for different purchasers – those who have purchased
-                        packages using separate accounts – to sit together at a match?
-                    </span>
-                    <i class="fa-solid fa-plus"></i>
-                </button>
-                <div class="faq-answer">
-                    <p>While not guaranteed, seating requests for separate bookings will be considered on a best-efforts basis and are strictly subject to availability and operational constraints. Please note that exact seating locations are not guaranteed.</p>
-                </div>
-            </div>
-
-        </div>
-
-        <div class="faq-footer">
-            <a href="#" class="faq-button">
-                See All FAQs
-            </a>
-        </div>
-
-    </div>
-
-</section>
-
-<!-- footer injected by main.js -->
-<div id="site-footer"></div>
-
-<script src="main.js"></script>
-
-<script>
-/* ── Lounge accordion ── */
-document.querySelectorAll('.lounge-item').forEach(item => {
-  item.addEventListener('click', () => {
-    document.querySelectorAll('.lounge-item').forEach(i => i.classList.remove('active'));
-    item.classList.add('active');
-  });
-});
-
-/* ── FAQ expand / collapse ── */
-document.querySelectorAll('.faq-question').forEach(btn => {
-  btn.addEventListener('click', () => {
-    const item = btn.closest('.faq-item');
-    const isOpen = item.classList.contains('active');
-
-    /* close all */
-    document.querySelectorAll('.faq-item').forEach(i => {
-      i.classList.remove('active');
-      i.querySelector('.faq-question i').className = 'fa-solid fa-plus';
-    });
-
-    /* open clicked one if it wasn't already open */
-    if (!isOpen) {
-      item.classList.add('active');
-      item.querySelector('.faq-question i').className = 'fa-solid fa-xmark';
-    }
-  });
-});
+  })();
 </script>
 
 <script>
-/* ============================================================
-   HERO FILTER — Location / Team / Stage (desktop columns)
-   Render helpers use data from main.js globals
-============================================================ */
+  (function(){
+    var openBtn = document.getElementById('menuOpenBtn');
+    var closeBtn = document.getElementById('menuCloseBtn');
+    var drawer = document.getElementById('mobileDrawer');
+    var overlay = document.getElementById('drawerOverlay');
 
-/* ---- Location: grouped ---- */
-function renderLocationDropdown(container, onSelect) {
-  let html = '';
-  wc26LocationGroups.forEach(section => {
-    if (section.group) {
-      html += `<div class="fc-dropdown-group">${section.group}</div>`;
+    function openDrawer(){
+      drawer.classList.add('open');
+      overlay.classList.add('open');
+      drawer.setAttribute('aria-hidden','false');
+      openBtn.setAttribute('aria-expanded','true');
+      document.body.style.overflow = 'hidden';
     }
-    section.items.forEach(item => {
-      html += `<div class="fc-dropdown-item" data-label="${item.label}">${item.label}</div>`;
+    function closeDrawer(){
+      drawer.classList.remove('open');
+      overlay.classList.remove('open');
+      drawer.setAttribute('aria-hidden','true');
+      openBtn.setAttribute('aria-expanded','false');
+      document.body.style.overflow = '';
+    }
+    openBtn.addEventListener('click', openDrawer);
+    closeBtn.addEventListener('click', closeDrawer);
+    overlay.addEventListener('click', closeDrawer);
+    document.addEventListener('keydown', function(e){
+      if(e.key === 'Escape') closeDrawer();
     });
-  });
-  container.innerHTML = html;
-
-  container.querySelectorAll('.fc-dropdown-item').forEach(el => {
-    el.addEventListener('click', (e) => {
-      e.stopPropagation();
-      onSelect(el.dataset.label);
-      container.querySelectorAll('.fc-dropdown-item').forEach(c => c.classList.remove('selected'));
-      el.classList.add('selected');
-      closeAllDropdowns();
-    });
-  });
-}
-
-/* ---- Team: every participating nation with its flag ---- */
-function renderTeamDropdown(container, onSelect) {
-  container.innerHTML = wc26Teams.map(t => `
-    <div class="fc-dropdown-item fc-dropdown-item-flag" data-name="${t.name}">
-      <img src="https://flagcdn.com/w40/${t.code}.png" alt="${t.name} flag">
-      <span>${t.name}</span>
-    </div>
-  `).join('');
-
-  container.querySelectorAll('.fc-dropdown-item').forEach((el, i) => {
-    el.addEventListener('click', (e) => {
-      e.stopPropagation();
-      onSelect(wc26Teams[i]);
-      container.querySelectorAll('.fc-dropdown-item').forEach(c => c.classList.remove('selected'));
-      el.classList.add('selected');
-      closeAllDropdowns();
-    });
-  });
-}
-
-/* ---- Stage: flat official stage list ---- */
-function renderStageDropdown(container, onSelect) {
-  container.innerHTML = wc26StagesData.map(s => `
-    <div class="fc-dropdown-item" data-label="${s.label}">${s.label}</div>
-  `).join('');
-
-  container.querySelectorAll('.fc-dropdown-item').forEach((el, i) => {
-    el.addEventListener('click', (e) => {
-      e.stopPropagation();
-      onSelect(wc26StagesData[i]);
-      container.querySelectorAll('.fc-dropdown-item').forEach(c => c.classList.remove('selected'));
-      el.classList.add('selected');
-      closeAllDropdowns();
-    });
-  });
-}
-
-function setupFilterToggle(colId, dropdownId, valueId) {
-  const col = document.getElementById(colId);
-  const dropdown = document.getElementById(dropdownId);
-  const valueEl = document.getElementById(valueId);
-  if (!col || !dropdown || !valueEl) return;
-
-  col.addEventListener('click', (e) => {
-    e.stopPropagation();
-    const isOpen = dropdown.classList.contains('open');
-    closeAllDropdowns();
-    if (!isOpen) {
-      dropdown.classList.add('open');
-      valueEl.classList.add('open');
-    }
-  });
-}
-
-/* Location column */
-const fcDropdownLocation = document.getElementById('fcDropdownLocation');
-const fcValueLocation = document.getElementById('fcValueLocation');
-if (fcDropdownLocation) {
-  renderLocationDropdown(fcDropdownLocation, (label) => {
-    fcValueLocation.innerHTML = `${label} <i class="fa-solid fa-chevron-down"></i>`;
-  });
-}
-setupFilterToggle('filterColLocation', 'fcDropdownLocation', 'fcValueLocation');
-
-/* Team column */
-const fcDropdownTeam = document.getElementById('fcDropdownTeam');
-const fcValueTeam = document.getElementById('fcValueTeam');
-if (fcDropdownTeam) {
-  renderTeamDropdown(fcDropdownTeam, (team) => {
-    fcValueTeam.innerHTML = `
-      <img src="https://flagcdn.com/w40/${team.code}.png" alt="${team.name} flag" style="width:18px;height:13px;object-fit:cover;border-radius:2px;margin-right:2px">
-      ${team.name} <i class="fa-solid fa-chevron-down"></i>
-    `;
-  });
-}
-setupFilterToggle('filterColTeam', 'fcDropdownTeam', 'fcValueTeam');
-
-/* Stage column */
-const fcDropdownStage = document.getElementById('fcDropdownStage');
-const fcValueStage = document.getElementById('fcValueStage');
-if (fcDropdownStage) {
-  renderStageDropdown(fcDropdownStage, (stage) => {
-    fcValueStage.innerHTML = `${stage.label} <i class="fa-solid fa-chevron-down"></i>`;
-  });
-}
-setupFilterToggle('filterColStage', 'fcDropdownStage', 'fcValueStage');
-
-/* ============================================================
-   HERO FILTER — Mobile tabs + single dropdown input
-============================================================ */
-const mobFieldRenderers = {
-  location: { render: renderLocationDropdown, placeholder: 'Select match location', getLabel: (v) => v },
-  team:     { render: renderTeamDropdown,     placeholder: 'Select your team',       getLabel: (v) => v.name },
-  stage:    { render: renderStageDropdown,    placeholder: 'Select stage',           getLabel: (v) => v.label }
-};
-
-const mobTabs        = document.querySelectorAll('.mob-filter-tab');
-const mobFilterInput = document.getElementById('mobFilterInput');
-const mobFilterLabel = document.getElementById('mobFilterLabel');
-const mobDropdown    = document.getElementById('fcDropdownMobile');
-
-let activeMobField = 'location';
-
-function renderMobDropdown(field) {
-  const config = mobFieldRenderers[field];
-  config.render(mobDropdown, (value) => {
-    mobFilterLabel.textContent = config.getLabel(value);
-    closeAllDropdowns();
-  });
-}
-if (mobDropdown) renderMobDropdown(activeMobField);
-
-mobTabs.forEach(tab => {
-  tab.addEventListener('click', (e) => {
-    e.stopPropagation();
-    mobTabs.forEach(t => t.classList.remove('active'));
-    tab.classList.add('active');
-    activeMobField = tab.dataset.field;
-    mobFilterLabel.textContent = mobFieldRenderers[activeMobField].placeholder;
-    renderMobDropdown(activeMobField);
-    closeAllDropdowns();
-  });
-});
-
-if (mobFilterInput) {
-  mobFilterInput.addEventListener('click', (e) => {
-    e.stopPropagation();
-    const isOpen = mobDropdown.classList.contains('open');
-    closeAllDropdowns();
-    if (!isOpen) {
-      mobDropdown.classList.add('open');
-      mobFilterInput.classList.add('open');
-    }
-  });
-}
-
-/* ============================================================
-   MATCH CARDS — dynamic data + render + carousel controls
-============================================================ */
-
-const matchesData = {
-  popular: [
-    {
-      banner: "images/68e520a0ca5637eed2191a66_Frame 1321317772.webp",
-      team1: { flag: "images/flags/Panama.webp", name: "Panama" },
-      team2: { flag: "images/flags/England.webp", name: "England" },
-      day: "Saturday", date: "June,27", time: "4:00 pm",
-      venue: "New York New Jersey Stadium", country: "USA",
-      ref: "M67: Panama vs. England"
-    },
-    {
-      banner: "images/68e520a0ca5637eed2191a66_Frame 1321317772.webp",
-      team1: { flag: "images/flags/Turkey.webp", name: "Türkiye" },
-      team2: { flag: "images/flags/USA.webp", name: "United States" },
-      day: "Thursday", date: "June,25", time: "4:00 pm",
-      venue: "Los Angeles Stadium", country: "USA",
-      ref: "M59: Türkiye vs. United States"
-    },
-    {
-      banner: "images/68e520a0ca5637eed2191a66_Frame 1321317772.webp",
-      team1: { flag: "images/flags/Colombia.webp", name: "Colombia" },
-      team2: { flag: "images/flags/Portugal.webp", name: "Portugal" },
-      day: "Saturday", date: "June,27", time: "4:00 pm",
-      venue: "Dallas Stadium", country: "USA",
-      ref: "M71: Colombia vs. Portugal"
-    },
-    {
-      banner: "images/68e520a0ca5637eed2191a66_Frame 1321317772.webp",
-      team1: { flag: "images/flags/ecuador.webp", name: "Ecuador" },
-      team2: { flag: "images/flags/germany.webp", name: "Germany" },
-      day: "Thursday", date: "June,25", time: "4:00 pm",
-      venue: "New York New Jersey Stadium", country: "USA",
-      ref: "M56: Ecuador vs. Germany"
-    },
-    {
-      banner: "images/68e520a0ca5637eed2191a66_Frame 1321317772.webp",
-      team1: { flag: "images/flags/brazil.webp", name: "Brazil" },
-      team2: { flag: "images/flags/argentina.webp", name: "Argentina" },
-      day: "Sunday", date: "June,29", time: "6:00 pm",
-      venue: "MetLife Stadium", country: "USA",
-      ref: "M80: Brazil vs. Argentina"
-    },
-    {
-      banner: "images/68e520a0ca5637eed2191a66_Frame 1321317772.webp",
-      team1: { flag: "images/flags/France.webp", name: "France" },
-      team2: { flag: "images/flags/Spain.webp", name: "Spain" },
-      day: "Wednesday", date: "July,2", time: "3:00 pm",
-      venue: "SoFi Stadium", country: "USA",
-      ref: "M88: France vs. Spain"
-    }
-  ],
-  group: [
-    {
-      banner: "images/68e520a0ca5637eed2191a66_Frame 1321317772.webp",
-      team1: { flag: "images/flags/Mexico.webp", name: "Mexico" },
-      team2: { flag: "images/flags/Poland.webp", name: "Poland" },
-      day: "Friday", date: "June,12", time: "1:00 pm",
-      venue: "Estadio Azteca", country: "Mexico",
-      ref: "M3: Mexico vs. Poland"
-    },
-    {
-      banner: "images/68e520a0ca5637eed2191a66_Frame 1321317772.webp",
-      team1: { flag: "images/flags/Canada.webp", name: "Canada" },
-      team2: { flag: "images/flags/Belgium.webp", name: "Belgium" },
-      day: "Saturday", date: "June,13", time: "12:00 pm",
-      venue: "BMO Field", country: "Canada",
-      ref: "M5: Canada vs. Belgium"
-    }
-  ],
-  round32: [
-    {
-      banner: "images/68e520a0ca5637eed2191a66_Frame 1321317772.webp",
-      team1: { flag: "images/flags/Netherlands.webp", name: "Netherlands" },
-      team2: { flag: "images/flags/Senegal.webp", name: "Senegal" },
-      day: "Sunday", date: "June,28", time: "2:00 pm",
-      venue: "AT&T Stadium", country: "USA",
-      ref: "M73: Netherlands vs. Senegal"
-    }
-  ]
-};
-
-function createMatchCard(m) {
-  return `
-    <div class="match-card">
-      <div class="match-banner">
-        <img src="${m.banner}" alt="">
-        <div class="overlay"></div>
-        <div class="teams">
-          <div class="team">
-            <img src="${m.team1.flag}" alt="${m.team1.name}">
-            <span>${m.team1.name.toUpperCase()}</span>
-          </div>
-          <div class="vs">VS</div>
-          <div class="team">
-            <img src="${m.team2.flag}" alt="${m.team2.name}">
-            <span>${m.team2.name.toUpperCase()}</span>
-          </div>
-        </div>
-      </div>
-      <div class="match-info">
-        <div class="info-row">
-          <i class="fa-regular fa-calendar"></i>
-         <p> ${m.day}, <strong> ${m.date} </strong> at <span> ${m.time} </span> </p>
-        </div>
-        <div class="info-row">
-          <i class="fa-solid fa-location-dot"></i>
-          <p><strong>${m.venue}</strong>, ${m.country}</p>
-        </div>
-        <div class="info-row">
-          <i class="fa-regular fa-futbol"></i>
-          ${m.ref}
-        </div>
-      </div>
-      <div class="buy-row">
-        <span>Buy Now</span>
-        <i class="fa-solid fa-chevron-right"></i>
-      </div>
-    </div>
-  `;
-}
-
-const matchesRow   = document.getElementById('matchesRow');
-const prevBtn      = document.getElementById('prevBtn');
-const nextBtn      = document.getElementById('nextBtn');
-const tabButtons   = document.querySelectorAll('.match-tabs button');
-
-function renderMatches(key) {
-  const list = matchesData[key] || [];
-  matchesRow.innerHTML = list.map(createMatchCard).join('');
-  matchesRow.scrollTo({ left: 0 });
-  updateCarouselButtons();
-}
-
-function updateCarouselButtons() {
-  const maxScroll = matchesRow.scrollWidth - matchesRow.clientWidth - 2;
-  prevBtn.disabled = matchesRow.scrollLeft <= 0;
-  nextBtn.disabled = matchesRow.scrollLeft >= maxScroll;
-}
-
-function scrollByCard(direction) {
-  const card = matchesRow.querySelector('.match-card');
-  const cardWidth = card ? card.getBoundingClientRect().width : 260;
-  const gap = 20;
-  matchesRow.scrollBy({ left: direction * (cardWidth + gap) * 2, behavior: 'smooth' });
-}
-
-prevBtn.addEventListener('click', () => scrollByCard(-1));
-nextBtn.addEventListener('click', () => scrollByCard(1));
-matchesRow.addEventListener('scroll', () => {
-  window.requestAnimationFrame(updateCarouselButtons);
-});
-window.addEventListener('resize', updateCarouselButtons);
-
-tabButtons.forEach(btn => {
-  btn.addEventListener('click', () => {
-    tabButtons.forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    renderMatches(btn.dataset.tab);
-  });
-});
-
-/* initial render */
-renderMatches('popular');
+  })();
 </script>
-
 </body>
 </html>

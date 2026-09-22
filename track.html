@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Track a Shipment | Pacific Express Logistics Services</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<style>
+  :root{
+    --navy:#0a1f44;
+    --navy-deep:#071630;
+    --sky:#42b0e8;
+    --sky-deep:#1a7fb8;
+    --ink:#14213d;
+    --paper:#ffffff;
+    --mist:#f4f6f8;
+    --line:#e1e5ea;
+    --grey:#5b6472;
+    box-sizing:border-box;
+    padding-top:env(safe-area-inset-top,0px);
+    padding-bottom:env(safe-area-inset-bottom,0px);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-padding-top:env(safe-area-inset-top,0px); scroll-behavior:smooth;}
+  body{
+    margin:0;
+    font-family:"Helvetica Neue", Arial, sans-serif;
+    color:var(--ink);
+    background:var(--paper);
+    line-height:1.5;
+  }
+  img,.ph{max-width:100%;}
+  a{color:inherit;}
+  .wrap{max-width:1180px; margin:0 auto; padding:0 24px;}
+
+  /* placeholder image block */
+  .ph{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:repeating-linear-gradient(45deg, #d7dee6, #d7dee6 10px, #cbd4dd 10px, #cbd4dd 20px);
+    color:#5b6472;
+    font-size:13px;
+    letter-spacing:.02em;
+    text-align:center;
+    border-radius:4px;
+    width:100%;
+    overflow:hidden;
+    flex-shrink:0;
+  }
+  .ph span{background:rgba(255,255,255,.75); padding:4px 10px; border-radius:3px;}
+  .ph img{width:100%; height:100%; object-fit:cover; display:block;}
+
+  /* header */
+  header{
+    position:sticky; top:0; z-index:50;
+    background:#fff;
+    color:var(--ink);
+    padding-top:env(safe-area-inset-top,0px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:14px 24px;
+    max-width:1180px; margin:0 auto;
+  }
+  .logo{display:flex; align-items:center; gap:10px; font-weight:700; font-size:18px; white-space:nowrap;}
+  .logo .mark{
+    width:36px;height:36px;flex-shrink:0;
+    background:repeating-linear-gradient(45deg, #c7cfd9, #c7cfd9 6px, #b8c1cd 6px, #b8c1cd 12px);
+    border-radius:6px;display:flex;align-items:center;justify-content:center;
+    color:#5b6472; font-size:13px;
+  }
+  footer .logo .mark{
+    background:repeating-linear-gradient(45deg, #2a3a5c, #2a3a5c 6px, #223252 6px, #223252 12px);
+    color:#9fb0c9;
+  }
+  .navlinks{display:flex; gap:4px; font-size:14px; list-style:none; margin:0; padding:0;}
+  .navlinks li{
+    cursor:pointer; padding:9px 14px; border-radius:6px; color:var(--ink);
+    transition:background-color .18s ease, color .18s ease;
+  }
+  .navlinks li:hover,
+  .navlinks li:focus-visible{
+    background:var(--mist); color:var(--sky-deep);
+  }
+  .navlinks li:active{
+    background:#e4ebf2; color:var(--sky-deep);
+  }
+  .navlinks li:focus-visible{outline:2px solid var(--sky-deep); outline-offset:-2px;}
+  .navcta{display:flex; gap:10px; align-items:center;}
+  .hamburger{
+    display:none; background:none; border:none; color:var(--ink); font-size:20px;
+    cursor:pointer; padding:8px; line-height:1; border-radius:6px;
+    transition:background-color .18s ease, color .18s ease, transform .12s ease;
+  }
+  .hamburger:hover,
+  .hamburger:focus-visible{background:var(--mist); color:var(--sky-deep);}
+  .hamburger:active{transform:scale(.92); background:#e4ebf2;}
+  .hamburger:focus-visible{outline:2px solid var(--sky-deep); outline-offset:1px;}
+  @media (max-width:900px){
+    .navlinks{display:none;}
+    .navcta .btn-outline-dark{display:none;}
+    .hamburger{display:inline-block;}
+  }
+
+  /* mobile drawer */
+  .drawer-overlay{
+    position:fixed; inset:0; background:rgba(7,22,48,.55);
+    opacity:0; pointer-events:none; transition:opacity .25s ease;
+    z-index:90;
+  }
+  .drawer-overlay.open{opacity:1; pointer-events:auto;}
+  .drawer{
+    position:fixed; top:0; right:0; height:100%; width:78%; max-width:320px;
+    background:var(--navy); color:#fff; z-index:100;
+    transform:translateX(100%); transition:transform .28s ease;
+    padding:env(safe-area-inset-top,0px) 0 env(safe-area-inset-bottom,0px) 0;
+    display:flex; flex-direction:column;
+  }
+  .drawer.open{transform:translateX(0);}
+  .drawer-head{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:14px 20px; border-bottom:1px solid rgba(255,255,255,.12);background-color: white;
+  }
+  .drawer-close{
+    background:rgba(0, 0, 0, 0.055); border:none; color:#000; font-size:20px; cursor:pointer; padding:8px;
+    border-radius:6px; transition:background-color .18s ease, transform .12s ease;
+  }
+  .drawer-close:hover,
+  .drawer-close:focus-visible{background:rgba(255,255,255,.12);}
+  .drawer-close:active{transform:scale(.92); background:rgba(255,255,255,.2);}
+  .drawer-close:focus-visible{outline:2px solid var(--sky); outline-offset:1px;}
+  .drawer ul{list-style:none; margin:0; padding:10px 8px; flex:1; overflow-y:auto;}
+  .drawer ul li{
+    padding:14px 12px; font-size:15px; border-bottom:1px solid rgba(255,255,255,.08);
+    cursor:pointer; border-radius:6px; transition:background-color .18s ease, color .18s ease, padding-left .18s ease;
+  }
+  .drawer ul li:hover,
+  .drawer ul li:focus-visible{
+    background:rgba(255,255,255,.08); color:var(--sky); padding-left:18px;
+  }
+  .drawer ul li:active{background:rgba(255,255,255,.15);}
+  .drawer ul li:focus-visible{outline:2px solid var(--sky); outline-offset:-2px;}
+  .drawer-actions{padding:18px 20px; display:flex; flex-direction:column; gap:12px; border-top:1px solid rgba(255,255,255,.12);}
+  .drawer-actions .btn{text-align:center;}
+  .btn{
+    display:inline-block; padding:10px 20px; font-size:14px; border-radius:2px;
+    text-decoration:none; font-weight:600; cursor:pointer; border:1.5px solid transparent;
+    transition:transform .15s ease, box-shadow .15s ease, background-color .15s ease, border-color .15s ease, color .15s ease;
+  }
+  .btn:hover{transform:translateY(-2px); box-shadow:0 6px 16px rgba(10,31,68,.18);}
+  .btn:active{transform:translateY(0); box-shadow:none;}
+  .btn:focus-visible{outline:2px solid var(--sky-deep); outline-offset:2px;}
+  .btn-sky{background:var(--sky); color:var(--navy-deep);}
+  .btn-sky:hover{background:#5cc0f0;}
+  .btn-sky:active{background:var(--sky-deep); color:#fff;}
+  .btn-outline{border-color:rgba(255,255,255,.5); color:#fff;}
+  .btn-outline:hover{background:rgba(255,255,255,.12); border-color:#fff;}
+  .btn-outline:active{background:rgba(255,255,255,.2);}
+  .btn-outline-dark{border-color:var(--navy); color:var(--navy);}
+  .btn-outline-dark:hover{background:var(--navy); color:#fff;}
+  .btn-outline-dark:active{background:var(--navy-deep);}
+  .btn-navy{background:var(--navy); color:#fff;}
+  .btn-navy:hover{background:var(--navy-deep);}
+  .btn-navy:active{background:#050f22;}
+
+  /* hero */
+  .hero{
+    position:relative;
+    background:var(--navy-deep);
+    color:#fff;
+    padding:64px 0 0 0;
+    overflow:hidden;
+  }
+  .hero-bg-stack{position:absolute; inset:0; z-index:0;}
+  .hero-bg-stack .hero-bg{
+    position:absolute; inset:0; height:100%;
+    opacity:0; transform:scale(1.06);
+    transition:opacity 1.4s ease, transform 8s ease;
+    display:flex; align-items:center; justify-content:center;
+    background:repeating-linear-gradient(45deg,#13294f,#13294f 14px,#0f2242 14px,#0f2242 28px);
+  }
+  .hero-bg-stack .hero-bg:nth-child(2){background:repeating-linear-gradient(45deg,#123a4f,#123a4f 14px,#0e2c3b 14px,#0e2c3b 28px);}
+  .hero-bg-stack .hero-bg:nth-child(3){background:repeating-linear-gradient(45deg,#1a2f4f,#1a2f4f 14px,#13233c 14px,#13233c 28px);}
+  .hero-bg-stack .hero-bg:nth-child(4){background:repeating-linear-gradient(45deg,#123049,#123049 14px,#0d2338 14px,#0d2338 28px);}
+  .hero-bg-stack .hero-bg span{
+    font-size:13px; letter-spacing:.02em; color:#aebfd9;
+    background:rgba(7,22,48,.55); padding:6px 14px; border-radius:20px;
+    border:1px solid rgba(255,255,255,.12);
+  }
+  .hero-bg-stack .hero-bg img{
+    position:absolute; inset:0; width:100%; height:100%; object-fit:cover;
+  }
+  .hero-bg-stack .hero-bg.is-active{opacity:1; transform:scale(1);}
+  .hero-overlay{
+    position:absolute; inset:0; z-index:1;
+    background:linear-gradient(120deg, rgba(7,22,48,.92) 0%, rgba(10,31,68,.82) 55%, rgba(10,31,68,.55) 100%);
+  }
+  .hero > .wrap{position:relative; z-index:2;}
+  @media (prefers-reduced-motion:reduce){
+    .hero-bg-stack .hero-bg{transition:opacity .3s linear; transform:none;}
+  }
+  .hero-grid{
+    display:grid; grid-template-columns:1.1fr 1fr; gap:40px; align-items:center;
+  }
+  .eyebrow-tags{display:flex; gap:10px; margin-bottom:22px; flex-wrap:wrap;}
+  .tag{
+    font-size:12.5px; padding:6px 12px; border:1px solid rgba(255,255,255,.35);
+    border-radius:20px; color:#cfe6f7;
+  }
+  h1{font-size:44px; line-height:1.12; margin:0 0 18px 0; font-weight:700; max-width:16ch;}
+  .hero p.lead{font-size:18px; color:#cfd8e4; max-width:46ch; margin:0 0 30px 0;}
+  .hero-actions{display:flex; gap:14px; margin-bottom:28px; flex-wrap:wrap;}
+
+  /* hero image slideshow */
+  .hero-img{position:relative; height:360px;}
+  .hero-img .hero-slide{
+    position:absolute; inset:0; height:100%;
+    opacity:0; transform:scale(1.03);
+    transition:opacity 1.1s ease, transform 6s ease;
+    pointer-events:none;
+  }
+  .hero-img .hero-slide.is-active{
+    opacity:1; transform:scale(1);
+    pointer-events:auto;
+  }
+  @media (max-width:860px){ .hero-img{height:220px;} }
+
+  /* hero caption text animation */
+  #heroTags, #heroHeadline, #heroLead{
+    transition:opacity .45s ease, transform .45s ease;
+  }
+  .hero-copy.caption-out #heroTags,
+  .hero-copy.caption-out #heroHeadline,
+  .hero-copy.caption-out #heroLead{
+    opacity:0; transform:translateY(10px);
+  }
+  .hero-copy.caption-out #heroHeadline{transition-delay:.03s;}
+  .hero-copy.caption-out #heroLead{transition-delay:.06s;}
+
+  .hero-dots{display:flex; gap:8px; margin-top:8px;}
+  .hero-dots button{
+    width:26px; height:4px; border:none; border-radius:2px;
+    background:rgba(255,255,255,.3); cursor:pointer; padding:0;
+    transition:background .25s ease;
+  }
+  .hero-dots button.is-active{background:var(--sky);}
+
+  @media (prefers-reduced-motion:reduce){
+    .hero-img .hero-slide{transition:opacity .3s linear; transform:none;}
+    #heroTags, #heroHeadline, #heroLead{transition:none;}
+  }
+  @media (max-width:860px){
+    .hero-grid{grid-template-columns:1fr;}
+    h1{font-size:32px;}
+  }
+
+  section{padding:72px 0;}
+  .section-tight{padding:48px 0;}
+  h2{font-size:30px; margin:0 0 14px 0; font-weight:700; max-width:22ch;}
+  h3{font-size:19px; margin:0 0 8px 0; font-weight:700;}
+  .subhead{color:var(--grey); font-size:16px; max-width:60ch; margin:0 0 36px 0;}
+
+  /* services intro */
+  .services-intro{background:var(--mist);}
+  .services-intro-grid{display:flex; align-items:flex-start; justify-content:space-between; gap:40px; flex-wrap:wrap;}
+  .services-intro-grid > div:first-child{max-width:520px;}
+
+  /* main air freight block */
+  .af-grid{display:grid; grid-template-columns:0.9fr 1.1fr; gap:48px; align-items:center;}
+  .af-grid .ph{height:300px;}
+  .af-list{list-style:none; padding:0; margin:22px 0 0 0;}
+  .af-list li{
+    position:relative; padding-left:26px; margin-bottom:14px; color:var(--ink); font-size:15.5px;
+  }
+  .af-list li::before{
+    content:"✓"; position:absolute; left:0; top:0; color:var(--sky-deep); font-weight:700;
+  }
+  @media (max-width:860px){ .af-grid{grid-template-columns:1fr;} }
+
+  /* service level cards */
+  .levels{display:grid; grid-template-columns:repeat(3,1fr); gap:20px; margin-top:36px;}
+  .level-card{
+    border:1px solid var(--line); border-radius:6px; padding:26px; background:#fff;
+  }
+  .level-card .badge{
+    display:inline-block; font-size:12px; font-weight:700; color:var(--sky-deep);
+    text-transform:uppercase; letter-spacing:.04em; margin-bottom:10px;
+  }
+  .level-card h3{font-size:20px;}
+  .level-card .priority{color:var(--grey); font-size:14px; margin-bottom:16px;}
+  .level-card .delivery{
+    border-top:1px solid var(--line); padding-top:14px; margin-top:14px; font-size:14px;
+  }
+  .level-card .delivery b{display:block; color:var(--ink); font-size:15px; margin-top:2px;}
+  @media (max-width:860px){ .levels{grid-template-columns:1fr;} }
+
+  /* digital booking */
+  .booking{
+    background:var(--navy); color:#fff; border-radius:10px; overflow:hidden;
+    display:grid; grid-template-columns:1fr 1fr; align-items:center;
+  }
+  .booking-copy{padding:48px;}
+  .booking .ph{height:100%; min-height:280px; border-radius:0;}
+  .booking h2{color:#fff; max-width:none;}
+  .booking p{color:#cfd8e4; font-size:16px; max-width:44ch;}
+  @media (max-width:860px){ .booking{grid-template-columns:1fr;} .booking-copy{padding:32px;} }
+
+  /* case study */
+  .case{background:var(--mist);}
+  .case-grid{display:grid; grid-template-columns:1fr 1fr; gap:48px; align-items:center;}
+  .case-grid .ph{height:280px;}
+  .case-tag{font-size:13px; font-weight:700; color:var(--sky-deep); text-transform:uppercase; letter-spacing:.04em; margin-bottom:10px;}
+  @media (max-width:860px){ .case-grid{grid-template-columns:1fr;} }
+
+  /* stats */
+  .stats{background:var(--navy-deep); color:#fff;}
+  .stats-grid{display:grid; grid-template-columns:1fr 1.4fr; gap:48px; align-items:center;}
+  .stat-list{display:flex; gap:40px; flex-wrap:wrap;}
+  .stat-list .num{font-size:42px; font-weight:700; color:var(--sky); margin-bottom:4px;}
+  .stat-list .label{font-size:14px; color:#c3cee0;}
+  .stats h2{color:#fff;}
+  .stats .ph{height:240px;}
+  @media (max-width:860px){ .stats-grid{grid-template-columns:1fr;} }
+
+  /* why choose */
+  .why-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:28px; margin-top:8px;}
+  .why-card{padding:8px 0;}
+  .why-card .icon{
+    width:46px; height:46px; border-radius:8px; background:var(--mist);
+    display:flex; align-items:center; justify-content:center; margin-bottom:16px;
+    color:var(--sky-deep); font-size:18px;
+  }
+  @media (max-width:860px){ .why-grid{grid-template-columns:1fr 1fr;} }
+  @media (max-width:560px){ .why-grid{grid-template-columns:1fr;} }
+
+  /* additional services */
+  .addl-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:24px; margin-top:8px;}
+  .addl-card{border:1px solid var(--line); border-radius:6px; overflow:hidden; background:#fff;}
+  .addl-card .ph{height:150px; border-radius:0;}
+  .addl-card-body{padding:20px;}
+  .addl-card p{font-size:14.5px; color:var(--grey); margin:8px 0 0 0;}
+  @media (max-width:860px){ .addl-grid{grid-template-columns:1fr;} }
+
+  /* how it works */
+  .steps{counter-reset:step; margin-top:8px; display:grid; grid-template-columns:repeat(4,1fr); gap:24px;}
+  .step{position:relative; padding-top:8px;}
+  .step .stepnum{
+    font-size:13px; font-weight:700; color:var(--sky-deep); margin-bottom:10px; display:block;
+  }
+  @media (max-width:860px){ .steps{grid-template-columns:1fr 1fr;} }
+  @media (max-width:560px){ .steps{grid-template-columns:1fr;} }
+
+  /* cta band */
+  .cta-band{
+    background:var(--sky); color:var(--navy-deep); border-radius:10px; padding:48px;
+    display:flex; align-items:center; justify-content:space-between; gap:24px; flex-wrap:wrap;
+  }
+  .cta-band h2{color:var(--navy-deep); max-width:none; margin:0;}
+
+  footer{background:var(--navy-deep); color:#c3cee0; padding:56px 0 30px 0; font-size:14px;}
+  .foot-grid{display:grid; grid-template-columns:2fr repeat(4,1fr); gap:32px;}
+  .foot-grid h4{color:#fff; font-size:14px; margin:0 0 14px 0;}
+  .foot-grid ul{list-style:none; padding:0; margin:0;}
+  .foot-grid li{margin-bottom:10px; opacity:.85;}
+  .foot-bottom{
+    border-top:1px solid rgba(255,255,255,.12); margin-top:40px; padding-top:24px;
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap:12px; font-size:12.5px; color:#8b98ad;
+  }
+  @media (max-width:860px){ .foot-grid{grid-template-columns:1fr 1fr;} }
+
+  /* tracking hero */
+  .track-hero{
+    background:var(--navy-deep); color:#fff; padding:64px 0 56px 0; position:relative; overflow:hidden;
+  }
+  .track-hero::before{
+    content:''; position:absolute; inset:0;
+    background:repeating-linear-gradient(45deg,#0f2242,#0f2242 14px,#0c1c38 14px,#0c1c38 28px);
+    opacity:.55; z-index:0;
+  }
+  .track-hero > .wrap{position:relative; z-index:1;}
+  .track-hero h1{font-size:36px; max-width:none; margin:0 0 10px 0;}
+  .track-hero p.lead{font-size:16px; color:#cfd8e4; max-width:56ch; margin:0 0 30px 0;}
+  .track-form{
+    display:flex; gap:10px; flex-wrap:wrap; background:#fff; padding:8px; border-radius:8px; max-width:640px;
+  }
+  .track-form input{
+    flex:1; min-width:180px; border:none; outline:none; padding:14px 16px; font-size:15px;
+    font-family:inherit; color:var(--ink); border-radius:4px;
+  }
+  .track-form button{
+    border:none; background:var(--sky); color:var(--navy-deep); font-weight:700; font-size:14px;
+    padding:0 26px; border-radius:4px; cursor:pointer; transition:background-color .15s ease, transform .15s ease;
+    display:inline-flex; align-items:center; gap:8px;
+  }
+  .track-form button:hover{background:#5cc0f0; transform:translateY(-1px);}
+  .track-form button:active{transform:translateY(0); background:var(--sky-deep); color:#fff;}
+  .track-error{
+    margin-top:14px; color:#ffd4d4; font-size:14px; display:none; align-items:center; gap:8px;
+  }
+  .track-error.show{display:flex;}
+
+  /* results */
+  .track-results{display:none;}
+  .track-results.show{display:block;}
+  .result-summary{
+    display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:24px;
+    border:1px solid var(--line); border-radius:10px; padding:28px; margin-bottom:36px;
+  }
+  .result-mode-badge{
+    display:inline-flex; align-items:center; gap:8px; font-size:12.5px; font-weight:700;
+    text-transform:uppercase; letter-spacing:.04em; color:var(--sky-deep); background:var(--mist);
+    padding:6px 12px; border-radius:20px; margin-bottom:14px;
+  }
+  .result-route{font-size:22px; font-weight:700; margin:0 0 6px 0; display:flex; align-items:center; gap:12px; flex-wrap:wrap;}
+  .result-route i{color:var(--sky-deep); font-size:16px;}
+  .result-id{color:var(--grey); font-size:14px;}
+  .result-eta{text-align:right;}
+  .result-eta .label{font-size:12.5px; color:var(--grey); text-transform:uppercase; letter-spacing:.03em; margin-bottom:4px;}
+  .result-eta .value{font-size:22px; font-weight:700; color:var(--ink);}
+  .result-status-pill{
+    display:inline-block; margin-top:8px; font-size:12.5px; font-weight:700; padding:5px 12px;
+    border-radius:20px; background:#e6f6ea; color:#1f8a45;
+  }
+  .result-status-pill.pending{background:#fff3d6; color:#a5720b;}
+
+  /* stepper */
+  .track-stepper{display:flex; align-items:flex-start; margin:0 0 44px 0; overflow-x:auto; padding-bottom:6px;}
+  .tstep{flex:1; min-width:110px; text-align:center; position:relative; padding:0 6px;}
+  .tstep .dot{
+    width:30px; height:30px; border-radius:50%; background:var(--mist); border:2px solid var(--line);
+    display:flex; align-items:center; justify-content:center; margin:0 auto 10px auto; color:var(--grey); font-size:13px;
+    position:relative; z-index:2; transition:background-color .2s ease, border-color .2s ease, color .2s ease;
+  }
+  .tstep .line{
+    position:absolute; top:14px; left:-50%; width:100%; height:3px; background:var(--line); z-index:1;
+  }
+  .tstep:first-child .line{display:none;}
+  .tstep .tlabel{font-size:12.5px; color:var(--grey); line-height:1.3;}
+  .tstep.done .dot{background:var(--sky-deep); border-color:var(--sky-deep); color:#fff;}
+  .tstep.done .line{background:var(--sky-deep);}
+  .tstep.active .dot{background:var(--sky); border-color:var(--sky); color:var(--navy-deep); box-shadow:0 0 0 5px rgba(66,176,232,.25);}
+  .tstep.active .tlabel{color:var(--ink); font-weight:700;}
+  .tstep.done .tlabel{color:var(--ink);}
+  @media (max-width:700px){ .track-stepper{justify-content:flex-start;} .tstep{min-width:96px;} }
+
+  /* timeline */
+  .track-timeline{list-style:none; margin:0; padding:0;}
+  .ttl-item{
+    display:grid; grid-template-columns:130px 20px 1fr; gap:18px; padding-bottom:28px; position:relative;
+  }
+  .ttl-item:not(:last-child)::before{
+    content:''; position:absolute; left:139px; top:22px; bottom:0; width:2px; background:var(--line);
+  }
+  .ttl-item.done:not(:last-child)::before{background:var(--sky-deep);}
+  .ttl-date{font-size:13px; color:var(--grey); padding-top:2px;}
+  .ttl-dot-wrap{display:flex; justify-content:center;}
+  .ttl-dot{width:14px; height:14px; border-radius:50%; background:var(--line); margin-top:4px;}
+  .ttl-item.done .ttl-dot{background:var(--sky-deep);}
+  .ttl-item.active .ttl-dot{background:var(--sky); box-shadow:0 0 0 4px rgba(66,176,232,.25);}
+  .ttl-body h3{font-size:16px; margin:0 0 4px 0;}
+  .ttl-body p{font-size:14px; color:var(--grey); margin:0;}
+  .ttl-item.pending .ttl-body h3, .ttl-item.pending .ttl-body p{color:var(--grey);}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav">
+    <a class="logo" href="index.html" style="text-decoration:none;"><img src="images/pacific-express-logo.png" alt="" style="height: 60px;"></a>
+    <ul class="navlinks">
+      <li tabindex="0" onclick="location.href='index.html#road'">Road Freight</li>
+      <li tabindex="0" onclick="location.href='index.html#air'">Air Freight</li>
+      <li tabindex="0" onclick="location.href='index.html#sea'">Sea Freight</li>
+      <li tabindex="0">Sustainability</li>
+      <li tabindex="0">Insights</li>
+      <li tabindex="0">Support</li>
+    </ul>
+    <div class="navcta">
+      <a class="btn btn-outline-dark" href="track.html" style="background:var(--navy); color:#fff;"><i class="fa-solid fa-location-crosshairs" style="margin-right:6px;"></i>Track</a>
+      <a class="btn btn-sky" href="#">Sign in</a>
+      <button class="hamburger" id="menuOpenBtn" aria-label="Open menu" aria-expanded="false" aria-controls="mobileDrawer">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="drawer-overlay" id="drawerOverlay"></div>
+<nav class="drawer" id="mobileDrawer" aria-hidden="true">
+  <div class="drawer-head">
+    <div class="logo" style="color:#fff;"><img src="images/pacific-express-logo.png" alt="" style="height: 40px;"></div>
+    <button class="drawer-close" id="menuCloseBtn" aria-label="Close menu"><i class="fa-solid fa-xmark"></i></button>
+  </div>
+  <ul>
+    <li tabindex="0" onclick="location.href='index.html#road'">Road Freight</li>
+    <li tabindex="0" onclick="location.href='index.html#air'">Air Freight</li>
+    <li tabindex="0" onclick="location.href='index.html#sea'">Sea Freight</li>
+    <li tabindex="0">Sustainability</li>
+    <li tabindex="0">Insights</li>
+    <li tabindex="0">Support</li>
+  </ul>
+  <div class="drawer-actions">
+    <a class="btn btn-outline" href="track.html">Track</a>
+    <a class="btn btn-sky" href="#">Sign in</a>
+  </div>
+</nav>
+
+<section class="track-hero">
+  <div class="wrap">
+    <h1>Track your shipment</h1>
+    <p class="lead">Enter your tracking number to see real-time status for your road, air, or sea freight shipment.</p>
+    <form class="track-form" id="trackForm">
+      <input type="text" id="trackInput" placeholder="Enter tracking number, e.g. PE-AR-77190" autocomplete="off">
+      <button type="submit"><i class="fa-solid fa-magnifying-glass"></i> Track</button>
+    </form>
+    <div class="track-error" id="trackError"><i class="fa-solid fa-circle-exclamation"></i> <span>Please enter a tracking number.</span></div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="track-results" id="trackResults">
+      <div class="result-summary">
+        <div>
+          <span class="result-mode-badge" id="rModeBadge"><i class="fa-solid fa-truck"></i> Road Freight</span>
+          <div class="result-route" id="rRoute"><span>Origin</span><i class="fa-solid fa-arrow-right"></i><span>Destination</span></div>
+          <div class="result-id" id="rId">Tracking number: —</div>
+        </div>
+        <div class="result-eta">
+          <div class="label">Estimated delivery</div>
+          <div class="value" id="rEta">—</div>
+          <span class="result-status-pill" id="rStatusPill">In transit</span>
+        </div>
+      </div>
+
+      <div class="track-stepper" id="trackStepper"></div>
+
+      <h3 style="margin-bottom:18px;">Shipment history</h3>
+      <ul class="track-timeline" id="trackTimeline"></ul>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <div class="logo" style="color:#fff; margin-bottom:14px;"><img src="images/pacific-express-logo.png" alt="" height="100px"></div>
+        <p style="max-width:32ch; opacity:.8;">Integrated container logistics — connecting the world for a global economy in growth.</p>
+      </div>
+      <div>
+        <h4>Services</h4>
+        <ul>
+          <li><a href="index.html#road" style="color:inherit; text-decoration:none;">Road freight</a></li>
+          <li><a href="index.html#air" style="color:inherit; text-decoration:none;">Air freight</a></li>
+          <li><a href="index.html#sea" style="color:inherit; text-decoration:none;">Sea freight</a></li>
+          <li>Warehousing</li>
+        </ul>
+      </div>
+      <div>
+        <h4>Solutions</h4>
+        <ul>
+          <li>Supply chain management</li>
+          <li>Customs</li>
+          <li>Cold chain</li>
+          <li>Dangerous goods</li>
+        </ul>
+      </div>
+      <div>
+        <h4>Company</h4>
+        <ul>
+          <li>About us</li>
+          <li>Sustainability</li>
+          <li>Newsroom</li>
+          <li>Careers</li>
+        </ul>
+      </div>
+      <div>
+        <h4>Support</h4>
+        <ul>
+          <li><a href="track.html" style="color:inherit; text-decoration:none;">Track a shipment</a></li>
+          <li>Contact us</li>
+          <li>Help centre</li>
+          <li>Sign in</li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <div>© 2026 Pacific Express Logistics Services. Clone for demonstration purposes only.</div>
+      <div>Privacy &nbsp;·&nbsp; Terms &nbsp;·&nbsp; Cookies</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  // TODO: paste your deployed Apps Script Web App URL here (same one used by track-admin.html)
+  var API_URL = "https://script.google.com/macros/s/AKfycbwHPLIWFap9TSmamizNDUcmVaFXkwH6KL5sSQyuFXuUqWj0_4p_8jKI-NO8P-c3iVsp/exec";
+
+  var MODE_META = {
+    road:{ label:'Road Freight', icon:'fa-truck' },
+    air:{ label:'Air Freight', icon:'fa-plane' },
+    sea:{ label:'Sea Freight', icon:'fa-ship' }
+  };
+
+  function fmtDate(d){
+    d = (d instanceof Date) ? d : new Date(d);
+    return d.toLocaleDateString(undefined,{month:'short', day:'numeric', year:'numeric'}) + ', ' +
+      d.toLocaleTimeString(undefined,{hour:'2-digit', minute:'2-digit'});
+  }
+
+  function renderResults(shipment, events){
+    var meta = MODE_META[shipment.mode] || MODE_META.road;
+    var totalSteps = events.length;
+    var currentStep = Number(shipment.currentStep);
+    var delivered = currentStep >= totalSteps - 1 && events[totalSteps - 1].status !== 'pending';
+
+    var badge = document.getElementById('rModeBadge');
+    badge.innerHTML = '<i class="fa-solid ' + meta.icon + '"></i> ' + meta.label;
+
+    document.getElementById('rRoute').innerHTML =
+      '<span>' + shipment.origin + '</span><i class="fa-solid fa-arrow-right"></i><span>' + shipment.destination + '</span>';
+    document.getElementById('rId').textContent = 'Tracking number: ' + shipment.trackingId.toUpperCase();
+    document.getElementById('rEta').textContent = fmtDate(shipment.eta);
+
+    var pill = document.getElementById('rStatusPill');
+    if(delivered){
+      pill.textContent = 'Delivered';
+      pill.classList.remove('pending');
+    } else {
+      pill.textContent = events[currentStep] ? events[currentStep].title : shipment.status;
+      pill.classList.add('pending');
+    }
+
+    var stepperHtml = '';
+    events.forEach(function(ev, i){
+      var cls = i < currentStep ? 'done' : (i === currentStep ? 'active' : '');
+      stepperHtml += '<div class="tstep ' + cls + '"><div class="line"></div><div class="dot">' +
+        (i < currentStep ? '<i class="fa-solid fa-check"></i>' : (i+1)) +
+        '</div><div class="tlabel">' + ev.title + '</div></div>';
+    });
+    document.getElementById('trackStepper').innerHTML = stepperHtml;
+
+    var timelineHtml = '';
+    for(var i = events.length - 1; i >= 0; i--){
+      var ev = events[i];
+      var datePrefix = ev.status === 'pending' ? 'Est. ' : '';
+      timelineHtml += '<li class="ttl-item ' + ev.status + '">' +
+        '<div class="ttl-date">' + datePrefix + fmtDate(ev.date) + '</div>' +
+        '<div class="ttl-dot-wrap"><div class="ttl-dot"></div></div>' +
+        '<div class="ttl-body"><h3>' + ev.title + '</h3><p>' + ev.location + '</p></div>' +
+        '</li>';
+    }
+    document.getElementById('trackTimeline').innerHTML = timelineHtml;
+
+    document.getElementById('trackResults').classList.add('show');
+    document.getElementById('trackResults').scrollIntoView({behavior:'smooth', block:'start'});
+  }
+
+  var form = document.getElementById('trackForm');
+  var input = document.getElementById('trackInput');
+  var errorEl = document.getElementById('trackError');
+  var trackBtn = form.querySelector('button[type="submit"]');
+
+  function setError(message){
+    errorEl.querySelector('span').textContent = message;
+    errorEl.classList.add('show');
+  }
+
+  async function runTrack(id){
+    id = (id || '').trim();
+    if(!id){
+      setError('Please enter a tracking number.');
+      return;
+    }
+    errorEl.classList.remove('show');
+
+    var originalBtnHtml = trackBtn.innerHTML;
+    trackBtn.disabled = true;
+    trackBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Tracking…';
+    document.getElementById('trackResults').classList.remove('show');
+
+    try{
+      var res = await fetch(API_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify({ action: 'trackShipment', trackingId: id })
+      });
+      var data = await res.json();
+
+      if(data && data.status && data.shipment){
+        renderResults(data.shipment, data.events || []);
+      } else {
+        setError((data && data.message) || "We couldn't find a shipment with that tracking number.");
+      }
+    } catch(err){
+      setError('Something went wrong reaching our tracking service. Please try again.');
+    } finally {
+      trackBtn.disabled = false;
+      trackBtn.innerHTML = originalBtnHtml;
+    }
+  }
+
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    runTrack(input.value);
+  });
+
+  // auto-run if a tracking number is passed via ?id= or #id
+  var params = new URLSearchParams(window.location.search);
+  var preset = params.get('id');
+  if(preset){
+    input.value = preset;
+    runTrack(preset);
+  }
+})();
+</script>
+
+<script>
+  (function(){
+    var openBtn = document.getElementById('menuOpenBtn');
+    var closeBtn = document.getElementById('menuCloseBtn');
+    var drawer = document.getElementById('mobileDrawer');
+    var overlay = document.getElementById('drawerOverlay');
+
+    function openDrawer(){
+      drawer.classList.add('open');
+      overlay.classList.add('open');
+      drawer.setAttribute('aria-hidden','false');
+      openBtn.setAttribute('aria-expanded','true');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeDrawer(){
+      drawer.classList.remove('open');
+      overlay.classList.remove('open');
+      drawer.setAttribute('aria-hidden','true');
+      openBtn.setAttribute('aria-expanded','false');
+      document.body.style.overflow = '';
+    }
+    openBtn.addEventListener('click', openDrawer);
+    closeBtn.addEventListener('click', closeDrawer);
+    overlay.addEventListener('click', closeDrawer);
+    document.addEventListener('keydown', function(e){
+      if(e.key === 'Escape') closeDrawer();
+    });
+  })();
+</script>
+</body>
+</html>

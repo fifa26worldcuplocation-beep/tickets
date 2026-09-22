@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Admin | Pacific Express Logistics Services</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<style>
+  :root{
+    --navy:#0a1f44;
+    --navy-deep:#071630;
+    --sky:#42b0e8;
+    --sky-deep:#1a7fb8;
+    --ink:#14213d;
+    --paper:#ffffff;
+    --mist:#f4f6f8;
+    --line:#e1e5ea;
+    --grey:#5b6472;
+    --ok:#1f8a45;
+    --ok-bg:#e6f6ea;
+    --warn:#a5720b;
+    --warn-bg:#fff3d6;
+    --danger:#c62828;
+    --danger-bg:#fde8e8;
+    box-sizing:border-box;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0; font-family:"Helvetica Neue",Arial,sans-serif; color:var(--ink); background:var(--mist); line-height:1.5;}
+
+  /* ===== LOGIN ===== */
+  .login-screen{min-height:100vh; display:flex; align-items:center; justify-content:center; background:var(--navy-deep); padding:20px;}
+  .login-card{background:#fff; border-radius:12px; padding:36px 32px; width:100%; max-width:380px; box-shadow:0 24px 60px rgba(0,0,0,.35);}
+  .login-logo{display:flex; align-items:center; gap:10px; font-weight:800; font-size:17px; margin-bottom:22px; color:var(--navy);}
+  .login-logo .mark{width:34px; height:34px; border-radius:8px; background:var(--navy); color:var(--sky); display:flex; align-items:center; justify-content:center; font-size:14px;}
+  .login-title{font-size:20px; font-weight:800; margin-bottom:4px;}
+  .login-sub{font-size:13px; color:var(--grey); margin-bottom:22px;}
+  .login-error{display:none; background:var(--danger-bg); color:var(--danger); font-size:13px; padding:10px 12px; border-radius:8px; margin-bottom:16px;}
+  .login-error.show{display:block;}
+  .field{margin-bottom:14px;}
+  .field label{display:block; font-size:12.5px; font-weight:700; color:var(--grey); margin-bottom:6px;}
+  .field input, .field select{
+    width:100%; padding:11px 13px; border:1.5px solid var(--line); border-radius:8px;
+    font-size:14px; font-family:inherit; color:var(--ink); outline:none; transition:border-color .15s ease;
+  }
+  .field input:focus, .field select:focus{border-color:var(--sky-deep);}
+  .btn{
+    display:inline-flex; align-items:center; justify-content:center; gap:8px;
+    padding:11px 18px; font-size:14px; font-weight:700; border-radius:8px; border:1.5px solid transparent;
+    cursor:pointer; transition:opacity .15s ease, transform .1s ease;
+  }
+  .btn:active{transform:scale(.98);}
+  .btn-primary{background:var(--navy); color:#fff; width:100%;}
+  .btn-primary:hover{background:var(--navy-deep);}
+  .btn-sky{background:var(--sky); color:var(--navy-deep);}
+  .btn-sky:hover{opacity:.9;}
+  .btn-ghost{background:#fff; color:var(--ink); border-color:var(--line);}
+  .btn-ghost:hover{background:var(--mist);}
+  .btn-danger{background:var(--danger-bg); color:var(--danger); border-color:rgba(198,40,40,.2);}
+  .btn-danger:hover{background:#fbdada;}
+  .btn-sm{padding:7px 12px; font-size:12.5px;}
+  .btn:disabled{opacity:.6; cursor:default;}
+  .spin{width:14px; height:14px; border:2px solid rgba(255,255,255,.4); border-top-color:#fff; border-radius:50%; animation:spin .7s linear infinite; display:inline-block;}
+  @keyframes spin{to{transform:rotate(360deg);}}
+
+  /* ===== APP SHELL ===== */
+  .app{display:none; min-height:100vh;}
+  .app.show{display:flex;}
+  .topbar{
+    position:fixed; top:0; left:0; right:0; height:60px; background:var(--navy); color:#fff;
+    display:flex; align-items:center; justify-content:space-between; padding:0 22px; z-index:40;
+  }
+  .topbar-logo{display:flex; align-items:center; gap:10px; font-weight:800; font-size:15px;}
+  .topbar-logo .mark{width:28px; height:28px; border-radius:7px; background:var(--sky); color:var(--navy-deep); display:flex; align-items:center; justify-content:center; font-size:13px;}
+  .topbar-user{display:flex; align-items:center; gap:12px; font-size:13px; color:#cfd8e4;}
+  .topbar-user button{background:none; border:none; color:#cfd8e4; cursor:pointer; font-size:13px; display:flex; align-items:center; gap:6px;}
+  .topbar-user button:hover{color:#fff;}
+
+  .tabs{
+    position:fixed; top:60px; left:0; right:0; background:#fff; border-bottom:1px solid var(--line);
+    display:flex; gap:4px; padding:0 22px; z-index:39; overflow-x:auto;
+  }
+  .tab{padding:14px 16px; font-size:13.5px; font-weight:700; color:var(--grey); cursor:pointer; border-bottom:2.5px solid transparent; white-space:nowrap;}
+  .tab.active{color:var(--navy); border-color:var(--sky-deep);}
+  .tab .count{display:inline-block; margin-left:6px; background:var(--mist); color:var(--grey); font-size:11px; padding:1px 7px; border-radius:20px;}
+  .tab.active .count{background:rgba(66,176,232,.15); color:var(--sky-deep);}
+
+  main{flex:1; padding:120px 22px 40px; max-width:1180px; margin:0 auto; width:100%;}
+  .panel{display:none;}
+  .panel.active{display:block;}
+
+  .panel-head{display:flex; align-items:center; justify-content:space-between; margin-bottom:18px; gap:12px; flex-wrap:wrap;}
+  .panel-title{font-size:19px; font-weight:800;}
+  .panel-sub{font-size:13px; color:var(--grey); margin-top:2px;}
+
+  .card{background:#fff; border:1px solid var(--line); border-radius:12px; overflow:hidden;}
+  table{width:100%; border-collapse:collapse; font-size:13.5px;}
+  th{text-align:left; padding:12px 16px; font-size:11.5px; font-weight:700; text-transform:uppercase; letter-spacing:.04em; color:var(--grey); background:var(--mist); border-bottom:1px solid var(--line); white-space:nowrap;}
+  td{padding:13px 16px; border-bottom:1px solid var(--line); vertical-align:middle;}
+  tr:last-child td{border-bottom:none;}
+  .mono{font-family:"SF Mono","Courier New",monospace; font-weight:700;}
+  .route-cell{display:flex; align-items:center; gap:6px; color:var(--grey); font-size:12.5px;}
+  .mode-badge{font-size:11px; font-weight:700; padding:3px 9px; border-radius:20px; white-space:nowrap;}
+  .mode-badge.road{background:#e6f0fb; color:#2255a4;}
+  .mode-badge.air{background:#e9f3fc; color:var(--sky-deep);}
+  .mode-badge.sea{background:#e6f6f3; color:#1a7f6b;}
+  .status-pill{font-size:11.5px; font-weight:700; padding:4px 10px; border-radius:20px; white-space:nowrap;}
+  .status-pill.delivered{background:var(--ok-bg); color:var(--ok);}
+  .status-pill.pending{background:var(--warn-bg); color:var(--warn);}
+  .row-actions{display:flex; gap:6px; flex-wrap:wrap;}
+
+  .empty-state{padding:60px 20px; text-align:center; color:var(--grey);}
+  .empty-state i{font-size:30px; margin-bottom:12px; opacity:.5;}
+
+  /* modal */
+  .modal-overlay{position:fixed; inset:0; background:rgba(7,22,48,.55); display:none; align-items:center; justify-content:center; z-index:200; padding:20px;}
+  .modal-overlay.show{display:flex;}
+  .modal{background:#fff; border-radius:14px; width:100%; max-width:440px; max-height:90vh; overflow-y:auto; padding:26px;}
+  .modal-title{font-size:17px; font-weight:800; margin-bottom:4px;}
+  .modal-sub{font-size:12.5px; color:var(--grey); margin-bottom:18px;}
+  .modal-actions{display:flex; gap:10px; margin-top:20px;}
+  .modal-actions .btn{flex:1;}
+
+  /* toast */
+  .toast-wrap{position:fixed; bottom:20px; right:20px; z-index:300; display:flex; flex-direction:column; gap:10px;}
+  .toast{background:var(--navy); color:#fff; padding:13px 18px; border-radius:8px; font-size:13.5px; box-shadow:0 10px 24px rgba(0,0,0,.25); display:flex; align-items:center; gap:10px; min-width:220px; animation:toastIn .2s ease;}
+  .toast.ok i{color:#7be0a3;}
+  .toast.err{background:var(--danger);}
+  @keyframes toastIn{from{opacity:0; transform:translateY(8px);} to{opacity:1; transform:translateY(0);}}
+
+  @media (max-width:700px){
+    main{padding:112px 14px 32px;}
+    th, td{padding:10px 10px;}
+    .panel-head{align-items:flex-start; flex-direction:column;}
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== LOGIN ===== -->
+<div class="login-screen" id="loginScreen">
+  <div class="login-card">
+    <div class="login-logo"><span class="mark"><i class="fa-solid fa-truck-fast"></i></span> Pacific Express</div>
+    <div class="login-title">Admin sign in</div>
+    <div class="login-sub">Enter your admin credentials to manage shipments.</div>
+
+    <div class="login-error" id="loginError"></div>
+
+    <div class="field">
+      <label>Admin Email</label>
+      <input type="email" id="adminEmail" placeholder="admin@pacificexpress.test" autocomplete="off">
+    </div>
+    <div class="field">
+      <label>Password</label>
+      <input type="password" id="adminPassword" placeholder="••••••••" autocomplete="off">
+    </div>
+
+    <button class="btn btn-primary" id="loginBtn" onclick="handleLogin()">Sign in</button>
+  </div>
+</div>
+
+<!-- ===== APP ===== -->
+<div class="app" id="app">
+  <div class="topbar">
+    <div class="topbar-logo"><span class="mark"><i class="fa-solid fa-truck-fast"></i></span> Pacific Express Admin</div>
+    <div class="topbar-user">
+      <span id="topbarEmail"></span>
+      <button onclick="logout()"><i class="fa-solid fa-arrow-right-from-bracket"></i> Sign out</button>
+    </div>
+  </div>
+
+  <div class="tabs">
+    <div class="tab active" data-tab="shipments" onclick="switchTab('shipments')">Shipments <span class="count" id="tabCountShipments">0</span></div>
+    <div class="tab" data-tab="logs" onclick="switchTab('logs')">Search Logs <span class="count" id="tabCountLogs">0</span></div>
+  </div>
+
+  <main>
+
+    <!-- SHIPMENTS PANEL -->
+    <div class="panel active" id="panel-shipments">
+      <div class="panel-head">
+        <div>
+          <div class="panel-title">Shipments</div>
+          <div class="panel-sub">Every shipment customers can look up on the tracking page.</div>
+        </div>
+        <button class="btn btn-sky" onclick="openCreateModal()"><i class="fa-solid fa-plus"></i> New Shipment</button>
+      </div>
+
+      <div class="card">
+        <div id="shipmentsTableWrap">
+          <div class="empty-state"><i class="fa-solid fa-spinner fa-spin"></i><div>Loading shipments…</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- LOGS PANEL -->
+    <div class="panel" id="panel-logs">
+      <div class="panel-head">
+        <div>
+          <div class="panel-title">Search Logs</div>
+          <div class="panel-sub">Every tracking-number lookup made on the public site, most recent first.</div>
+        </div>
+        <button class="btn btn-ghost btn-sm" onclick="loadLogs()"><i class="fa-solid fa-rotate"></i> Refresh</button>
+      </div>
+
+      <div class="card">
+        <div id="logsTableWrap">
+          <div class="empty-state"><i class="fa-solid fa-spinner fa-spin"></i><div>Loading search logs…</div></div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<!-- ===== MODAL: New Shipment ===== -->
+<div class="modal-overlay" id="createModal">
+  <div class="modal">
+    <div class="modal-title">New shipment</div>
+    <div class="modal-sub">A default 6-step timeline is generated automatically for the chosen freight mode.</div>
+
+    <div class="field">
+      <label>Freight Mode</label>
+      <select id="newMode">
+        <option value="road">Road Freight</option>
+        <option value="air">Air Freight</option>
+        <option value="sea">Sea Freight</option>
+      </select>
+    </div>
+    <div class="field">
+      <label>Origin</label>
+      <input type="text" id="newOrigin" placeholder="e.g. Lagos, NG">
+    </div>
+    <div class="field">
+      <label>Destination</label>
+      <input type="text" id="newDestination" placeholder="e.g. Accra, GH">
+    </div>
+    <div class="field">
+      <label>Tracking ID (optional — auto-generated if left blank)</label>
+      <input type="text" id="newTrackingId" placeholder="PE-RD-48213">
+    </div>
+
+    <div class="modal-actions">
+      <button class="btn btn-ghost" onclick="closeCreateModal()">Cancel</button>
+      <button class="btn btn-primary" id="createBtn" onclick="handleCreateShipment()">Create</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== MODAL: Confirm ===== -->
+<div class="modal-overlay" id="confirmModal">
+  <div class="modal">
+    <div class="modal-title" id="confirmTitle">Are you sure?</div>
+    <div class="modal-sub" id="confirmMessage"></div>
+    <div class="modal-actions">
+      <button class="btn btn-ghost" id="confirmCancelBtn">Cancel</button>
+      <button class="btn btn-danger" id="confirmOkBtn">Confirm</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast-wrap" id="toastWrap"></div>
+
+<script>
+/* ============================================================
+   API DEPLOYMENT URL
+============================================================ */
+// TODO: paste your deployed Apps Script Web App URL here
+const DEFAULT_API_URL = "https://script.google.com/macros/s/AKfycbwHPLIWFap9TSmamizNDUcmVaFXkwH6KL5sSQyuFXuUqWj0_4p_8jKI-NO8P-c3iVsp/exec";
+
+/* ============================================================
+   STATE
+============================================================ */
+const state = {
+  apiUrl: DEFAULT_API_URL,
+  token: localStorage.getItem('pe_admin_token') || '',
+  email: localStorage.getItem('pe_admin_email') || '',
+  shipments: [],
+  logs: []
+};
+
+const MODES = {
+  road: { label: 'Road Freight', totalSteps: 6 },
+  air:  { label: 'Air Freight', totalSteps: 6 },
+  sea:  { label: 'Sea Freight', totalSteps: 6 }
+};
+
+/* ============================================================
+   HELPERS
+============================================================ */
+function escapeHtml(str) {
+  return String(str ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+
+function fmtDate(val) {
+  if (!val) return '—';
+  const d = new Date(val);
+  if (isNaN(d.getTime())) return String(val);
+  return d.toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' }) + ', ' +
+    d.toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit' });
+}
+
+async function api(action, payload) {
+  const body = Object.assign({ action, token: state.token }, payload || {});
+  const res = await fetch(state.apiUrl, {
+    method: 'POST',
+    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+    body: JSON.stringify(body)
+  });
+  const data = await res.json();
+
+  if (data && data.sessionExpired) {
+    showToast('Session expired — please sign in again', 'err');
+    logout();
+    throw new Error('Session expired');
+  }
+
+  return data;
+}
+
+function showToast(message, type) {
+  const wrap = document.getElementById('toastWrap');
+  const el = document.createElement('div');
+  el.className = 'toast ' + (type === 'err' ? 'err' : 'ok');
+  el.innerHTML = `<i class="fa-solid ${type === 'err' ? 'fa-circle-exclamation' : 'fa-circle-check'}"></i><span>${escapeHtml(message)}</span>`;
+  wrap.appendChild(el);
+  setTimeout(() => el.remove(), 3800);
+}
+
+function showConfirm({ title, message, danger }) {
+  return new Promise(resolve => {
+    document.getElementById('confirmTitle').textContent = title || 'Are you sure?';
+    document.getElementById('confirmMessage').textContent = message || '';
+    const modal = document.getElementById('confirmModal');
+    const okBtn = document.getElementById('confirmOkBtn');
+    const cancelBtn = document.getElementById('confirmCancelBtn');
+
+    modal.classList.add('show');
+
+    function cleanup(result) {
+      modal.classList.remove('show');
+      okBtn.onclick = null;
+      cancelBtn.onclick = null;
+      resolve(result);
+    }
+
+    okBtn.onclick = () => cleanup(true);
+    cancelBtn.onclick = () => cleanup(false);
+  });
+}
+
+/* ============================================================
+   LOGIN / LOGOUT
+============================================================ */
+async function handleLogin() {
+  const email = document.getElementById('adminEmail').value.trim();
+  const password = document.getElementById('adminPassword').value;
+  const errorBox = document.getElementById('loginError');
+  const btn = document.getElementById('loginBtn');
+
+  errorBox.classList.remove('show');
+
+  if (!email || !password) {
+    errorBox.textContent = 'Fill in your email and password.';
+    errorBox.classList.add('show');
+    return;
+  }
+
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spin"></span> Signing in…';
+
+  try {
+    const res = await fetch(state.apiUrl, {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify({ action: 'adminLogin', email, password })
+    });
+    const data = await res.json();
+
+    if (data && data.status && data.token) {
+      state.token = data.token;
+      state.email = data.admin?.email || email;
+
+      localStorage.setItem('pe_admin_token', state.token);
+      localStorage.setItem('pe_admin_email', state.email);
+
+      enterApp();
+    } else {
+      errorBox.textContent = (data && data.message) || 'Invalid email or password.';
+      errorBox.classList.add('show');
+    }
+  } catch (err) {
+    errorBox.textContent = 'Could not reach the API. Please try again.';
+    errorBox.classList.add('show');
+  } finally {
+    btn.disabled = false;
+    btn.textContent = 'Sign in';
+  }
+}
+
+function logout() {
+  localStorage.removeItem('pe_admin_token');
+  localStorage.removeItem('pe_admin_email');
+  state.token = '';
+  document.getElementById('app').classList.remove('show');
+  document.getElementById('loginScreen').style.display = 'flex';
+}
+
+function enterApp() {
+  document.getElementById('loginScreen').style.display = 'none';
+  document.getElementById('app').classList.add('show');
+  document.getElementById('topbarEmail').textContent = state.email;
+  loadShipments();
+}
+
+/* ============================================================
+   TABS
+============================================================ */
+function switchTab(name) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.toggle('active', t.dataset.tab === name));
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.getElementById('panel-' + name).classList.add('active');
+
+  if (name === 'logs' && !state.logs.length) loadLogs();
+}
+
+/* ============================================================
+   SHIPMENTS
+============================================================ */
+async function loadShipments() {
+  try {
+    const res = await api('getAllShipments');
+    if (!res.status) throw new Error(res.message || 'Failed to load shipments');
+
+    state.shipments = res.shipments || [];
+    document.getElementById('tabCountShipments').textContent = state.shipments.length;
+    renderShipments();
+  } catch (err) {
+    document.getElementById('shipmentsTableWrap').innerHTML =
+      `<div class="empty-state"><i class="fa-solid fa-triangle-exclamation"></i><div>${escapeHtml(err.message)}</div></div>`;
+  }
+}
+
+function renderShipments() {
+  const wrap = document.getElementById('shipmentsTableWrap');
+
+  if (!state.shipments.length) {
+    wrap.innerHTML = `<div class="empty-state"><i class="fa-solid fa-box-open"></i><div>No shipments yet — create one to get started.</div></div>`;
+    return;
+  }
+
+  const rows = state.shipments.map(s => {
+    const totalSteps = MODES[s.mode] ? MODES[s.mode].totalSteps : 6;
+    const delivered = Number(s.currentStep) >= totalSteps - 1;
+
+    return `
+      <tr>
+        <td class="mono">${escapeHtml(s.trackingId)}</td>
+        <td><span class="mode-badge ${escapeHtml(s.mode)}">${escapeHtml(MODES[s.mode] ? MODES[s.mode].label : s.mode)}</span></td>
+        <td><div class="route-cell">${escapeHtml(s.origin)} <i class="fa-solid fa-arrow-right"></i> ${escapeHtml(s.destination)}</div></td>
+        <td>${escapeHtml(s.status)}</td>
+        <td><span class="status-pill ${delivered ? 'delivered' : 'pending'}">${delivered ? 'Delivered' : 'Step ' + (Number(s.currentStep) + 1) + '/' + totalSteps}</span></td>
+        <td>${fmtDate(s.eta)}</td>
+        <td>
+          <div class="row-actions">
+            ${!delivered ? `<button class="btn btn-ghost btn-sm" onclick="handleAdvance('${escapeHtml(s.trackingId)}')"><i class="fa-solid fa-forward-step"></i> Advance</button>` : ''}
+            <button class="btn btn-danger btn-sm" onclick="handleDelete('${escapeHtml(s.trackingId)}')"><i class="fa-solid fa-trash"></i></button>
+          </div>
+        </td>
+      </tr>`;
+  }).join('');
+
+  wrap.innerHTML = `
+    <table>
+      <thead><tr>
+        <th>Tracking ID</th><th>Mode</th><th>Route</th><th>Status</th><th>Progress</th><th>ETA</th><th>Actions</th>
+      </tr></thead>
+      <tbody>${rows}</tbody>
+    </table>`;
+}
+
+function openCreateModal() {
+  document.getElementById('newMode').value = 'road';
+  document.getElementById('newOrigin').value = '';
+  document.getElementById('newDestination').value = '';
+  document.getElementById('newTrackingId').value = '';
+  document.getElementById('createModal').classList.add('show');
+}
+function closeCreateModal() {
+  document.getElementById('createModal').classList.remove('show');
+}
+
+async function handleCreateShipment() {
+  const mode = document.getElementById('newMode').value;
+  const origin = document.getElementById('newOrigin').value.trim();
+  const destination = document.getElementById('newDestination').value.trim();
+  const trackingId = document.getElementById('newTrackingId').value.trim();
+
+  if (!origin || !destination) {
+    showToast('Fill in the origin and destination', 'err');
+    return;
+  }
+
+  const btn = document.getElementById('createBtn');
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spin"></span> Creating…';
+
+  try {
+    const res = await api('createShipment', { mode, origin, destination, trackingId });
+    if (!res.status) throw new Error(res.message || 'Failed to create shipment');
+
+    showToast(`Shipment ${res.trackingId} created`, 'ok');
+    closeCreateModal();
+    loadShipments();
+  } catch (err) {
+    showToast(err.message, 'err');
+  } finally {
+    btn.disabled = false;
+    btn.textContent = 'Create';
+  }
+}
+
+async function handleAdvance(trackingId) {
+  try {
+    const res = await api('advanceShipmentStep', { trackingId });
+    if (!res.status) throw new Error(res.message || 'Failed to advance shipment');
+
+    showToast(`${trackingId} advanced to "${res.statusLabel}"`, 'ok');
+    loadShipments();
+  } catch (err) {
+    showToast(err.message, 'err');
+  }
+}
+
+async function handleDelete(trackingId) {
+  const ok = await showConfirm({
+    title: 'Delete shipment',
+    message: `Remove ${trackingId} and its full tracking history? This cannot be undone.`,
+    danger: true
+  });
+  if (!ok) return;
+
+  try {
+    const res = await api('deleteShipment', { trackingId });
+    if (!res.status) throw new Error(res.message || 'Failed to delete shipment');
+
+    showToast('Shipment deleted', 'ok');
+    loadShipments();
+  } catch (err) {
+    showToast(err.message, 'err');
+  }
+}
+
+/* ============================================================
+   SEARCH LOGS
+============================================================ */
+async function loadLogs() {
+  document.getElementById('logsTableWrap').innerHTML =
+    `<div class="empty-state"><i class="fa-solid fa-spinner fa-spin"></i><div>Loading search logs…</div></div>`;
+
+  try {
+    const res = await api('getTrackingLogs');
+    if (!res.status) throw new Error(res.message || 'Failed to load logs');
+
+    state.logs = res.logs || [];
+    document.getElementById('tabCountLogs').textContent = state.logs.length;
+    renderLogs();
+  } catch (err) {
+    document.getElementById('logsTableWrap').innerHTML =
+      `<div class="empty-state"><i class="fa-solid fa-triangle-exclamation"></i><div>${escapeHtml(err.message)}</div></div>`;
+  }
+}
+
+function renderLogs() {
+  const wrap = document.getElementById('logsTableWrap');
+
+  if (!state.logs.length) {
+    wrap.innerHTML = `<div class="empty-state"><i class="fa-solid fa-magnifying-glass"></i><div>No searches recorded yet.</div></div>`;
+    return;
+  }
+
+  const rows = state.logs.map(l => `
+    <tr>
+      <td>${fmtDate(l.timestamp)}</td>
+      <td class="mono">${escapeHtml(l.trackingId)}</td>
+      <td><span class="status-pill ${l.found === 'Yes' ? 'delivered' : 'pending'}">${l.found === 'Yes' ? 'Found' : 'Not found'}</span></td>
+    </tr>`).join('');
+
+  wrap.innerHTML = `
+    <table>
+      <thead><tr><th>Time</th><th>Tracking ID Searched</th><th>Result</th></tr></thead>
+      <tbody>${rows}</tbody>
+    </table>`;
+}
+
+/* ============================================================
+   INIT — auto sign-in if a session is stored
+============================================================ */
+(function init() {
+  document.getElementById('adminEmail').value = state.email;
+
+  if (state.token) {
+    enterApp();
+  }
+})();
+</script>
+
+</body>
+</html>
