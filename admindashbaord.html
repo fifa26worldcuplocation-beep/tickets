@@ -1,0 +1,1147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Admin | Pacific Express Logistics Services</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<style>
+  :root{
+    --navy:#0a1f44;
+    --navy-deep:#071630;
+    --sky:#42b0e8;
+    --sky-deep:#1a7fb8;
+    --ink:#14213d;
+    --paper:#ffffff;
+    --mist:#f4f6f8;
+    --line:#e1e5ea;
+    --grey:#5b6472;
+    --ok:#1f8a45;
+    --ok-bg:#e6f6ea;
+    --warn:#a5720b;
+    --warn-bg:#fff3d6;
+    --danger:#c62828;
+    --danger-bg:#fde8e8;
+    box-sizing:border-box;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0; font-family:"Helvetica Neue",Arial,sans-serif; color:var(--ink); background:var(--mist); line-height:1.5; overflow-x:hidden;}
+
+  /* ===== LOGIN ===== */
+  .login-screen{min-height:100vh; display:flex; align-items:center; justify-content:center; background:var(--navy-deep); padding:20px;}
+  .login-card{background:#fff; border-radius:12px; padding:36px 32px; width:100%; max-width:380px; box-shadow:0 24px 60px rgba(0,0,0,.35);}
+  .login-logo{display:flex; align-items:center; gap:10px; font-weight:800; font-size:17px; margin-bottom:22px; color:var(--navy);}
+  .login-logo .mark{width:34px; height:34px; border-radius:8px; background:var(--navy); color:var(--sky); display:flex; align-items:center; justify-content:center; font-size:14px;}
+  .login-title{font-size:20px; font-weight:800; margin-bottom:4px;}
+  .login-sub{font-size:13px; color:var(--grey); margin-bottom:22px;}
+  .login-error{display:none; background:var(--danger-bg); color:var(--danger); font-size:13px; padding:10px 12px; border-radius:8px; margin-bottom:16px;}
+  .login-error.show{display:block;}
+  .field{margin-bottom:14px;}
+  .field label{display:block; font-size:12.5px; font-weight:700; color:var(--grey); margin-bottom:6px;}
+  .field input, .field select{
+    width:100%; padding:11px 13px; border:1.5px solid var(--line); border-radius:8px;
+    font-size:14px; font-family:inherit; color:var(--ink); outline:none; transition:border-color .15s ease;
+  }
+  .field input:focus, .field select:focus{border-color:var(--sky-deep);}
+  .btn{
+    display:inline-flex; align-items:center; justify-content:center; gap:8px;
+    padding:11px 18px; font-size:14px; font-weight:700; border-radius:8px; border:1.5px solid transparent;
+    cursor:pointer; transition:opacity .15s ease, transform .1s ease;
+  }
+  .btn:active{transform:scale(.98);}
+  .btn-primary{background:var(--navy); color:#fff; width:100%;}
+  .btn-primary:hover{background:var(--navy-deep);}
+  .btn-sky{background:var(--sky); color:var(--navy-deep);}
+  .btn-sky:hover{opacity:.9;}
+  .btn-ghost{background:#fff; color:var(--ink); border-color:var(--line);}
+  .btn-ghost:hover{background:var(--mist);}
+  .btn-danger{background:var(--danger-bg); color:var(--danger); border-color:rgba(198,40,40,.2);}
+  .btn-danger:hover{background:#fbdada;}
+  .btn-sm{padding:7px 12px; font-size:12.5px;}
+  .btn:disabled{opacity:.6; cursor:default;}
+  .spin{width:14px; height:14px; border:2px solid rgba(255,255,255,.4); border-top-color:#fff; border-radius:50%; animation:spin .7s linear infinite; display:inline-block;}
+  @keyframes spin{to{transform:rotate(360deg);}}
+
+  /* ===== APP SHELL ===== */
+  .app{display:none; min-height:100vh;}
+  .app.show{display:flex;}
+  .topbar{
+    position:fixed; top:0; left:0; right:0; height:60px; background:var(--navy); color:#fff;
+    display:flex; align-items:center; justify-content:space-between; padding:0 22px; z-index:40;
+  }
+  .topbar-logo{display:flex; align-items:center; gap:10px; font-weight:800; font-size:15px;}
+  .topbar-logo .mark{width:28px; height:28px; border-radius:7px; background:var(--sky); color:var(--navy-deep); display:flex; align-items:center; justify-content:center; font-size:13px;}
+  .topbar-user{display:flex; align-items:center; gap:12px; font-size:13px; color:#cfd8e4; min-width:0;}
+  .topbar-user button{background:none; border:none; color:#cfd8e4; cursor:pointer; font-size:13px; display:flex; align-items:center; gap:6px; flex-shrink:0; white-space:nowrap;}
+  .topbar-user button:hover{color:#fff;}
+  #topbarEmail{overflow:hidden; text-overflow:ellipsis; white-space:nowrap; max-width:180px;}
+
+  .tabs{
+    position:fixed; top:60px; left:0; right:0; background:#fff; border-bottom:1px solid var(--line);
+    display:flex; gap:4px; padding:0 22px; z-index:39; overflow-x:auto;
+  }
+  .tab{padding:14px 16px; font-size:13.5px; font-weight:700; color:var(--grey); cursor:pointer; border-bottom:2.5px solid transparent; white-space:nowrap;}
+  .tab.active{color:var(--navy); border-color:var(--sky-deep);}
+  .tab .count{display:inline-block; margin-left:6px; background:var(--mist); color:var(--grey); font-size:11px; padding:1px 7px; border-radius:20px;}
+  .tab.active .count{background:rgba(66,176,232,.15); color:var(--sky-deep);}
+
+  /* ===== HAMBURGER + MOBILE NAV DRAWER ===== */
+  .hamburger-btn{display:none; background:none; border:none; color:#fff; font-size:19px; cursor:pointer; padding:6px 4px; margin-right:2px; flex-shrink:0;}
+  .nav-drawer-backdrop{position:fixed; inset:0; background:rgba(7,22,48,.55); z-index:210; opacity:0; pointer-events:none; transition:opacity .2s ease;}
+  .nav-drawer-backdrop.show{opacity:1; pointer-events:auto;}
+  .nav-drawer{
+    position:fixed; top:0; left:0; bottom:0; width:82%; max-width:300px; background:#fff; z-index:220;
+    display:flex; flex-direction:column; transform:translateX(-100%); transition:transform .22s ease;
+  }
+  .nav-drawer.show{transform:translateX(0);}
+  .nav-drawer-head{display:flex; align-items:center; justify-content:space-between; padding:18px 18px; border-bottom:1px solid var(--line);}
+  .nav-drawer-head .topbar-logo{color:var(--navy);}
+  .nav-drawer-close{background:none; border:none; color:var(--grey); font-size:18px; cursor:pointer; padding:4px;}
+  .nav-drawer-tabs{padding:10px; flex:1; overflow-y:auto;}
+  .nav-drawer-tabs .tab{display:flex; align-items:center; justify-content:space-between; padding:13px 12px; border-radius:9px; border-bottom:none; font-size:14.5px;}
+  .nav-drawer-tabs .tab.active{background:var(--mist); color:var(--navy);}
+  .nav-drawer-footer{padding:16px 18px; border-top:1px solid var(--line);}
+  .nav-drawer-footer .drawer-email{font-size:12.5px; color:var(--grey); margin-bottom:10px; overflow-wrap:break-word;}
+  .nav-drawer-footer .btn{width:100%;}
+
+  @media (max-width:700px){
+    .hamburger-btn{display:inline-flex; align-items:center;}
+    .tabs{display:none;}
+    .topbar-user{display:none;}
+    .topbar{justify-content:flex-start; gap:12px;}
+  }
+
+  main{flex:1; padding:120px 22px 40px; max-width:1180px; margin:0 auto; width:100%;}
+  .panel{display:none;}
+  .panel.active{display:block;}
+
+  .panel-head{display:flex; align-items:center; justify-content:space-between; margin-bottom:18px; gap:12px; flex-wrap:wrap;}
+  .panel-title{font-size:19px; font-weight:800;}
+  .panel-sub{font-size:13px; color:var(--grey); margin-top:2px;}
+
+  .card{background:#fff; border:1px solid var(--line); border-radius:12px; overflow:hidden;}
+  .table-scroll{width:100%; overflow-x:auto; -webkit-overflow-scrolling:touch;}
+  table{width:100%; min-width:640px; border-collapse:collapse; font-size:13.5px;}
+  th{text-align:left; padding:12px 16px; font-size:11.5px; font-weight:700; text-transform:uppercase; letter-spacing:.04em; color:var(--grey); background:var(--mist); border-bottom:1px solid var(--line); white-space:nowrap;}
+  td{padding:13px 16px; border-bottom:1px solid var(--line); vertical-align:middle;}
+  tr:last-child td{border-bottom:none;}
+  .mono{font-family:"SF Mono","Courier New",monospace; font-weight:700;}
+  .route-cell{display:flex; align-items:center; gap:6px; color:var(--grey); font-size:12.5px;}
+  .mode-badge{font-size:11px; font-weight:700; padding:3px 9px; border-radius:20px; white-space:nowrap;}
+  .mode-badge.road{background:#e6f0fb; color:#2255a4;}
+  .mode-badge.air{background:#e9f3fc; color:var(--sky-deep);}
+  .mode-badge.sea{background:#e6f6f3; color:#1a7f6b;}
+  .status-pill{font-size:11.5px; font-weight:700; padding:4px 10px; border-radius:20px; white-space:nowrap;}
+  .status-pill.delivered{background:var(--ok-bg); color:var(--ok);}
+  .status-pill.pending{background:var(--warn-bg); color:var(--warn);}
+  .row-actions{display:flex; gap:6px; flex-wrap:wrap;}
+
+  .empty-state{padding:60px 20px; text-align:center; color:var(--grey);}
+  .empty-state i{font-size:30px; margin-bottom:12px; opacity:.5;}
+
+  /* modal */
+  .modal-overlay{position:fixed; inset:0; background:rgba(7,22,48,.55); display:none; align-items:center; justify-content:center; z-index:200; padding:20px;}
+  .modal-overlay.show{display:flex;}
+  .modal{background:#fff; border-radius:14px; width:100%; max-width:440px; max-height:90vh; overflow-y:auto; padding:26px;}
+  .modal-title{font-size:17px; font-weight:800; margin-bottom:4px;}
+  .modal-sub{font-size:12.5px; color:var(--grey); margin-bottom:18px;}
+  .modal-actions{display:flex; gap:10px; margin-top:20px;}
+  .modal-actions .btn{flex:1;}
+
+  /* toast */
+  .toast-wrap{position:fixed; bottom:20px; right:20px; z-index:300; display:flex; flex-direction:column; gap:10px;}
+  .toast{background:var(--navy); color:#fff; padding:13px 18px; border-radius:8px; font-size:13.5px; box-shadow:0 10px 24px rgba(0,0,0,.25); display:flex; align-items:center; gap:10px; min-width:220px; animation:toastIn .2s ease;}
+  .toast.ok i{color:#7be0a3;}
+  .toast.err{background:var(--danger);}
+  @keyframes toastIn{from{opacity:0; transform:translateY(8px);} to{opacity:1; transform:translateY(0);}}
+
+  @media (max-width:700px){
+    main{padding:78px 14px 32px;}
+    th, td{padding:10px 10px;}
+    .panel-head{align-items:flex-start; flex-direction:column;}
+  }
+
+  @media (max-width:480px){
+    .topbar{padding:0 14px;}
+    .topbar-logo{font-size:13px; gap:7px;}
+    #topbarEmail{max-width:90px;}
+    .panel-title{font-size:17px;}
+    .modal{padding:20px;}
+  }
+
+  @media (max-width:360px){
+    #topbarEmail{display:none;}
+    .topbar-logo .logo-text{display:none;}
+  }
+
+  /* ===== RESPONSIVE TABLE -> CARD LIST (mobile) ===== */
+  @media (max-width:700px){
+    .table-scroll{overflow-x:visible;}
+    table.responsive-cards{min-width:0; width:100%;}
+    table.responsive-cards thead{display:none;}
+    table.responsive-cards, table.responsive-cards tbody, table.responsive-cards tr, table.responsive-cards td{display:block; width:100%;}
+    table.responsive-cards tbody{display:flex; flex-direction:column; gap:10px; padding:12px;}
+    table.responsive-cards tr{border:1px solid var(--line); border-radius:10px; overflow:hidden;}
+    table.responsive-cards td{padding:10px 14px; border-bottom:1px solid var(--line);}
+    table.responsive-cards td:last-child{border-bottom:none;}
+    table.responsive-cards td::before{content:attr(data-label); display:block; font-size:10.5px; font-weight:800; text-transform:uppercase; letter-spacing:.04em; color:var(--grey); margin-bottom:5px;}
+    table.responsive-cards td:empty::before{margin-bottom:0;}
+    table.responsive-cards .row-actions{flex-wrap:wrap;}
+
+    /* collapsible shipment cards: only the summary cell shows by default */
+    table.responsive-cards td.mobile-hide{display:none;}
+    table.responsive-cards td.card-detail{display:none;}
+    table.responsive-cards tr.expanded td.card-detail{display:block;}
+    table.responsive-cards tr.expanded td.mobile-hide{display:none;}
+
+    table.responsive-cards td.mobile-summary-cell{display:block; padding:0; border-bottom:none;}
+    table.responsive-cards tr.expanded td.mobile-summary-cell{border-bottom:1px solid var(--line);}
+    table.responsive-cards td.mobile-summary-cell::before{content:none;}
+    .mobile-summary{display:flex; align-items:center; justify-content:space-between; gap:10px; padding:13px 14px; cursor:pointer;}
+    .mobile-summary-main{min-width:0; flex:1;}
+    .mobile-summary-title{font-size:14px; font-weight:800; color:var(--ink); display:flex; align-items:center; gap:6px; flex-wrap:wrap;}
+    .mobile-summary-title i{font-size:11px; color:var(--grey);}
+    .mobile-summary-sub{font-size:12px; color:var(--grey); font-family:"SF Mono","Courier New",monospace; font-weight:700; margin-top:3px;}
+    .mobile-summary-actions{display:flex; align-items:center; gap:6px; flex-shrink:0;}
+    .icon-btn{width:30px; height:30px; border-radius:8px; border:1.5px solid var(--line); background:#fff; color:var(--grey); display:flex; align-items:center; justify-content:center; font-size:13px; cursor:pointer; flex-shrink:0;}
+    .icon-btn:active{background:var(--mist);}
+    .mobile-summary-chevron{color:var(--grey); font-size:13px; transition:transform .18s ease; flex-shrink:0;}
+    tr.expanded .mobile-summary-chevron{transform:rotate(180deg);}
+  }
+  .mobile-summary-cell{display:none;}
+
+  /* ===== EXPANDED SHIPMENT FORM / DETAILS ===== */
+  .modal-lg{max-width:640px;}
+  .field-row{display:grid; grid-template-columns:1fr 1fr; gap:12px;}
+  @media (max-width:520px){ .field-row{grid-template-columns:1fr;} }
+  .field-section{font-size:11.5px; font-weight:800; text-transform:uppercase; letter-spacing:.04em; color:var(--sky-deep); margin:20px 0 10px; padding-top:14px; border-top:1px solid var(--line);}
+  .field-section:first-of-type{margin-top:4px; padding-top:0; border-top:none;}
+  .fee-cell{font-weight:700; white-space:nowrap;}
+  .shipstatus-pill{font-size:11px; font-weight:700; padding:4px 10px; border-radius:20px; white-space:nowrap; display:inline-block;}
+  .shipstatus-pill.Pending{background:var(--warn-bg); color:var(--warn);}
+  .shipstatus-pill.In-Transit{background:#e6f0fb; color:#2255a4;}
+  .shipstatus-pill.On-Hold{background:#fde8e8; color:var(--danger);}
+  .shipstatus-pill.Delivered{background:var(--ok-bg); color:var(--ok);}
+  .shipstatus-pill.Cancelled{background:var(--mist); color:var(--grey);}
+
+  .photo-grid{display:flex; flex-wrap:wrap; gap:10px; margin-top:2px;}
+  .photo-thumb{position:relative; width:84px; height:84px; border-radius:8px; overflow:hidden; border:1px solid var(--line); background:var(--mist);}
+  .photo-thumb img{width:100%; height:100%; object-fit:cover; display:block;}
+  .photo-thumb button{position:absolute; top:3px; right:3px; width:20px; height:20px; border-radius:50%; border:none; background:rgba(7,22,48,.72); color:#fff; font-size:11px; cursor:pointer; display:flex; align-items:center; justify-content:center;}
+  .photo-thumb button:hover{background:var(--danger);}
+  .photo-empty{font-size:12.5px; color:var(--grey); margin-top:8px;}
+
+  .photo-upload-row{display:flex; align-items:center; gap:10px; flex-wrap:wrap; margin-bottom:10px; padding:12px; background:var(--mist); border:1px solid var(--line); border-radius:10px;}
+  .photo-choose-btn{flex-shrink:0;}
+  .photo-selected-name{font-size:12.5px; color:var(--grey); flex:1; min-width:140px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
+  .photo-upload-status{font-size:12.5px; min-height:18px; margin:-2px 0 14px; display:flex; align-items:center; gap:7px;}
+  .photo-upload-status.uploading{color:var(--sky-deep);}
+  .photo-upload-status.ok{color:var(--ok);}
+  .photo-upload-status.err{color:var(--danger);}
+  .spin-sm{width:12px; height:12px; border:2px solid rgba(26,127,184,.25); border-top-color:var(--sky-deep); border-radius:50%; animation:spin .7s linear infinite; display:inline-block; flex-shrink:0;}
+
+  .detail-tabs{display:flex; gap:4px; margin-bottom:16px; border-bottom:1px solid var(--line);}
+  .detail-tab{padding:9px 4px; margin-right:16px; font-size:13px; font-weight:700; color:var(--grey); cursor:pointer; border-bottom:2.5px solid transparent;}
+  .detail-tab.active{color:var(--navy); border-color:var(--sky-deep);}
+  .detail-pane{display:none;}
+  .detail-pane.active{display:block;}
+</style>
+</head>
+<body>
+
+<!-- ===== LOGIN ===== -->
+<div class="login-screen" id="loginScreen">
+  <div class="login-card">
+    <div class="login-logo"><span class="mark"><i class="fa-solid fa-truck-fast"></i></span> Pacific Express</div>
+    <div class="login-title">Admin sign in</div>
+    <div class="login-sub">Enter your admin credentials to manage shipments.</div>
+
+    <div class="login-error" id="loginError"></div>
+
+    <div class="field">
+      <label>Admin Email</label>
+      <input type="email" id="adminEmail" placeholder="admin@pacificexpress.test" autocomplete="off">
+    </div>
+    <div class="field">
+      <label>Password</label>
+      <input type="password" id="adminPassword" placeholder="••••••••" autocomplete="off">
+    </div>
+
+    <button class="btn btn-primary" id="loginBtn" onclick="handleLogin()">Sign in</button>
+  </div>
+</div>
+
+<!-- ===== APP ===== -->
+<div class="app" id="app">
+  <div class="topbar">
+    <button class="hamburger-btn" onclick="openNavDrawer()" aria-label="Open menu"><i class="fa-solid fa-bars"></i></button>
+    <div class="topbar-logo"><span class="mark"><i class="fa-solid fa-truck-fast"></i></span> <span class="logo-text">Pacific Express Admin</span></div>
+    <div class="topbar-user">
+      <span id="topbarEmail"></span>
+      <button onclick="logout()"><i class="fa-solid fa-arrow-right-from-bracket"></i> Sign out</button>
+    </div>
+  </div>
+
+  <div class="tabs">
+    <div class="tab active" data-tab="shipments" onclick="switchTab('shipments')">Shipments <span class="count count-shipments" id="tabCountShipments">0</span></div>
+    <div class="tab" data-tab="logs" onclick="switchTab('logs')">Search Logs <span class="count count-logs" id="tabCountLogs">0</span></div>
+  </div>
+
+  <!-- MOBILE NAV DRAWER -->
+  <div class="nav-drawer-backdrop" id="navDrawerBackdrop" onclick="closeNavDrawer()"></div>
+  <div class="nav-drawer" id="navDrawer">
+    <div class="nav-drawer-head">
+      <div class="topbar-logo"><span class="mark"><i class="fa-solid fa-truck-fast"></i></span> <span class="logo-text">Pacific Express</span></div>
+      <button class="nav-drawer-close" onclick="closeNavDrawer()" aria-label="Close menu"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="nav-drawer-tabs">
+      <div class="tab active" data-tab="shipments" onclick="switchTab('shipments'); closeNavDrawer();">Shipments <span class="count count-shipments">0</span></div>
+      <div class="tab" data-tab="logs" onclick="switchTab('logs'); closeNavDrawer();">Search Logs <span class="count count-logs">0</span></div>
+    </div>
+    <div class="nav-drawer-footer">
+      <div class="drawer-email" id="drawerEmail"></div>
+      <button class="btn btn-ghost btn-sm" onclick="logout()"><i class="fa-solid fa-arrow-right-from-bracket"></i> Sign out</button>
+    </div>
+  </div>
+
+  <main>
+
+    <!-- SHIPMENTS PANEL -->
+    <div class="panel active" id="panel-shipments">
+      <div class="panel-head">
+        <div>
+          <div class="panel-title">Shipments</div>
+          <div class="panel-sub">Every shipment customers can look up on the tracking page.</div>
+        </div>
+        <button class="btn btn-sky" onclick="openCreateModal()"><i class="fa-solid fa-plus"></i> New Shipment</button>
+      </div>
+
+      <div class="card">
+        <div id="shipmentsTableWrap">
+          <div class="empty-state"><i class="fa-solid fa-spinner fa-spin"></i><div>Loading shipments…</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- LOGS PANEL -->
+    <div class="panel" id="panel-logs">
+      <div class="panel-head">
+        <div>
+          <div class="panel-title">Search Logs</div>
+          <div class="panel-sub">Every tracking-number lookup made on the public site, most recent first.</div>
+        </div>
+        <button class="btn btn-ghost btn-sm" onclick="loadLogs()"><i class="fa-solid fa-rotate"></i> Refresh</button>
+      </div>
+
+      <div class="card">
+        <div id="logsTableWrap">
+          <div class="empty-state"><i class="fa-solid fa-spinner fa-spin"></i><div>Loading search logs…</div></div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<!-- ===== MODAL: New Shipment ===== -->
+<div class="modal-overlay" id="createModal">
+  <div class="modal modal-lg">
+    <div class="modal-title">New shipment</div>
+    <div class="modal-sub">A default 6-step timeline is generated automatically for the chosen freight mode. Photos can be added once the shipment exists, from its Details panel.</div>
+
+    <div class="field-section">Shipment</div>
+    <div class="field-row">
+      <div class="field">
+        <label>Freight Mode</label>
+        <select id="newMode">
+          <option value="road">Road Freight</option>
+          <option value="air">Air Freight</option>
+          <option value="sea">Sea Freight</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>Shipping Status</label>
+        <select id="newShippingStatus">
+          <option value="Pending">Pending</option>
+          <option value="In Transit">In Transit</option>
+          <option value="On Hold">On Hold</option>
+        </select>
+      </div>
+    </div>
+    <div class="field-row">
+      <div class="field">
+        <label>Origin</label>
+        <input type="text" id="newOrigin" placeholder="e.g. Lagos, NG">
+      </div>
+      <div class="field">
+        <label>Destination</label>
+        <input type="text" id="newDestination" placeholder="e.g. Accra, GH">
+      </div>
+    </div>
+    <div class="field-row">
+      <div class="field">
+        <label>Tracking ID (optional — auto-generated if left blank)</label>
+        <input type="text" id="newTrackingId" placeholder="PE-RD-48213">
+      </div>
+      <div class="field">
+        <label>Shipping Fee</label>
+        <div style="display:flex; gap:8px;">
+          <select id="newCurrency" style="width:88px; flex-shrink:0;">
+            <option value="USD">USD</option>
+            <option value="EUR">EUR</option>
+            <option value="GBP">GBP</option>
+            <option value="NGN">NGN</option>
+          </select>
+          <input type="number" id="newFee" min="0" step="0.01" placeholder="0.00">
+        </div>
+      </div>
+    </div>
+    <div class="field">
+      <label>Shipment Description (contents, weight, etc.)</label>
+      <input type="text" id="newDescription" placeholder="e.g. 3 cartons — office electronics, 42kg">
+    </div>
+
+    <div class="field-section">Sender</div>
+    <div class="field-row">
+      <div class="field"><label>Name</label><input type="text" id="newSenderName" placeholder="Full name"></div>
+      <div class="field"><label>Phone</label><input type="text" id="newSenderPhone" placeholder="Phone number"></div>
+    </div>
+    <div class="field-row">
+      <div class="field"><label>Email</label><input type="email" id="newSenderEmail" placeholder="Email"></div>
+      <div class="field"><label>Address</label><input type="text" id="newSenderAddress" placeholder="Address"></div>
+    </div>
+
+    <div class="field-section">Receiver</div>
+    <div class="field-row">
+      <div class="field"><label>Name</label><input type="text" id="newReceiverName" placeholder="Full name"></div>
+      <div class="field"><label>Phone</label><input type="text" id="newReceiverPhone" placeholder="Phone number"></div>
+    </div>
+    <div class="field-row">
+      <div class="field"><label>Email</label><input type="email" id="newReceiverEmail" placeholder="Email"></div>
+      <div class="field"><label>Address</label><input type="text" id="newReceiverAddress" placeholder="Address"></div>
+    </div>
+
+    <div class="modal-actions">
+      <button class="btn btn-ghost" onclick="closeCreateModal()">Cancel</button>
+      <button class="btn btn-primary" id="createBtn" onclick="handleCreateShipment()">Create</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== MODAL: Shipment Details (view/edit + photos) ===== -->
+<div class="modal-overlay" id="detailModal">
+  <div class="modal modal-lg">
+    <div class="modal-title" id="detailTitle">Shipment details</div>
+    <div class="modal-sub" id="detailSub"></div>
+
+    <div class="detail-tabs">
+      <div class="detail-tab active" data-pane="info" onclick="switchDetailTab('info')">Details</div>
+      <div class="detail-tab" data-pane="photos" onclick="switchDetailTab('photos')">Photos <span id="detailPhotoCount" class="count" style="background:var(--mist); color:var(--grey); font-size:11px; padding:1px 7px; border-radius:20px;">0</span></div>
+    </div>
+
+    <div class="detail-pane active" id="detailPane-info">
+      <div class="field-row">
+        <div class="field">
+          <label>Shipping Status</label>
+          <select id="dShippingStatus">
+            <option value="Pending">Pending</option>
+            <option value="In Transit">In Transit</option>
+            <option value="On Hold">On Hold</option>
+            <option value="Delivered">Delivered</option>
+            <option value="Cancelled">Cancelled</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Shipping Fee</label>
+          <div style="display:flex; gap:8px;">
+            <select id="dCurrency" style="width:88px; flex-shrink:0;">
+              <option value="USD">USD</option>
+              <option value="EUR">EUR</option>
+              <option value="GBP">GBP</option>
+              <option value="NGN">NGN</option>
+            </select>
+            <input type="number" id="dFee" min="0" step="0.01" placeholder="0.00">
+          </div>
+        </div>
+      </div>
+      <div class="field">
+        <label>Shipment Description</label>
+        <input type="text" id="dDescription" placeholder="e.g. 3 cartons — office electronics, 42kg">
+      </div>
+
+      <div class="field-section">Sender</div>
+      <div class="field-row">
+        <div class="field"><label>Name</label><input type="text" id="dSenderName"></div>
+        <div class="field"><label>Phone</label><input type="text" id="dSenderPhone"></div>
+      </div>
+      <div class="field-row">
+        <div class="field"><label>Email</label><input type="email" id="dSenderEmail"></div>
+        <div class="field"><label>Address</label><input type="text" id="dSenderAddress"></div>
+      </div>
+
+      <div class="field-section">Receiver</div>
+      <div class="field-row">
+        <div class="field"><label>Name</label><input type="text" id="dReceiverName"></div>
+        <div class="field"><label>Phone</label><input type="text" id="dReceiverPhone"></div>
+      </div>
+      <div class="field-row">
+        <div class="field"><label>Email</label><input type="email" id="dReceiverEmail"></div>
+        <div class="field"><label>Address</label><input type="text" id="dReceiverAddress"></div>
+      </div>
+
+      <div class="modal-actions">
+        <button class="btn btn-ghost" onclick="closeDetailModal()">Close</button>
+        <button class="btn btn-primary" id="saveDetailsBtn" onclick="handleSaveDetails()">Save changes</button>
+      </div>
+    </div>
+
+    <div class="detail-pane" id="detailPane-photos">
+      <div class="photo-upload-row">
+        <label class="btn btn-ghost btn-sm photo-choose-btn" for="photoFileInput"><i class="fa-solid fa-image"></i> Choose photo</label>
+        <input type="file" id="photoFileInput" accept="image/*" style="display:none" onchange="handlePhotoFileSelected(this)">
+        <span id="photoSelectedName" class="photo-selected-name">No file selected</span>
+        <button class="btn btn-sky btn-sm" id="photoUploadBtn" onclick="handlePhotoUpload()" disabled><i class="fa-solid fa-cloud-arrow-up"></i> Upload</button>
+      </div>
+      <div id="photoUploadStatus" class="photo-upload-status"></div>
+
+      <div id="photoGridWrap" class="photo-grid"></div>
+      <div id="photoEmptyMsg" class="photo-empty" style="display:none;">No photos uploaded yet.</div>
+
+      <div class="modal-actions">
+        <button class="btn btn-ghost" onclick="closeDetailModal()">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== MODAL: Confirm ===== -->
+<div class="modal-overlay" id="confirmModal">
+  <div class="modal">
+    <div class="modal-title" id="confirmTitle">Are you sure?</div>
+    <div class="modal-sub" id="confirmMessage"></div>
+    <div class="modal-actions">
+      <button class="btn btn-ghost" id="confirmCancelBtn">Cancel</button>
+      <button class="btn btn-danger" id="confirmOkBtn">Confirm</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast-wrap" id="toastWrap"></div>
+
+<script>
+/* ============================================================
+   API DEPLOYMENT URL
+============================================================ */
+// TODO: paste your deployed Apps Script Web App URL here
+const DEFAULT_API_URL = "https://script.google.com/macros/s/AKfycbwHPLIWFap9TSmamizNDUcmVaFXkwH6KL5sSQyuFXuUqWj0_4p_8jKI-NO8P-c3iVsp/exec";
+
+/* ============================================================
+   STATE
+============================================================ */
+const state = {
+  apiUrl: DEFAULT_API_URL,
+  token: localStorage.getItem('pe_admin_token') || '',
+  email: localStorage.getItem('pe_admin_email') || '',
+  shipments: [],
+  logs: [],
+  activeDetailId: null,
+  pendingPhotoFile: null
+};
+
+const MODES = {
+  road: { label: 'Road Freight', totalSteps: 6 },
+  air:  { label: 'Air Freight', totalSteps: 6 },
+  sea:  { label: 'Sea Freight', totalSteps: 6 }
+};
+
+/* ============================================================
+   HELPERS
+============================================================ */
+function escapeHtml(str) {
+  return String(str ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+
+function fmtDate(val) {
+  if (!val) return '—';
+  const d = new Date(val);
+  if (isNaN(d.getTime())) return String(val);
+  return d.toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' }) + ', ' +
+    d.toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit' });
+}
+
+async function api(action, payload) {
+  const body = Object.assign({ action, token: state.token }, payload || {});
+  const res = await fetch(state.apiUrl, {
+    method: 'POST',
+    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+    body: JSON.stringify(body)
+  });
+  const data = await res.json();
+
+  if (data && data.sessionExpired) {
+    showToast('Session expired — please sign in again', 'err');
+    logout();
+    throw new Error('Session expired');
+  }
+
+  return data;
+}
+
+function showToast(message, type) {
+  const wrap = document.getElementById('toastWrap');
+  const el = document.createElement('div');
+  el.className = 'toast ' + (type === 'err' ? 'err' : 'ok');
+  el.innerHTML = `<i class="fa-solid ${type === 'err' ? 'fa-circle-exclamation' : 'fa-circle-check'}"></i><span>${escapeHtml(message)}</span>`;
+  wrap.appendChild(el);
+  setTimeout(() => el.remove(), 3800);
+}
+
+function showConfirm({ title, message, danger }) {
+  return new Promise(resolve => {
+    document.getElementById('confirmTitle').textContent = title || 'Are you sure?';
+    document.getElementById('confirmMessage').textContent = message || '';
+    const modal = document.getElementById('confirmModal');
+    const okBtn = document.getElementById('confirmOkBtn');
+    const cancelBtn = document.getElementById('confirmCancelBtn');
+
+    modal.classList.add('show');
+
+    function cleanup(result) {
+      modal.classList.remove('show');
+      okBtn.onclick = null;
+      cancelBtn.onclick = null;
+      resolve(result);
+    }
+
+    okBtn.onclick = () => cleanup(true);
+    cancelBtn.onclick = () => cleanup(false);
+  });
+}
+
+/* ============================================================
+   LOGIN / LOGOUT
+============================================================ */
+async function handleLogin() {
+  const email = document.getElementById('adminEmail').value.trim();
+  const password = document.getElementById('adminPassword').value;
+  const errorBox = document.getElementById('loginError');
+  const btn = document.getElementById('loginBtn');
+
+  errorBox.classList.remove('show');
+
+  if (!email || !password) {
+    errorBox.textContent = 'Fill in your email and password.';
+    errorBox.classList.add('show');
+    return;
+  }
+
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spin"></span> Signing in…';
+
+  try {
+    const res = await fetch(state.apiUrl, {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify({ action: 'adminLogin', email, password })
+    });
+    const data = await res.json();
+
+    if (data && data.status && data.token) {
+      state.token = data.token;
+      state.email = data.admin?.email || email;
+
+      localStorage.setItem('pe_admin_token', state.token);
+      localStorage.setItem('pe_admin_email', state.email);
+
+      enterApp();
+    } else {
+      errorBox.textContent = (data && data.message) || 'Invalid email or password.';
+      errorBox.classList.add('show');
+    }
+  } catch (err) {
+    errorBox.textContent = 'Could not reach the API. Please try again.';
+    errorBox.classList.add('show');
+  } finally {
+    btn.disabled = false;
+    btn.textContent = 'Sign in';
+  }
+}
+
+function logout() {
+  localStorage.removeItem('pe_admin_token');
+  localStorage.removeItem('pe_admin_email');
+  state.token = '';
+  document.getElementById('app').classList.remove('show');
+  document.getElementById('loginScreen').style.display = 'flex';
+}
+
+function enterApp() {
+  document.getElementById('loginScreen').style.display = 'none';
+  document.getElementById('app').classList.add('show');
+  document.getElementById('topbarEmail').textContent = state.email;
+  document.getElementById('drawerEmail').textContent = state.email;
+  loadShipments();
+}
+
+/* ============================================================
+   MOBILE COLLAPSIBLE SHIPMENT CARDS
+============================================================ */
+function toggleShipmentCard(summaryEl) {
+  const row = summaryEl.closest('tr');
+  if (row) row.classList.toggle('expanded');
+}
+
+async function copyTrackingId(trackingId) {
+  try {
+    if (navigator.clipboard && window.isSecureContext) {
+      await navigator.clipboard.writeText(trackingId);
+    } else {
+      const ta = document.createElement('textarea');
+      ta.value = trackingId;
+      ta.style.position = 'fixed';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.focus();
+      ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+    }
+    showToast('Tracking ID copied', 'ok');
+  } catch (err) {
+    showToast('Could not copy tracking ID', 'err');
+  }
+}
+
+/* ============================================================
+   MOBILE NAV DRAWER
+============================================================ */
+function openNavDrawer() {
+  document.getElementById('navDrawer').classList.add('show');
+  document.getElementById('navDrawerBackdrop').classList.add('show');
+  document.body.style.overflow = 'hidden';
+}
+function closeNavDrawer() {
+  document.getElementById('navDrawer').classList.remove('show');
+  document.getElementById('navDrawerBackdrop').classList.remove('show');
+  document.body.style.overflow = '';
+}
+
+/* ============================================================
+   TABS
+============================================================ */
+function switchTab(name) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.toggle('active', t.dataset.tab === name));
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.getElementById('panel-' + name).classList.add('active');
+
+  if (name === 'logs' && !state.logs.length) loadLogs();
+}
+
+/* ============================================================
+   SHIPMENTS
+============================================================ */
+async function loadShipments() {
+  try {
+    const res = await api('getAllShipments');
+    if (!res.status) throw new Error(res.message || 'Failed to load shipments');
+
+    state.shipments = res.shipments || [];
+    document.querySelectorAll('.count-shipments').forEach(el => el.textContent = state.shipments.length);
+    renderShipments();
+  } catch (err) {
+    document.getElementById('shipmentsTableWrap').innerHTML =
+      `<div class="empty-state"><i class="fa-solid fa-triangle-exclamation"></i><div>${escapeHtml(err.message)}</div></div>`;
+  }
+}
+
+function renderShipments() {
+  const wrap = document.getElementById('shipmentsTableWrap');
+
+  if (!state.shipments.length) {
+    wrap.innerHTML = `<div class="empty-state"><i class="fa-solid fa-box-open"></i><div>No shipments yet — create one to get started.</div></div>`;
+    return;
+  }
+
+  const rows = state.shipments.map(s => {
+    const totalSteps = MODES[s.mode] ? MODES[s.mode].totalSteps : 6;
+    const delivered = Number(s.currentStep) >= totalSteps - 1;
+    const shipStatus = s.shippingStatus || 'Pending';
+    const feeText = (s.shippingFee !== undefined && s.shippingFee !== '' && s.shippingFee !== null)
+      ? `${escapeHtml(s.currency || 'USD')} ${Number(s.shippingFee).toFixed(2)}` : '—';
+
+    return `
+      <tr class="shipment-row">
+        <td class="mobile-summary-cell">
+          <div class="mobile-summary" onclick="toggleShipmentCard(this)">
+            <div class="mobile-summary-main">
+              <div class="mobile-summary-title">${escapeHtml(s.origin)} <i class="fa-solid fa-arrow-right"></i> ${escapeHtml(s.destination)}</div>
+              <div class="mobile-summary-sub">${escapeHtml(s.trackingId)}</div>
+            </div>
+            <div class="mobile-summary-actions">
+              <button class="icon-btn" onclick="event.stopPropagation(); copyTrackingId('${escapeHtml(s.trackingId)}')" title="Copy tracking ID"><i class="fa-regular fa-copy"></i></button>
+              <i class="fa-solid fa-chevron-down mobile-summary-chevron"></i>
+            </div>
+          </div>
+        </td>
+        <td data-label="Tracking ID" class="mono card-detail mobile-hide">${escapeHtml(s.trackingId)}</td>
+        <td data-label="Mode" class="card-detail"><span class="mode-badge ${escapeHtml(s.mode)}">${escapeHtml(MODES[s.mode] ? MODES[s.mode].label : s.mode)}</span></td>
+        <td data-label="Route" class="card-detail mobile-hide"><div class="route-cell">${escapeHtml(s.origin)} <i class="fa-solid fa-arrow-right"></i> ${escapeHtml(s.destination)}</div></td>
+        <td data-label="Shipping Status" class="card-detail"><span class="shipstatus-pill ${escapeHtml(shipStatus.replace(/\s+/g,'-'))}">${escapeHtml(shipStatus)}</span></td>
+        <td data-label="Fee" class="fee-cell card-detail">${feeText}</td>
+        <td data-label="Progress" class="card-detail"><span class="status-pill ${delivered ? 'delivered' : 'pending'}">${delivered ? 'Delivered' : 'Step ' + (Number(s.currentStep) + 1) + '/' + totalSteps}</span></td>
+        <td data-label="ETA" class="card-detail">${fmtDate(s.eta)}</td>
+        <td data-label="Actions" class="card-detail">
+          <div class="row-actions">
+            <button class="btn btn-ghost btn-sm" onclick="openDetailModal('${escapeHtml(s.trackingId)}')"><i class="fa-solid fa-circle-info"></i> Details</button>
+            <button class="btn btn-ghost btn-sm" onclick="openDetailModal('${escapeHtml(s.trackingId)}', 'photos')"><i class="fa-solid fa-camera"></i> Photos${(s.photoUrls || []).length ? ` (${(s.photoUrls || []).length})` : ''}</button>
+            ${!delivered ? `<button class="btn btn-ghost btn-sm" onclick="handleAdvance('${escapeHtml(s.trackingId)}')"><i class="fa-solid fa-forward-step"></i> Advance</button>` : ''}
+            <button class="btn btn-danger btn-sm" onclick="handleDelete('${escapeHtml(s.trackingId)}')"><i class="fa-solid fa-trash"></i></button>
+          </div>
+        </td>
+      </tr>`;
+  }).join('');
+
+  wrap.innerHTML = `
+    <div class="table-scroll">
+    <table class="responsive-cards">
+      <thead><tr>
+        <th>Tracking ID</th><th>Mode</th><th>Route</th><th>Shipping Status</th><th>Fee</th><th>Progress</th><th>ETA</th><th>Actions</th>
+      </tr></thead>
+      <tbody>${rows}</tbody>
+    </table>
+    </div>`;
+}
+
+const CREATE_FIELD_IDS = [
+  'newMode','newShippingStatus','newOrigin','newDestination','newTrackingId','newCurrency','newFee','newDescription',
+  'newSenderName','newSenderPhone','newSenderEmail','newSenderAddress',
+  'newReceiverName','newReceiverPhone','newReceiverEmail','newReceiverAddress'
+];
+
+function openCreateModal() {
+  CREATE_FIELD_IDS.forEach(id => { document.getElementById(id).value = ''; });
+  document.getElementById('newMode').value = 'road';
+  document.getElementById('newShippingStatus').value = 'Pending';
+  document.getElementById('newCurrency').value = 'USD';
+  document.getElementById('createModal').classList.add('show');
+}
+function closeCreateModal() {
+  document.getElementById('createModal').classList.remove('show');
+}
+
+async function handleCreateShipment() {
+  const mode = document.getElementById('newMode').value;
+  const origin = document.getElementById('newOrigin').value.trim();
+  const destination = document.getElementById('newDestination').value.trim();
+  const trackingId = document.getElementById('newTrackingId').value.trim();
+
+  if (!origin || !destination) {
+    showToast('Fill in the origin and destination', 'err');
+    return;
+  }
+
+  const payload = {
+    mode, origin, destination, trackingId,
+    shippingStatus: document.getElementById('newShippingStatus').value,
+    currency: document.getElementById('newCurrency').value,
+    shippingFee: document.getElementById('newFee').value,
+    description: document.getElementById('newDescription').value.trim(),
+    senderName: document.getElementById('newSenderName').value.trim(),
+    senderPhone: document.getElementById('newSenderPhone').value.trim(),
+    senderEmail: document.getElementById('newSenderEmail').value.trim(),
+    senderAddress: document.getElementById('newSenderAddress').value.trim(),
+    receiverName: document.getElementById('newReceiverName').value.trim(),
+    receiverPhone: document.getElementById('newReceiverPhone').value.trim(),
+    receiverEmail: document.getElementById('newReceiverEmail').value.trim(),
+    receiverAddress: document.getElementById('newReceiverAddress').value.trim()
+  };
+
+  const btn = document.getElementById('createBtn');
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spin"></span> Creating…';
+
+  try {
+    const res = await api('createShipment', payload);
+    if (!res.status) throw new Error(res.message || 'Failed to create shipment');
+
+    showToast(`Shipment ${res.trackingId} created`, 'ok');
+    closeCreateModal();
+    loadShipments();
+  } catch (err) {
+    showToast(err.message, 'err');
+  } finally {
+    btn.disabled = false;
+    btn.textContent = 'Create';
+  }
+}
+
+/* ============================================================
+   SHIPMENT DETAILS MODAL (view/edit + photos)
+============================================================ */
+const DETAIL_FIELD_MAP = {
+  dShippingStatus: 'shippingStatus', dCurrency: 'currency', dFee: 'shippingFee', dDescription: 'description',
+  dSenderName: 'senderName', dSenderPhone: 'senderPhone', dSenderEmail: 'senderEmail', dSenderAddress: 'senderAddress',
+  dReceiverName: 'receiverName', dReceiverPhone: 'receiverPhone', dReceiverEmail: 'receiverEmail', dReceiverAddress: 'receiverAddress'
+};
+
+function switchDetailTab(name) {
+  document.querySelectorAll('.detail-tab').forEach(t => t.classList.toggle('active', t.dataset.pane === name));
+  document.querySelectorAll('.detail-pane').forEach(p => p.classList.toggle('active', p.id === 'detailPane-' + name));
+}
+
+function openDetailModal(trackingId, startTab) {
+  const s = state.shipments.find(x => x.trackingId === trackingId);
+  if (!s) { showToast('Shipment not found in the loaded list', 'err'); return; }
+
+  state.activeDetailId = trackingId;
+  document.getElementById('detailTitle').textContent = trackingId;
+  document.getElementById('detailSub').textContent = `${s.origin} → ${s.destination} · ${MODES[s.mode] ? MODES[s.mode].label : s.mode}`;
+
+  Object.keys(DETAIL_FIELD_MAP).forEach(elId => {
+    const val = s[DETAIL_FIELD_MAP[elId]];
+    document.getElementById(elId).value = (val === undefined || val === null) ? '' : val;
+  });
+  if (!document.getElementById('dShippingStatus').value) document.getElementById('dShippingStatus').value = 'Pending';
+  if (!document.getElementById('dCurrency').value) document.getElementById('dCurrency').value = 'USD';
+
+  renderPhotoGrid(s.photoUrls || []);
+  resetPhotoPicker();
+  switchDetailTab(startTab === 'photos' ? 'photos' : 'info');
+  document.getElementById('detailModal').classList.add('show');
+}
+
+function closeDetailModal() {
+  document.getElementById('detailModal').classList.remove('show');
+  state.activeDetailId = null;
+}
+
+async function handleSaveDetails() {
+  const trackingId = state.activeDetailId;
+  if (!trackingId) return;
+
+  const payload = { trackingId };
+  Object.keys(DETAIL_FIELD_MAP).forEach(elId => {
+    payload[DETAIL_FIELD_MAP[elId]] = document.getElementById(elId).value;
+  });
+
+  const btn = document.getElementById('saveDetailsBtn');
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spin"></span> Saving…';
+
+  try {
+    const res = await api('updateShipmentDetails', payload);
+    if (!res.status) throw new Error(res.message || 'Failed to save changes');
+
+    showToast('Shipment details saved', 'ok');
+    await loadShipments();
+    const refreshed = state.shipments.find(x => x.trackingId === trackingId);
+    if (refreshed) renderPhotoGrid(refreshed.photoUrls || []);
+  } catch (err) {
+    showToast(err.message, 'err');
+  } finally {
+    btn.disabled = false;
+    btn.textContent = 'Save changes';
+  }
+}
+
+function renderPhotoGrid(urls) {
+  document.getElementById('detailPhotoCount').textContent = urls.length;
+  const wrap = document.getElementById('photoGridWrap');
+  const emptyMsg = document.getElementById('photoEmptyMsg');
+
+  wrap.innerHTML = urls.map(u => `
+    <div class="photo-thumb">
+      <img src="${escapeHtml(u)}" alt="Package photo" loading="lazy">
+      <button title="Remove photo" onclick="handleDeletePhoto('${escapeHtml(u)}')"><i class="fa-solid fa-xmark"></i></button>
+    </div>`).join('');
+
+  emptyMsg.style.display = urls.length ? 'none' : 'block';
+}
+
+function resetPhotoPicker() {
+  state.pendingPhotoFile = null;
+  document.getElementById('photoFileInput').value = '';
+  document.getElementById('photoSelectedName').textContent = 'No file selected';
+  document.getElementById('photoUploadBtn').disabled = true;
+  setPhotoUploadStatus('', '');
+}
+
+function formatFileSize(bytes) {
+  if (bytes < 1024) return bytes + ' B';
+  if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB';
+  return (bytes / (1024 * 1024)).toFixed(1) + ' MB';
+}
+
+function setPhotoUploadStatus(message, type) {
+  const el = document.getElementById('photoUploadStatus');
+  el.className = 'photo-upload-status' + (type ? ' ' + type : '');
+  el.innerHTML = type === 'uploading'
+    ? `<span class="spin-sm"></span>${escapeHtml(message)}`
+    : (message ? `<i class="fa-solid ${type === 'ok' ? 'fa-circle-check' : type === 'err' ? 'fa-triangle-exclamation' : ''}"></i>${escapeHtml(message)}` : '');
+}
+
+function handlePhotoFileSelected(inputEl) {
+  const file = inputEl.files && inputEl.files[0];
+  const nameEl = document.getElementById('photoSelectedName');
+  const uploadBtn = document.getElementById('photoUploadBtn');
+
+  state.pendingPhotoFile = file || null;
+  setPhotoUploadStatus('', '');
+
+  if (file) {
+    nameEl.textContent = `${file.name} (${formatFileSize(file.size)})`;
+    uploadBtn.disabled = false;
+  } else {
+    nameEl.textContent = 'No file selected';
+    uploadBtn.disabled = true;
+  }
+}
+
+async function handlePhotoUpload() {
+  const file = state.pendingPhotoFile;
+  const trackingId = state.activeDetailId;
+  if (!file || !trackingId) return;
+
+  const uploadBtn = document.getElementById('photoUploadBtn');
+  uploadBtn.disabled = true;
+  setPhotoUploadStatus('Uploading…', 'uploading');
+
+  const reader = new FileReader();
+  reader.onerror = () => {
+    setPhotoUploadStatus('Could not read that file', 'err');
+    uploadBtn.disabled = false;
+  };
+  reader.onload = async () => {
+    try {
+      const res = await api('uploadShipmentPhoto', {
+        trackingId,
+        photoBase64: reader.result, // data: URL — the backend strips the prefix
+        mimeType: file.type || 'image/jpeg',
+        fileName: file.name
+      });
+      if (!res.status) throw new Error(res.message || 'Photo upload failed');
+
+      setPhotoUploadStatus('Uploaded', 'ok');
+      showToast('Photo added', 'ok');
+      await loadShipments();
+      const refreshed = state.shipments.find(x => x.trackingId === trackingId);
+      renderPhotoGrid(refreshed ? (refreshed.photoUrls || []) : (res.photoUrls || []));
+      resetPhotoPicker();
+    } catch (err) {
+      setPhotoUploadStatus(err.message, 'err');
+      showToast(err.message, 'err');
+      uploadBtn.disabled = false;
+    }
+  };
+  reader.readAsDataURL(file);
+}
+
+async function handleDeletePhoto(url) {
+  const trackingId = state.activeDetailId;
+  if (!trackingId) return;
+
+  const ok = await showConfirm({ title: 'Remove photo', message: 'Remove this photo from the shipment?', danger: true });
+  if (!ok) return;
+
+  try {
+    const res = await api('deleteShipmentPhoto', { trackingId, url });
+    if (!res.status) throw new Error(res.message || 'Failed to remove photo');
+
+    showToast('Photo removed', 'ok');
+    await loadShipments();
+    const refreshed = state.shipments.find(x => x.trackingId === trackingId);
+    renderPhotoGrid(refreshed ? (refreshed.photoUrls || []) : (res.photoUrls || []));
+  } catch (err) {
+    showToast(err.message, 'err');
+  }
+}
+
+async function handleAdvance(trackingId) {
+  try {
+    const res = await api('advanceShipmentStep', { trackingId });
+    if (!res.status) throw new Error(res.message || 'Failed to advance shipment');
+
+    showToast(`${trackingId} advanced to "${res.statusLabel}"`, 'ok');
+    loadShipments();
+  } catch (err) {
+    showToast(err.message, 'err');
+  }
+}
+
+async function handleDelete(trackingId) {
+  const ok = await showConfirm({
+    title: 'Delete shipment',
+    message: `Remove ${trackingId} and its full tracking history? This cannot be undone.`,
+    danger: true
+  });
+  if (!ok) return;
+
+  try {
+    const res = await api('deleteShipment', { trackingId });
+    if (!res.status) throw new Error(res.message || 'Failed to delete shipment');
+
+    showToast('Shipment deleted', 'ok');
+    loadShipments();
+  } catch (err) {
+    showToast(err.message, 'err');
+  }
+}
+
+/* ============================================================
+   SEARCH LOGS
+============================================================ */
+async function loadLogs() {
+  document.getElementById('logsTableWrap').innerHTML =
+    `<div class="empty-state"><i class="fa-solid fa-spinner fa-spin"></i><div>Loading search logs…</div></div>`;
+
+  try {
+    const res = await api('getTrackingLogs');
+    if (!res.status) throw new Error(res.message || 'Failed to load logs');
+
+    state.logs = res.logs || [];
+    document.querySelectorAll('.count-logs').forEach(el => el.textContent = state.logs.length);
+    renderLogs();
+  } catch (err) {
+    document.getElementById('logsTableWrap').innerHTML =
+      `<div class="empty-state"><i class="fa-solid fa-triangle-exclamation"></i><div>${escapeHtml(err.message)}</div></div>`;
+  }
+}
+
+function renderLogs() {
+  const wrap = document.getElementById('logsTableWrap');
+
+  if (!state.logs.length) {
+    wrap.innerHTML = `<div class="empty-state"><i class="fa-solid fa-magnifying-glass"></i><div>No searches recorded yet.</div></div>`;
+    return;
+  }
+
+  const rows = state.logs.map(l => `
+    <tr>
+      <td data-label="Time">${fmtDate(l.timestamp)}</td>
+      <td data-label="Tracking ID Searched" class="mono">${escapeHtml(l.trackingId)}</td>
+      <td data-label="Result"><span class="status-pill ${l.found === 'Yes' ? 'delivered' : 'pending'}">${l.found === 'Yes' ? 'Found' : 'Not found'}</span></td>
+    </tr>`).join('');
+
+  wrap.innerHTML = `
+    <div class="table-scroll">
+    <table class="responsive-cards" style="min-width:0;">
+      <thead><tr><th>Time</th><th>Tracking ID Searched</th><th>Result</th></tr></thead>
+      <tbody>${rows}</tbody>
+    </table>
+    </div>`;
+}
+
+/* ============================================================
+   INIT — auto sign-in if a session is stored
+============================================================ */
+(function init() {
+  document.getElementById('adminEmail').value = state.email;
+
+  if (state.token) {
+    enterApp();
+  }
+})();
+</script>
+
+</body>
+</html>

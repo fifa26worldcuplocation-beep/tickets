@@ -462,6 +462,22 @@
   .ttl-body h3{font-size:16px; margin:0 0 4px 0;}
   .ttl-body p{font-size:14px; color:var(--grey); margin:0;}
   .ttl-item.pending .ttl-body h3, .ttl-item.pending .ttl-body p{color:var(--grey);}
+
+  /* package info + photos */
+  .package-info{
+    display:grid; grid-template-columns:1fr 1fr; gap:24px;
+    border:1px solid var(--line); border-radius:10px; padding:24px; margin:0 0 36px 0;
+  }
+  .package-info .pi-block h4{font-size:12.5px; text-transform:uppercase; letter-spacing:.03em; color:var(--grey); margin:0 0 6px 0;}
+  .package-info .pi-block p{font-size:15px; margin:0; color:var(--ink);}
+  .package-info .pi-parties{display:flex; gap:32px; flex-wrap:wrap;}
+  @media (max-width:700px){ .package-info{grid-template-columns:1fr;} }
+
+  .package-photos{margin:0 0 36px 0;}
+  .package-photos .pgrid{display:flex; gap:12px; flex-wrap:wrap;}
+  .package-photos .pgrid img{
+    width:120px; height:120px; object-fit:cover; border-radius:8px; border:1px solid var(--line); cursor:zoom-in;
+  }
 </style>
 </head>
 <body>
@@ -536,6 +552,28 @@
       </div>
 
       <div class="track-stepper" id="trackStepper"></div>
+
+      <div class="package-info" id="packageInfo" style="display:none;">
+        <div class="pi-block">
+          <h4>Shipment description</h4>
+          <p id="piDescription">—</p>
+        </div>
+        <div class="pi-block pi-parties">
+          <div>
+            <h4>From</h4>
+            <p id="piSender">—</p>
+          </div>
+          <div>
+            <h4>To</h4>
+            <p id="piReceiver">—</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="package-photos" id="packagePhotos" style="display:none;">
+        <h3 style="margin-bottom:14px;">Package photos</h3>
+        <div class="pgrid" id="packagePhotosGrid"></div>
+      </div>
 
       <h3 style="margin-bottom:18px;">Shipment history</h3>
       <ul class="track-timeline" id="trackTimeline"></ul>
@@ -654,6 +692,31 @@
         '</li>';
     }
     document.getElementById('trackTimeline').innerHTML = timelineHtml;
+
+    // Package description + sender/receiver names.
+    // Note: only names are shown here, never phone/email/address — those
+    // stay admin-only in the dashboard to protect both parties' privacy.
+    var infoBlock = document.getElementById('packageInfo');
+    if (shipment.description || shipment.senderName || shipment.receiverName) {
+      document.getElementById('piDescription').textContent = shipment.description || 'No description provided.';
+      document.getElementById('piSender').textContent = shipment.senderName || '—';
+      document.getElementById('piReceiver').textContent = shipment.receiverName || '—';
+      infoBlock.style.display = 'grid';
+    } else {
+      infoBlock.style.display = 'none';
+    }
+
+    // Package photos, if the admin has uploaded any.
+    var photosBlock = document.getElementById('packagePhotos');
+    var photoUrls = shipment.photoUrls || [];
+    if (photoUrls.length) {
+      document.getElementById('packagePhotosGrid').innerHTML = photoUrls.map(function(u){
+        return '<img src="' + u + '" alt="Package photo" loading="lazy" onclick="window.open(this.src, \'_blank\')">';
+      }).join('');
+      photosBlock.style.display = 'block';
+    } else {
+      photosBlock.style.display = 'none';
+    }
 
     document.getElementById('trackResults').classList.add('show');
     document.getElementById('trackResults').scrollIntoView({behavior:'smooth', block:'start'});
